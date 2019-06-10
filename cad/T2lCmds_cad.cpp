@@ -1,0 +1,387 @@
+//
+// Copyright (C) 2014 Petr Talla. [petr.talla@gmail.com]
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//		      http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//=============================================================================
+//self
+#include "T2lCmds_cad.h"
+
+#include "T2lCmd_pan.h"
+#include "T2lCmd_zoomBox.h"
+
+#include "T2lGFileCol.h"
+#include "T2lGFile.h"
+#include "T2lGFileObjects.h"
+#include "T2lGFileImgDescr.h"
+#include "T2lCmd_active_file_move.h"
+#include "T2lCmdQueue.h"
+#include "T2lDisplayCol.h"
+#include "T2lCmd_object_enter.h"
+#include "T2lCmd_object_move.h"
+#include "T2lCmd_object_movePoints.h"
+#include "T2lCmd_object_delete.h"
+#include "T2lCmd_object_mocopy_parallel.h"
+#include "T2lCmd_object_set_symbology.h"
+#include "T2lCadSettings.h"
+#include "T2lCmd_viewinfo.h"
+#include "T2lFilterColor.h"
+#include "T2lWidgetFile.h"
+
+//geogebra
+#include "T2lActiveFile.h"
+#include "T2lGFile.h"
+#include "T2lCmd_draw_line.h"
+#include "T2lCmd_draw_image.h"
+#include "T2lCmd_draw_text.h"
+#include "T2lCmd_draw_imgLink.h"
+#include "T2lCmd_view_fit.h"
+#include "T2lCmd_measure.h"
+#include "T2lCmd_object_trimtoother.h"
+#include "T2lCmd_object_trim.h"
+
+#include "TcArg.h"
+#include "TcArgVal.h"
+#include "TcArgCol.h"
+
+#include "T2lFilter.h"
+#include "T2lScene.h"
+#include "T2lGObjectPool.h"
+
+//hg
+#include "T2lCmdQueue.h"
+
+//qt
+#include <QFileInfo>
+#include <QString>
+
+//std
+#include <sstream>
+
+using namespace std;
+using namespace T2l;
+
+//=============================================================================
+int Cmds_cad::view_new(TcCmdContext* context, TcArgCol& args)
+{
+    WidgetInteract* view = new WidgetInteract( Point2F(0, 0), 1.0/1000.0 );
+
+    Filter* filter = NULL;
+
+    if (args.count() > 1) {
+        TcArgVal* val1 = args.at(1)->getAsVal();
+
+        string val1Str( val1->value() );
+
+        if (val1Str == "red") {
+            filter = new FilterColor(Color(Color::RED));
+        }
+        else if (val1Str == "green") {
+            filter = new FilterColor(Color(Color::GREEN));
+        }
+        else if (val1Str == "blue") {
+            filter = new FilterColor(Color(Color::BLUE));
+        }
+    }
+
+    if (filter == NULL) filter = new Filter();
+
+
+    Scene* scene = new Scene(filter);
+    GObjectPool::instance().addRefCol(scene);
+
+    view->colorBackgroundSet(Color::WHITE);
+    scene->entities().addDisplay(view);
+
+    view->resize(800, 600);
+
+    if (args.count() > 1 ) {
+        TcArgVal* val = args.getVal("style");
+        if ( val ) {
+            if (string("pixels") == val->value()) {
+                view->scaleSet(1.0/4000);
+                view->originSet(Point2F(0, -600));
+            }
+        }
+    }
+
+    view->refresh();
+    view->show();
+
+    return 0;
+}
+
+//=============================================================================
+int Cmds_cad::cmd_xy(TcCmdContext* /*context*/, TcArgCol& args)
+{
+    DisplayCol& vc = DisplayCol::instance();
+    if ( vc.count() == 0 ) return 0;
+
+    if (args.count() < 2 ) {
+        return args.appendError("you must enter 2 coordinates");
+    }
+
+    TcArgVal* val1 = args.at(1)->getAsVal();
+
+    string xStr;
+    string yStr;
+
+    if (args.count() > 2) { //TODO hack
+        TcArgVal* val2 = args.at(2)->getAsVal();
+
+        xStr = val1->value();
+        yStr = val2->value();
+
+        if (xStr == "") xStr = string("-") + val1->name();
+        if (yStr == "") yStr = string("-") + val2->name();
+    }
+    else {
+        if ( (args.count() == 2) && (val1->name() == "") ) {
+            return args.appendError("you must enter 2 coordinates");
+        }
+        else {
+            xStr = string("-") + val1->name();
+            yStr = val1->value();
+        }
+    }
+
+    double x = stod(xStr);
+    double y = stod(yStr);
+
+    CmdQueue::queue().enterPointStright(Point2F(x,y), *DisplayCol::instance().active());
+
+    return 0;
+}
+
+//=============================================================================
+int Cmds_cad::cmd_cad_measure(TcCmdContext* /*context*/, TcArgCol& /*args*/)
+{
+    CmdQueue::queue().add( new Cmd_measure(), false );
+    return 0;
+}
+
+//=============================================================================
+int Cmds_cad::cmd_view_pan(TcCmdContext* /*context*/, TcArgCol& /*args*/)
+{
+    CmdQueue::queue().add( new Cmd_pan(), false );
+    return 0;
+}
+
+//=============================================================================
+int Cmds_cad::cmd_view_zoomrect(TcCmdContext* context, TcArgCol& args)
+{
+    CmdQueue::queue().add( new Cmd_zoomBox(), false );
+    return 0;
+}
+
+//=============================================================================
+int Cmds_cad::cmd_object_enter(TcCmdContext* /*context*/, TcArgCol& args)
+{
+    CmdQueue::queue().add( new Cmd_object_enter(), false );
+
+    string result ( "<br>symbol:"
+                    " <a href='tcview:://#symbol agregation'> [agregation]</a>"
+                    " <a href='tcview:://#symbol inheritance'> [inheritance]</a>"
+                    " <a href='tcview:://#symbol point'> [point]</a>"
+                  );
+
+    args.appendVal(result.c_str(), "result");
+
+    return 0;
+}
+
+//=============================================================================
+int Cmds_cad::cmd_object_move(TcCmdContext* /*context*/, TcArgCol& /*args*/)
+{
+    CmdQueue::queue().add( new Cmd_object_move(), false );
+    return 0;
+}
+
+//=============================================================================
+int Cmds_cad::cmd_object_movepoints(TcCmdContext* /*context*/, TcArgCol& /*args*/)
+{
+    CmdQueue::queue().add( new Cmd_object_movePoints(), false );
+    return 0;
+}
+
+//=============================================================================
+int Cmds_cad::cmd_object_delete(TcCmdContext* /*context*/, TcArgCol& /*args*/)
+{
+    CmdQueue::queue().add( new Cmd_object_delete(), false );
+    return 0;
+}
+
+//=============================================================================
+int Cmds_cad::cmd_object_mocopy_parallel(TcCmdContext* /*context*/, TcArgCol& args)
+{
+    CmdQueue::queue().add( new Cmd_object_mocopy_parallel(), false );
+
+    string result ( "<br>offset:"
+                    " <a href='tcview:://#cad_set_offset 5'> [5]</a>"
+                    " <a href='tcview:://#cad_set_offset 10'> [10]</a>"
+                    " <a href='tcview:://#cad_set_offset 20'> [20]</a>"
+                  );
+
+    args.appendVal(result.c_str(), "result");
+
+    return 1;
+}
+
+//=============================================================================
+int Cmds_cad::cmd_object_trimtoother(TcCmdContext* /*context*/, TcArgCol& /*args*/)
+{
+    CmdQueue::queue().add( new Cmd_object_trimtoother(), false );
+    return 0;
+}
+
+//=============================================================================
+int Cmds_cad::cmd_object_trim(TcCmdContext* /*context*/, TcArgCol& /*args*/)
+{
+    CmdQueue::queue().add( new Cmd_object_trim(), false );
+    return 0;
+}
+
+//=============================================================================
+int Cmds_cad::cad_set_width(TcCmdContext* /*context*/, TcArgCol& args)
+{
+    if ( args.count() <= 1 ) return args.appendError("you must enter the color");
+    TcArg* arg1 = args.getAsCol()->at(1);
+
+    double width = atof(arg1->getAsVal()->value());
+
+    CadSettings::instance().setWidth(width);
+    return 0;
+}
+
+//=============================================================================
+int Cmds_cad::cmd_object_set_symbology(TcCmdContext* /*context*/, TcArgCol& args)
+{
+    CmdQueue::queue().add( new Cmd_object_set_symbology(), false );
+
+    string result ( "<br>colors:"
+                    "<a href='tcview:://#cad_set_color   white'> [white]</a>"
+                    "<a href='tcview:://#cad_set_color     red'> [red]</a>"
+                    "<a href='tcview:://#cad_set_color   green'> [green]</a>"
+                    "<a href='tcview:://#cad_set_color    blue'> [blue]</a>"
+                    "<a href='tcview:://#cad_set_color  yellow'> [yellow]</a>"
+                    "<a href='tcview:://#cad_set_color    cyan'> [cyan]</a>"
+                    "<a href='tcview:://#cad_set_color magenta'> [magenta]</a>"
+                    "<a href='tcview:://#cad_set_color    gray'> [gray]</a>"
+                    "<a href='tcview:://#cad_set_color   lgray'> [lgray]</a>"
+                    "<a href='tcview:://#cad_set_color   dgray'> [dgray]</a>"
+                    "<a href='tcview:://#cad_set_color  orange'> [orange]</a>"
+                    "<a href='tcview:://#cad_set_color   brown'> [brown]</a>"
+
+                    "<br>width: "
+                    "<a href='tcview:://#cad_set_width 0.15'> [0.15]</a>"
+                    "<a href='tcview:://#cad_set_width 0.25'> [0.25]</a>"
+                    "<a href='tcview:://#cad_set_width 0.5'> [0.25]</a>"
+                    "<a href='tcview:://#cad_set_width 1'> [1]</a>"
+                    "<a href='tcview:://#cad_set_width 2'> [2]</a>"
+                    "<a href='tcview:://#cad_set_width 4'> [4]</a>"
+                    );
+
+    args.appendVal(result.c_str(), "result");
+
+    return 1;
+}
+
+//=============================================================================
+int Cmds_cad::cad_set_color(TcCmdContext* /*context*/, TcArgCol& args)
+{
+    if ( args.count() <= 1 ) return args.appendError("you must enter the color");
+    TcArg* arg1 = args.getAsCol()->at(1);
+
+    Color color = Color::read(arg1->getAsVal()->value());
+
+    CadSettings::instance().setColor(color);
+    return 0;
+}
+
+//=============================================================================
+int Cmds_cad::cad_set_offset(TcCmdContext* /*context*/, TcArgCol& args)
+{
+    if ( args.count() <= 1 ) return args.appendError("you must enter the offset");
+    TcArg* arg1 = args.getAsCol()->at(1);
+
+    double offset = atof(arg1->getAsVal()->value());
+
+    CadSettings::instance().offsetSet(fabs(offset));
+
+    return 0;
+}
+
+//=============================================================================
+int Cmds_cad::cad_set_symbol(TcCmdContext* /*context*/, TcArgCol& args)
+{
+    if ( args.count() <= 1 ) return args.appendError("you must enter the symbol");
+    TcArg* arg1 = args.getAsCol()->at(1);
+
+    string text;
+    arg1->toString(text);
+
+    CadSettings::instance().symbolSet(text.c_str());
+
+    return 0;
+}
+
+//=============================================================================
+int Cmds_cad::cad_set_ortho(TcCmdContext* /*context*/, TcArgCol& /*args*/)
+{
+    CadSettings::instance().orthoSet( !CadSettings::instance().ortho() );
+    return 0;
+}
+
+//=============================================================================
+int Cmds_cad::cad_open_in_active_view(TcCmdContext* /*context*/, TcArgCol& /*args*/)
+{
+    CadSettings::instance().openInActiveViewSet( !CadSettings::instance().openInActiveView() );
+    return 0;
+}
+
+
+//=============================================================================
+int Cmds_cad::cad_set_text(TcCmdContext* /*context*/, TcArgCol& args)
+{
+    if ( args.count() <= 1 ) return args.appendError("you must enter the text");
+    TcArg* arg1 = args.getAsCol()->at(1);
+
+    string text;
+    arg1->toString(text);
+    CadSettings::instance().textSet(text.c_str());
+
+    return 0;
+}
+
+//=============================================================================
+int Cmds_cad::cad_viewinfo(TcCmdContext* /*context*/, TcArgCol& /*args*/)
+{
+    CmdQueue::queue().add( new Cmd_viewinfo(), false );
+    return 0;
+}
+
+//=============================================================================
+int Cmds_cad::cad_set_size(TcCmdContext* /*context*/, TcArgCol& args)
+{
+    if ( args.count() <= 1 ) return args.appendError("you must enter the symbol");
+    TcArg* arg1 = args.getAsCol()->at(1);
+
+    string text;
+    arg1->toString(text);
+
+    QString size(text.c_str());
+
+    CadSettings::instance().setSize(size.toDouble());
+
+    return 0;
+}
+//=============================================================================

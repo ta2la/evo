@@ -1,0 +1,25 @@
+type:         header
+id:           techovska_pudorys
+date_changed: 2015 05 09
+------------------
+type:         graphics
+entity:       line
+width:        0.25
+color:        255, 0, 0
+point:        50, 40
+point:        80, 20
+------------------
+type:         graphics
+entity:       line
+width:        0.25
+color:        255, 0, 0
+point:        50, 40
+point:        80, 20
+------------------
+type:         graphics
+entity:       subimage
+bunch:        person
+width:        50
+height:       50
+point:        40, 30
+
