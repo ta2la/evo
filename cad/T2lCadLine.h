@@ -47,6 +47,7 @@ public:
     virtual bool loadFromStored(StoredItem* item, GFile* file);
     virtual void saveToStored(StoredItem& item, GFile* file);
     virtual std::string print();
+    virtual ObjectDisplable* clone();
 protected:
 //<DATA>
     Color  color_;

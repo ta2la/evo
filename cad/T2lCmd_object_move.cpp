@@ -21,18 +21,19 @@
 #include <T2lRefColSelection.h>
 #include <T2lGObject.h>
 #include <T2lGObjectPool.h>
-#include "T2lObjectDisplable.h"
 #include "T2lPoint2.h"
 #include "T2lPoint2.h"
 #include "T2lCadObject_image.h"
 #include "T2lGFile.h"
 #include "T2lEntityLine.h"
+#include "T2lEntityPoint.h"
+#include "T2lFilterFile.h"
 
 using namespace T2l;
 
 //===================================================================
 Cmd_object_move::Cmd_object_move(void) :
-    Cmd("move"),
+    CmdCad("move"),
     previousDefined_(false)
 {
 }
@@ -44,8 +45,8 @@ Cmd_object_move::~Cmd_object_move(void)
 
 //===================================================================
 void Cmd_object_move::enterPoint( const Point2F& pt, Display& view )
-{	//<STEP> Searching scene.
-
+{
+    //<STEP> Searching scene.
     EntityPack* pack = view.entityPack();
     if ( pack == NULL ) { assert(0); return; }
     if ( pack->scene() == NULL ) return;
@@ -56,31 +57,23 @@ void Cmd_object_move::enterPoint( const Point2F& pt, Display& view )
 
     if ( ( previousDefined_ == false ) || ( selected.count() == 0 ) )
     {
-        int count = pack->scene()->count();
+        foundClean();
 
-        for ( long i = 0; i < count; i++ )
-        {	Ref* ref = pack->scene()->get(i);
+        GFile* activeFile = ActiveFile::active().file();
+        FilterFile filterFile(activeFile);
 
-            ObjectDisplable* objectDisp = dynamic_cast<ObjectDisplable*>(ref->object());
-            if ( objectDisp->parent() == NULL ) continue;
+        foundFill(pt, view, &filterFile);
+        foundSelectFirst();
 
-            CadObject_image* image = dynamic_cast<CadObject_image*>(ref->object());
-            if (image != NULL) {
-                if (image->parent()->getAsObjects() == NULL) continue;
-            }
-
-            if ( ref->identifiedByPoint(view.getRefCanvas(), pt) )
-            {	ref->object()->isSelectedSet(true);
-                break;
-            }
-        }
+        previous_ = { pt.x(), pt.y() };
+        previousDefined_ = true;
     }
     else
     {
-
         for ( long i = 0; i < selected.count(); i++ )
-        {	GObject*       object  = selected.get(i)->object();
-            ObjectDisplable* objD = dynamic_cast<ObjectDisplable*>(object);
+        {
+            GObject*         object = selected.get(i)->object();
+            ObjectDisplable* objD   = dynamic_cast<ObjectDisplable*>(object);
 
             if (objD != NULL) {
                 Tuple<double>  p0( { previous_.x(), previous_.y() } );
@@ -91,17 +84,61 @@ void Cmd_object_move::enterPoint( const Point2F& pt, Display& view )
         }
 
         selected.unselectAll();
+        foundClean();
+        previousDefined_ = false;
     }
+}
 
-    previous_ = { pt.x(), pt.y() };
-    previousDefined_ = true;
+//===================================================================
+void Cmd_object_move::enterReset ( T2l::Display& view )
+{
+    UpdateLock l;
 
-    view.refresh();
+    RefColSelection& selected = GObjectPool::instance().selected();
+    selected.unselectAll();
+
+    if (foundSelectedCount() == 0) {
+        previousDefined_ = false;
+    }
+    else {
+        foundSelectFirst();
+    }
 }
 
 //===================================================================
 void Cmd_object_move::enterMove( const Point2F& pt, Display& view )
 {
+    //<STEP> Searching scene.
+    EntityPack* pack = view.entityPack();
+    if ( pack == NULL ) { assert(0); return; }
+    if ( pack->scene() == NULL ) return;
+
+    //<STEP> Dynamic drawing
+    pack->cleanDynamic();
+
+    if (previousDefined_) {
+        EntityLine* line = new EntityLine( Color::MAGENTA, 0.5 );
+        line->points().points().add( previous_ );
+        line->points().points().add( pt );
+        pack->addDynamic(line);
+
+        Style* styleCircle = Style::createPointStyle( Color::MAGENTA, Style::SYMBOL_CIRCLE_FILLED, 3.0, "" );
+        pack->addDynamic(new EntityPoint( Point2F(pt.x(), pt.y()), *styleCircle, true ));
+    }
+
+    pack->dynamicRefresh();
+}
+
+//===================================================================
+QString Cmd_object_move::hint(void) const
+{
+    RefColSelection& selected = GObjectPool::instance().selected();
+
+    if ( ( previousDefined_ == false ) || ( selected.count() == 0 ) ) {
+        return "select object to move";
+    }
+
+    return "enter position, where to move";
 }
 
 //===================================================================

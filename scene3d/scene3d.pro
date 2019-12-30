@@ -10,9 +10,16 @@ DEFINES += WINDOWS
 
 INCLUDEPATH += ./ \
                ../../base/base/include \
-               ../../base/base_ex/include \
                ../../base/geogebra \
-               ../../base/naray
+               ../../hg/hg_utility/include \
+               ../../hg/hg_style \
+               ../../hg/hg_display \
+               ../../hg/hg_interact \
+               ../../infrastructure/object_registry \
+               ../../evo/cad \
+               ../../evo/storage \
+               ../../infrastructure/command_registry \
+               ../../infrastructure/command_registry_ex
 
 SOURCES     += ./*.cpp
 HEADERS     += ./*.h

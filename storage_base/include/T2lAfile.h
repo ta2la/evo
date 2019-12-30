@@ -18,6 +18,7 @@
 #include <T2lGLoadSave.h>
 
 #include <QList>
+#include <QTextStream>
 #include <string>
 
 namespace T2l
@@ -46,6 +47,8 @@ public:
 
     AfileRecord* recordGet_bad(const char* name, int index = 0, const char* attr = "");
     AfileRecord* recordGet(const char* value, int index = 0, const char* attrName = "type");
+    
+    void loadStream (QTextStream& in);
 //=============================================================================
 protected:
 //<DATA>

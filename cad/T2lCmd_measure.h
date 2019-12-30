@@ -31,11 +31,12 @@ public:
     virtual ~Cmd_measure(void);
 //===================================================================
     virtual void enterPoint( const T2l::Point2F& pt, T2l::Display& view );
+    virtual void enterReset( Display& view );
     virtual void enterMove ( const T2l::Point2F& pt, T2l::Display& view );
+    virtual QString hint(void) const;
 //<DATA>
     T2l::Point2Col<double> points_;
 //<INTERNALS>
-    //T2l::Point2F recalculateOrtho_( const T2l::Point2F& pt );
 };
 
 }

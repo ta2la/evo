@@ -15,25 +15,28 @@
 //=============================================================================
 #pragma once
 
-#include <T2lCmd.h>
+#include "T2lObjectDisplable.h"
+#include <T2lCmdCad.h>
 #include <T2lPoint2.h>
 
 namespace T2l
 {
 
 //===================================================================
-class Cmd_object_move : public Cmd {
+class Cmd_object_move : public CmdCad {
 //===================================================================
 public:
 	Cmd_object_move(void);
     virtual ~Cmd_object_move(void);
 //===================================================================
-    virtual void enterPoint( const Point2F& pt, Display& view );
-    virtual void enterMove ( const Point2F& pt, Display& view );
+    virtual void    enterPoint ( const Point2F& pt, Display& view );
+    virtual void    enterMove  ( const Point2F& pt, Display& view );
+    virtual void    enterReset ( Display& view );
+    virtual QString hint       (void) const;
 protected:
 //<DATA>
-    bool           previousDefined_;
-    Point2<double> previous_;
+    bool                    previousDefined_;
+    Point2<double>          previous_;
 };
 
 }//namespace T2l

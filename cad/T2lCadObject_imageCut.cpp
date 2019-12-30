@@ -40,7 +40,6 @@ CadObject_imageCut::CadObject_imageCut( const Point2Col<double>& points, const Q
     ObjectDisplable(points, parent),
     display_(true)
 {
-    //QImage i("/home/t2l/Development/KADLUB/cvz/samples/storage/Selection_174.png");
     QImage i(filePath);
 
     if (parent != NULL) parent->add(this);

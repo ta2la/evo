@@ -45,21 +45,27 @@ public:
     const QString& text() { return text_; }
     void textSet( const QString& text) { text_ = text; }
 
-    CadObject_symbol::ESymbol symbol() { return symbol_; }
+    const char* symbol() const { return symbol_.c_str(); }
 
     bool ortho()                  { return ortho_; }
     void orthoSet(bool value)     { ortho_ = value;  }
 
     double offset()               { return offset_; }
     void offsetSet(double value)  { offset_ = value;  }
+    QString offsetEditor();
 
     const Color& color() const    { return color_; }
     void setColor(const Color& color) { color_ = color; }
+    QString colorEditor(const char* arg2);
+
+    const Color& color2() const    { return color2_; }
+    void setColor2(const Color& color) { color2_ = color; }
 
     double width() const          { return width_; }
     void setWidth( double width ) { width_ = width; }
+    QString widthEditor();
 
-    void symbolSet ( const char* id) { symbol_ = CadObject_symbol::mapSymbolIdToEnum(id); }
+    void symbolSet ( const char* id) { symbol_ = id; }
 
     double size() const           { return size_; }
     void setSize( double size )   { size_ = size; }
@@ -73,15 +79,39 @@ public:
     int brushSize()               { return brushSize_; }
     int brushSizeSet(int value)   { brushSize_ = value; }
     QString pixannCirclePrint();
+    QString pixannCircleEditor();
 
     bool pixannCircle()           { return pixannCircle_; }
     bool pixannCircleSet(bool value) { pixannCircle_ = value; }
     QString printBrushsize();
+
+    double grid();
+    void   gridSet(double grid);
+
+    const char* featureCmd() { return featureCmd_.c_str(); }
+    void featureCmdSet(const char* cmd) { featureCmd_ = cmd; }
+
+    bool image2points() const           { return image2points_; }
+    void image2pointsSet( bool value )   { image2points_ = value; }    
+
+    bool unselectMode() const           { return unselectMode_; }
+    void unselectModeSet( bool value )   { unselectMode_ = value; }
+
+    Vector2F d3Dir() const           { return d3Dir_; }
+    void     d3DirSet( const Vector2F& value )   { d3Dir_ = value; }
+
+    double d3Height1() { return d3Height1_; }
+    void   d3Height1Set(double value) { d3Height1_ = value; }
+
+    double d3Height2() { return d3Height2_; }
+    void   d3Height2Set(double value) { d3Height2_ = value; }
+
 //=============================================================================
 //<OVERRIDES>
 protected:
 //<DATA>
     Color                     color_;
+    Color                     color2_;
     double                    width_;
 
     bool                      ortho_;
@@ -89,8 +119,10 @@ protected:
     double                    offset_;
 
     std::string               imageSymbolFile_;
+    bool                      image2points_;
+
     QString                   text_;
-    CadObject_symbol::ESymbol symbol_;
+    std::string               symbol_;
 
     double                    size_;
     double                    sizeRelative_;
@@ -99,6 +131,14 @@ protected:
 
     int                       brushSize_;
     bool                      pixannCircle_;
+
+    std::string               featureCmd_;
+
+    bool                      unselectMode_;
+
+    Vector2F                  d3Dir_;
+    double                    d3Height1_;
+    double                    d3Height2_;
 //<HIDDING>
 //<INTERNALS>
 };

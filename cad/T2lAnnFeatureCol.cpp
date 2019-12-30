@@ -93,3 +93,51 @@ QString AnnFeatureCol::printHtml()
 }
 
 //=============================================================================
+QString AnnFeatureCol::printTml(const char* cmd, const char* filter, bool owriteShow)
+{
+    QString result;
+
+    AnnFeatureCol& feats = AnnFeatureCol::instance();
+    string categoryStr(feats.get(feats.activeFeature())->id());
+
+    for ( int i = 0; i < this->count(); i++ ) {
+        AnnFeature* featurei = get(i);
+
+        QString filterS(filter);
+        if (filterS.isEmpty() == false)  {
+            if( filterS == "o_on") {
+                if (featurei->owrite() == false) continue;
+            }
+            if( filterS == "o_off") {
+                if (featurei->owrite() ) continue;
+            }
+        }
+
+        if (i != 0) result += "TC;CT;text: <space>;;";
+
+        result += "TC;CT;text: ";
+        result += featurei->id();
+        result += ":;;";
+
+        if (owriteShow) {
+            if (featurei->owrite()) result += "mark:;";
+        }
+
+        result += "TC;CB;color: ";
+        result += featurei->backColor() .write().c_str();
+        result += ";";
+        if ( categoryStr == featurei->id() ) {
+            result += "active: true;";
+        }
+        result += "cmd: ";
+        result += cmd;
+        result += " "; // ";
+        result += featurei->id();
+        result.append(";;");
+    }
+
+    return result;
+}
+
+
+//=============================================================================

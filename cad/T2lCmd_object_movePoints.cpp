@@ -24,6 +24,7 @@
 #include "T2lObjectDisplable.h"
 #include "T2lPoint2.h"
 #include "T2lEntityLine.h"
+#include "T2lActiveFile.h"
 
 #include "iostream"
 
@@ -32,7 +33,7 @@ using namespace std;
 
 //===================================================================
 Cmd_object_movePoints::Cmd_object_movePoints(void) :
-    Cmd("move points")
+    Cmd("move vertices")
 {
 }
 
@@ -67,6 +68,9 @@ void Cmd_object_movePoints::enterPoint( const Point2F& pt, Display& view )
             ObjectDisplable* displable = dynamic_cast<ObjectDisplable*>(ref->object());
             if (displable == NULL) continue;
             if (displable->parent_ == NULL) continue;
+
+            GFile* activeFile = ActiveFile::active().file();
+            if ( activeFile != displable->parent_) continue;
 
             for ( int p = 0; p < displable->points_.count(); p++ ) {
                 Point2F pti = displable->points_.get(p);
@@ -128,6 +132,22 @@ void Cmd_object_movePoints::enterMove( const Point2F& pt, Display& view )
 
     pack->addDynamic(line);
     pack->dynamicRefresh();
+}
+
+//===================================================================
+QString Cmd_object_movePoints::hint(void) const
+{
+    if ( points_.count() == 0 ) {
+        return "enter corner of fence";
+    }
+    else if ( points_.count() == 1 ) {
+        return "enter second corner of fence";
+    }
+    else if ( points_.count() == 2 ) {
+        return "enter first point of movement";
+    }
+
+    return "enter second point of movement";
 }
 
 //===================================================================

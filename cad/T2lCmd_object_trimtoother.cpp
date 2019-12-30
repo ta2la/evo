@@ -27,12 +27,15 @@
 #include "T2lEntityLine.h"
 #include "T2lCadSettings.h"
 #include "T2lRay2.h"
+#include "T2lFilterCadObject.h"
+#include "T2lFilterCol.h"
+#include "T2lFilterFile.h"
 
 using namespace T2l;
 
 //===================================================================
 Cmd_object_trimtoother::Cmd_object_trimtoother(void) :
-    Cmd("trim to"),
+    CmdCad("trim to"),
     cadLine1_trimWhat_(NULL),
     cadLine2_trimTo_(NULL)
 {
@@ -44,30 +47,43 @@ Cmd_object_trimtoother::~Cmd_object_trimtoother(void)
 }
 
 //===================================================================
-CadLine* Cmd_object_trimtoother::selectLine_( const Point2F& pt, Display& view )
+/*CadLine* Cmd_object_trimtoother::calculateTrim_( const Point2F& pt, Display& view )
 {
-    EntityPack* pack = view.entityPack();
-
-    int count = pack->scene()->count();
-
-    for ( long i = 0; i < count; i++ )
-    {	Ref* ref = pack->scene()->get(i);
-        CadLine* cadLine = dynamic_cast<CadLine*>(ref->object());
-        if (cadLine == NULL) continue;
-        if (cadLine == cadLine1_trimWhat_) continue;
-
-        if ( ref->identifiedByPoint(view.getRefCanvas(), pt) )
-        {	ref->object()->isSelectedSet(true);
-            return cadLine;
-        }
-    }
-}
+    return nullptr;
+}*/
 
 //===================================================================
-void Cmd_object_trimtoother::enterReset( Display& /*view*/ )
+void Cmd_object_trimtoother::enterReset( Display& view )
 {
-    cadLine1_trimWhat_ = NULL;
-    cadLine2_trimTo_   = NULL;
+    UpdateLock l;
+
+    EntityPack* pack = view.entityPack();
+    if ( pack == nullptr ) { assert(0); return; }
+
+    pack->cleanDynamic();
+
+    if ( ( cadLine1_trimWhat_ != nullptr ) &&
+         ( cadLine2_trimTo_ == nullptr ) )  {
+        cadLine1_trimWhat_ ->isSelectedSet(false);
+        cadLine1_trimWhat_ = dynamic_cast<CadLine*>(foundSelectFirst());
+    }
+    else if ( ( cadLine1_trimWhat_ != nullptr ) &&
+         ( cadLine2_trimTo_ != nullptr ) )  {
+        cadLine2_trimTo_ ->isSelectedSet(false);
+        cadLine2_trimTo_ = dynamic_cast<CadLine*>(foundSelectFirst());
+
+        if ( cadLine2_trimTo_ ) {
+            Point2F pt0;
+            Point2F pt1;
+            calculateIntersection_(pt0, pt1);
+            EntityLine* line = new EntityLine( Color(255, 0, 255), 2 );
+            line->points().points().add( pt0 );
+            line->points().points().add( pt1 );
+            pack->addDynamic(line);
+        }
+    }
+
+    pack->dynamicRefresh();
 }
 
 //===================================================================
@@ -85,31 +101,47 @@ void Cmd_object_trimtoother::enterPoint( const Point2F& pt, Display& view )
     pack->cleanDynamic();
 
     if ( cadLine1_trimWhat_ == NULL ) {
-        cadLine1_trimWhat_ = selectLine_(pt, view);
-    }
-    else if ( cadLine2_trimTo_ == NULL ) {
-        cadLine2_trimTo_ = selectLine_(pt, view);
+        FilterCol filterCol(FilterCol::FT_AND);
+        GFile* activeFile = ActiveFile::active().file();
+        FilterFile filterFile(activeFile);
+        filterCol.add(&filterFile);
+        FilterCadObject filter(FilterCadObject::ECO_LINE);
+        filterCol.add(&filter);
 
-        if ( cadLine2_trimTo_ ) {
+        foundFill(pt, view, &filterCol);
+        cadLine1_trimWhat_ = dynamic_cast<CadLine*>(foundSelectFirst());
+        ptWhat_ = pt;
+    }
+    else {
+        if ( cadLine2_trimTo_ == NULL ) {
+            FilterCadObject filter(FilterCadObject::ECO_LINE);
+            foundFill(pt, view, &filter);
+            cadLine2_trimTo_ = dynamic_cast<CadLine*>(foundSelectFirst());
+
+            if ( cadLine2_trimTo_ ) {
+                Point2F pt0;
+                Point2F pt1;
+                calculateIntersection_(pt0, pt1);
+                EntityLine* line = new EntityLine( Color(255, 0, 255), 2 );
+                line->points().points().add( pt0 );
+                line->points().points().add( pt1 );
+                pack->addDynamic(line);
+            }
+        }
+        else
+        {
             Point2F pt0;
             Point2F pt1;
 
             calculateIntersection_(pt0, pt1);
 
-            EntityLine* line = new EntityLine( Color(255, 0, 255), 2 );
-            line->points().points().add( pt0 );
-            line->points().points().add( pt1 );
-            pack->addDynamic(line);
-
             cadLine1_trimWhat_->points().getRef(0) = pt0;
             cadLine1_trimWhat_->points().getRef(1) = pt1;
+
+            selected.unselectAll();
+            cadLine1_trimWhat_ = nullptr;
+            cadLine2_trimTo_   = nullptr;
         }
-    }
-    else
-    {
-        selected.unselectAll();
-        cadLine1_trimWhat_ = NULL;
-        cadLine2_trimTo_ = NULL;
     }
 
     pack->dynamicRefresh();
@@ -138,13 +170,13 @@ void Cmd_object_trimtoother::calculateIntersection_(Point2F& pt0, Point2F& pt1)
 
     Point2F pt = line_trimWhat.getPoint(intersect);
 
-    if ( Vector2F(pt, PT0).getLengthSq() < Vector2F(pt, PT1).getLengthSq() ) {
-        pt0 = pt;
-        pt1 = PT1;
-    }
-    else {
+    if ( Vector2F(ptWhat_, PT0).getLengthSq() < Vector2F(ptWhat_, PT1).getLengthSq() ) {
         pt0 = PT0;
         pt1 = pt;
+    }
+    else {
+        pt0 = pt;
+        pt1 = PT1;
     }
 }
 
@@ -157,6 +189,19 @@ void Cmd_object_trimtoother::enterMove( const Point2F& pt, Display& view )
     EntityPack* pack = view.entityPack();
     if ( pack == NULL ) { assert(0); return; }
 
+}
+
+//===================================================================
+QString Cmd_object_trimtoother::hint(void) const
+{
+    if ( cadLine1_trimWhat_ == NULL ) {
+        return "select line to trim";
+    }
+    else if ( cadLine2_trimTo_ == NULL ) {
+        return "select line to trim by";
+    }
+
+    return "enter point to confirm";
 }
 
 //===================================================================

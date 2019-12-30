@@ -26,19 +26,34 @@
 #include "T2lCadLine.h"
 #include "T2lEntityLine.h"
 #include "T2lCadSettings.h"
+#include "T2lFilterCadObject.h"
+#include "T2lFilterCol.h"
+#include "T2lFilterFile.h"
 
 using namespace T2l;
 
 //===================================================================
 Cmd_object_mocopy_parallel::Cmd_object_mocopy_parallel(void) :
-    Cmd("copy parallel"),
-    cadLine_(NULL)
+    CmdCad("copy parallel")
 {
+    GObjectPool::instance().selected().unselectAll();
 }
 
 //===================================================================
 Cmd_object_mocopy_parallel::~Cmd_object_mocopy_parallel(void)
 {
+}
+
+CadLine* Cmd_object_mocopy_parallel::getLine() const
+{
+    RefColSelection& selected = GObjectPool::instance().selected();
+
+    if ( selected.count() == 0 ) return nullptr;
+
+    GObject*         object = selected.get(0)->object();
+    CadLine*  objLine   = dynamic_cast<CadLine*>(object);
+
+    return objLine;
 }
 
 //===================================================================
@@ -53,30 +68,34 @@ void Cmd_object_mocopy_parallel::enterPoint( const Point2F& pt, Display& view )
 
     RefColSelection& selected = GObjectPool::instance().selected();
 
-    if ( cadLine_ == NULL )
+    if ( selected.count() == 0 )
     {
-        int count = pack->scene()->count();
+        FilterCol filterCol(FilterCol::FT_AND);
+        GFile* activeFile = ActiveFile::active().file();
+        FilterFile filterFile(activeFile);
+        filterCol.add(&filterFile);
+        FilterCadObject filter(FilterCadObject::ECO_LINE);
+        filterCol.add(&filter);
 
-        for ( long i = 0; i < count; i++ )
-        {	Ref* ref = pack->scene()->get(i);
-            cadLine_ = dynamic_cast<CadLine*>(ref->object());
-            if (cadLine_ == NULL) continue;
-
-            if ( ref->identifiedByPoint(view.getRefCanvas(), pt) )
-            {	ref->object()->isSelectedSet(true);
-                break;
-            }
-        }
+        foundFill(pt, view, &filterCol);
+        foundSelectFirst();
     }
     else
     {
+        GObject*         object = selected.get(0)->object();
+        CadLine*  objLine   = dynamic_cast<CadLine*>(object);
+
         Point2FCol ptsNew;
-        calculateNew_(pt, cadLine_->points(), ptsNew);
-        new CadLine(ptsNew, ActiveFile::active().file());
+        calculateNew_(pt, objLine->points(), ptsNew);
+        CadLine* line = new CadLine(ptsNew, ActiveFile::active().file());
+        line->setColor(objLine->color());
+        line->setWidth(objLine->width());
 
         selected.unselectAll();
-        cadLine_ = NULL;
     }
+
+    pack->cleanDynamic();
+    pack->dynamicRefresh();
 }
 
 //===================================================================
@@ -100,19 +119,73 @@ void Cmd_object_mocopy_parallel::calculateNew_(const Point2F& pt, const Point2FC
 //===================================================================
 void Cmd_object_mocopy_parallel::enterMove( const Point2F& pt, Display& view )
 {
-    if (cadLine_ == NULL) return;
+    CadLine* cadLine =  getLine();
+
+    if (cadLine == nullptr) return;
 
     EntityPack* pack = view.entityPack();
-    if ( pack == NULL ) { assert(0); return; }
+    if ( pack == nullptr ) { assert(0); return; }
+
     pack->cleanDynamic();
 
     Point2FCol ptsNew;
-    calculateNew_(pt, cadLine_->points(), ptsNew);
+    calculateNew_(pt, cadLine->points(), ptsNew);
 
-    EntityLine* line = new EntityLine( Color(255, 0, 255), 0.25 );
+    EntityLine* line = new EntityLine( cadLine->color(), 1 );
     line->points().points().add( ptsNew.get(0) );
     line->points().points().add( ptsNew.get(1) );
+
     pack->addDynamic(line);
+
+    pack->dynamicRefresh();
+}
+
+//===================================================================
+void Cmd_object_mocopy_parallel::enterReset ( T2l::Display& view )
+{
+    UpdateLock l;
+
+    RefColSelection& selected = GObjectPool::instance().selected();
+    selected.unselectAll();
+
+    if (foundSelectedCount() > 0) {
+        foundSelectFirst();
+    }
+
+    EntityPack* pack = view.entityPack();
+    if ( pack == nullptr ) { assert(0); return; }
+
+    pack->cleanDynamic();
+    pack->dynamicRefresh();
+}
+
+//===================================================================
+QString Cmd_object_mocopy_parallel::dialogTml() const
+{
+    QString result;
+
+    result += "TC;CT;text: offset:;;";
+    result += CadSettings::instance().offsetEditor();
+
+    //===================================================
+    result = result.replace("TC", "type: control");
+    result = result.replace("CT", "control: text");
+    result = result.replace("CB", "control: button");
+    result = result.replace(";", "\n");
+
+    return result;
+}
+
+//===================================================================
+QString Cmd_object_mocopy_parallel::hint(void) const
+{
+    CadLine* cadLine =  getLine();
+
+    if ( cadLine == nullptr ) {
+        return "select line to copy";
+    }
+
+    return "select position and enter";
 }
 
 //===================================================================

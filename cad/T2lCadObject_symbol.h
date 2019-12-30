@@ -19,6 +19,8 @@
 #include <T2lBox2.h>
 #include <T2lObjectDisplable.h>
 
+#include <string>
+
 namespace T2l
 {
 
@@ -33,10 +35,11 @@ public:
 //<ENUMS>
     enum ESymbol { SYMBOL_VOID, SYMBOL_AGREGATION, SYMBOL_INHERITANCE, SYMBOL_POINT };
 //<CONSTRUCTION>
-    CadObject_symbol(const Point2F& position, GFile* parent, ESymbol style = SYMBOL_VOID);
+    CadObject_symbol(const Point2F& position, GFile* parent, const char* style = "void");
     ~CadObject_symbol(void);
-    static Style* getSymbolStyle( ESymbol symbol, bool selectedArg );
+    static Style* getSymbolStyle( ESymbol symbol );
     static ESymbol mapSymbolIdToEnum(const char* id);
+    static const char* mapEnumToId(ESymbol symbol);
 //<METHODS>
     const Point2F position(void) const { return Point2F(points_.get(0).x(), points_.get(0).y()); }
 //===================================================================
@@ -48,8 +51,7 @@ public:
     virtual bool loadFromStored(StoredItem* item, GFile* parent);
 protected:
 //<DATA>
-    //Point2F  position_;
-    ESymbol   style_;
+    std::string style_;
 };
 
 }

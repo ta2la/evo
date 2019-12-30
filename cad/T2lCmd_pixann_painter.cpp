@@ -45,6 +45,8 @@
 #include "T2lRay2.h"
 
 #include <QPixmap>
+#include <QDir>
+#include <QCoreApplication>
 
 #include <iostream>
 
@@ -197,16 +199,16 @@ QString Cmd_pixann_painter::dialog_owrite()
 
     QString result;
 
-    result.append(QString("<a href='tcview:://#ann_feat_owrite all on'>[owirite all on]</a> "));
-    result.append(QString("<a href='tcview:://#ann_feat_owrite all off'>[owirite all off]</a> "));
+    result.append(QString("<a href='tcview:://#ann_feat_owrite all on'>[owrite all on]</a> "));
+    result.append(QString("<a href='tcview:://#ann_feat_owrite all off'>[owrite all off]</a> "));
     result.append("<br>");
     result.append("owrite on: ");
     for ( int i = 0; i < features.count(); i++ ) {
         AnnFeature* featurei = features.get(i);
-        if (featurei->owrite() == false) continue;
-        result.append("<a href='tcview:://#ann_feat_owrite single ");
+        if ( featurei->owrite() == false ) continue;
+        result.append("<a href='tcview:://#ann_feat_owrite single off ");
         result.append( featurei->id() );
-        result.append(" off'>");
+        result.append("'>");
         result.append( featurei->id() );
         result.append("</a>&nbsp;&nbsp;");
     }
@@ -215,9 +217,9 @@ QString Cmd_pixann_painter::dialog_owrite()
     for ( int i = 0; i < features.count(); i++ ) {
         AnnFeature* featurei = features.get(i);
         if (featurei->owrite()) continue;
-        result.append("<a href='tcview:://#ann_feat_owrite single ");
+        result.append("<a href='tcview:://#ann_feat_owrite single on ");
         result.append( featurei->id() );
-        result.append(" on'>");
+        result.append("'>");
         result.append( featurei->id() );
         result.append("</a>&nbsp;&nbsp;");
     }
@@ -243,6 +245,72 @@ QString Cmd_pixann_painter::dialog() const {
     result.append("<br><br>");
 
     result.append(dialog_owrite());
+
+    return result;
+}
+
+//===================================================================
+QString Cmd_pixann_painter::dialogTml_brushsize(const char* size)
+{
+    QString result;
+
+    result += "TC;CT;text: <a href='tcview:://#ann_set_brushsize ";
+    result += size;
+    result += "'>[";
+    result += size;
+    result += "]</a>;;";
+
+    return result;
+}
+
+//===================================================================
+QString Cmd_pixann_painter::dialogTml() const
+{
+    QString result;
+
+    if ( string(CadSettings::instance().featureCmd()) == "ann_set_category") {
+        result += "TC;CT;text: setting category:;cmd: cad_set_featcmd ann_feat_owrite;;";
+    }
+    else {
+        result += "TC;CT;text: setting feature:;cmd: cad_set_featcmd ann_set_category;;";
+    }
+
+
+    AnnFeatureCol& features = AnnFeatureCol::instance();
+    result += features.printTml(CadSettings::instance().featureCmd(), "", true);
+
+    result += "TC;CT;text: <hup>;;";
+    result += "TC;CT;text: brush size:;;";
+    result += dialogTml_brushsize("2");
+    result += dialogTml_brushsize("6");
+    result += dialogTml_brushsize("10");
+    result += dialogTml_brushsize("20");
+    result += dialogTml_brushsize("40");
+    result += dialogTml_brushsize("80");
+    result += dialogTml_brushsize("150");
+    result += dialogTml_brushsize("300");
+    result += dialogTml_brushsize("600");
+
+    result += "TC;CT;text: <hup>;;";
+    result += CadSettings::instance().pixannCircleEditor();
+
+    result += "TC;CT;text: <hup>;;";
+    result += "TC;CT;text: <a href='tcview:://#ann_feat_owrite all on'>[owrite all ON]</a>;;";
+    result += "TC;CT;text: <a href='tcview:://#ann_feat_owrite all off'>[owrite all OFF]</a>;;";
+
+    /*result += "TC;CT;text: <hup>;;";
+    result += "TC;CT;text: owrite on:;;";
+    result += features.printTml("ann_feat_owrite single off", "o_on");
+
+    result += "TC;CT;text: <hup>;;";
+    result += "TC;CT;text: owrite off:;;";
+    result += features.printTml("ann_feat_owrite single on", "o_off");*/
+
+    //===================================================
+    result = result.replace("TC", "type: control");
+    result = result.replace("CT", "control: text");
+    result = result.replace("CB", "control: button");
+    result = result.replace(";", "\n");
 
     return result;
 }

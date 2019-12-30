@@ -22,6 +22,8 @@
 #include <QString>
 #include <QList>
 
+#include "T2lStyleCol.h"
+
 namespace T2l {
 
 class GFileImage;
@@ -49,6 +51,7 @@ public:
     virtual QString qualifiedFilePath(const char* path);
     virtual void load() = 0;
     void unload();
+    void close();
     virtual void save() = 0;
     bool loaded() { return loaded_; }
 
@@ -62,14 +65,18 @@ public:
 
     virtual Box2F bound();
 
-    virtual GFileImage*    getAsImage()    { return NULL; }
-    virtual GFileImgDescr* getAsImgDescr() { return NULL; }
-    virtual GFileObjects*  getAsObjects()  { return NULL; }
-    virtual GFilePhotoMap* getAsPhotoMap() { return NULL; }
+    virtual GFileImage*    getAsImage()    { return nullptr; }
+    virtual GFileImgDescr* getAsImgDescr() { return nullptr; }
+    virtual GFileObjects*  getAsObjects()  { return nullptr; }
+    virtual GFilePhotoMap* getAsPhotoMap() { return nullptr; }
 
     int maxGid();
 
     bool dirty() { return dirty_; }
+
+    StyleCol& styles() { return styles_; }
+
+    void loadSymbols();
 //=============================================================================
 //<OVERRIDES>
 protected:
@@ -81,6 +88,7 @@ protected:
     GLoadSave*         loadSave_;
     bool               skipImage_;
     bool               dirty_;
+    StyleCol           styles_;
 public:
     int                widgetCount_;
 //<FRIENDS>

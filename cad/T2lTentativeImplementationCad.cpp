@@ -19,6 +19,7 @@
 #include "T2lDisplay.h"
 #include "T2lScene.h"
 #include <iostream>
+#include "T2lCadObject_symbol.h"
 
 using namespace T2l;
 using namespace std;
@@ -54,9 +55,20 @@ void TentativeImplementationCad::enterTentative( const Point2F& pt, Display& vie
 
         for ( long i = 0; i < count; i++ )
         {	Ref* ref = pack->scene()->get(i);
+
+            CadObject_symbol* symbol = dynamic_cast<CadObject_symbol*>(ref->object());
+            if ( symbol != nullptr ) {
+                if ( symbol->parent() == nullptr ) continue;
+
+                Point2F pti = symbol->points().get(0);
+                if ( Vector2F(pti, pt).getLengthSq() < Vector2F(PT, pt).getLengthSq() ) {
+                    PT = pti;
+                }
+            }
+
             CadLine* cadLine = dynamic_cast<CadLine*>(ref->object());
-            if (cadLine == NULL) continue;
-            if ( cadLine->parent() == NULL ) continue;
+            if ( cadLine == nullptr ) continue;
+            if ( cadLine->parent() == nullptr ) continue;
 
             for (int i = 0; i < cadLine->points().count(); i++) {
                 Point2F pti = cadLine->points().get(i);

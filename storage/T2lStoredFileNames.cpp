@@ -14,11 +14,14 @@
 // limitations under the License.
 //=============================================================================
 #include "T2lStoredFileNames.h"
-#include <iostream>
 #include "T2lAfileRecord.h"
+#include "T2lAfile.h"
 
 #include <QFileInfo>
 #include <QDir>
+#include <QApplication>
+
+#include <iostream>
 
 using namespace T2l;
 using namespace std;
@@ -105,6 +108,33 @@ QString StoredFileNames::t2lDescriptor(const QString fileName)
     descriptor += ".t2l";
 
     return descriptor;
+}
+
+//====================================================================
+QString StoredFileNames::getExeUpDir()
+{
+    QDir dir(QCoreApplication::applicationDirPath());
+    dir.cdUp();
+
+    return dir.path();
+}
+
+//====================================================================
+QString StoredFileNames::getVariable(const char* name)
+{
+    QDir dir(getExeUpDir());
+
+    QString settingsFileName(dir.path());
+    settingsFileName.append("/config/settings.t2l");
+
+    GLoadSave loader(settingsFileName);
+    Afile afile;
+    afile.load(loader);
+    if (afile.recordCount() == 0) return "";
+    AfileAttr* ann_generator = afile.recordGet(0)->attrsGet(name);
+    if (ann_generator == nullptr) return "";
+
+    return ann_generator->value();
 }
 
 //====================================================================

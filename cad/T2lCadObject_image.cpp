@@ -35,6 +35,7 @@
 #include "T2lEntityText.h"
 #include "T2lEntityArea.h"
 #include "T2lSfeatArea.h"
+#include "T2lCadSettings.h"
 
 //infrastructure
 #include "T2lBox2.h"
@@ -56,35 +57,18 @@ using namespace std;
 CadObject_image::CadObject_image(const char* fileName, const Point2FCol& position, GFile* parent) :
     ObjectDisplable(Point2Col<double>(position), parent),
     imageName_(fileName),
-    pixmap_(NULL)
+    pixmap_(nullptr)
 {
-    if (parent == NULL) return;
+    if (parent == nullptr) return;
 
     QString fileQualified = parent_->qualifiedFilePath(imageName_.toStdString().c_str());
     QFileInfo fi(fileQualified);
 
     if ( fi.exists() ) {
-
-        /*int w = T2L_IMAGE_SIZE;
-        int h = T2L_IMAGE_SIZE;
-
-        int pw = pixmap()->width();
-        int ph = pixmap()->height();
-
-        QPixmap pixmap(fileQualified);
-        if ( pw > ph) {
-            w = T2L_IMAGE_SIZE;
-            h = (int)(T2L_IMAGE_SIZE*ph/pw);
-        }
-        else {
-            w = (int)(T2L_IMAGE_SIZE*pw/ph);
-            h = T2L_IMAGE_SIZE;
-        }
-        pixmap = pixmap.scaled(w, h);*/
         pixmap_ = new QPixmap(fileQualified);
     }
 
-    if (parent != NULL) parent->add(this);
+    if (parent != nullptr) parent->add(this);
 }
 
 //===================================================================
@@ -106,8 +90,9 @@ bool CadObject_image::loadFromStored( StoredItem* item, GFile* parent )
 
     Point2FCol position;
 
-    StoredAttr* pa = item->get("point", 0);
-    if (pa != NULL) {
+    for (int i = 0; true; i++) {
+        StoredAttr* pa = item->get("point", i);
+        if ( pa == nullptr ) break;
         StoredAttrNUM* p = pa->getAsNUM();
         if (p != NULL) {
             Point2<double> p2( p->get(0), p->get(1));
@@ -120,7 +105,7 @@ bool CadObject_image::loadFromStored( StoredItem* item, GFile* parent )
     if (image_name->getAsSTR() == NULL) return false;
 
     string imageName = image_name->value().toStdString();
-    CadObject_image* objectImage = new CadObject_image( imageName.c_str(), position, parent );
+    new CadObject_image( imageName.c_str(), position, parent );
 }
 
 //===================================================================
@@ -135,9 +120,9 @@ void CadObject_image::saveToStored(StoredItem& item, GFile* file)
     item.add( new StoredAttrSTR("entity",     "symbol_image") );
     item.add( new StoredAttrSTR("image_name", imageName_) );
 
-    if ( points_.count() > 0 ) { //TODO
+    for ( int i = 0; i < points().count(); i++ ) {
         StoredAttrNUM* attrBeg = new StoredAttrNUM("point");
-        Point2F position = points_.get(0);
+        Point2F position = points_.get(i);
         attrBeg->add(position.x());
         attrBeg->add(position.y());
         item.add(attrBeg);
@@ -160,6 +145,13 @@ Box2F CadObject_image::box(Vector2F offsetArg)
                        offset.y()+offsetArg.y());
 
 
+    if (points_.count() >= 2)  {
+        Box2F result;
+        result.inflateTo(points_.get(0));
+        result.inflateTo(points_.get(1));
+
+        return result;
+    }
     if (points_.count() > 0) {
         Box2F result;
         Point2F center(points_.get(0));

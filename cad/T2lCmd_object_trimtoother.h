@@ -15,7 +15,7 @@
 //=============================================================================
 #pragma once
 
-#include <T2lCmd.h>
+#include <T2lCmdCad.h>
 #include "T2lPoint2Col.h"
 
 namespace T2l
@@ -25,7 +25,7 @@ class CadLine;
 class EntityPack;
 
 //===================================================================
-class Cmd_object_trimtoother : public Cmd {
+class Cmd_object_trimtoother : public CmdCad {
 //===================================================================
 public:
     Cmd_object_trimtoother(void);
@@ -38,9 +38,11 @@ protected:
 //<DATA>
     CadLine* cadLine1_trimWhat_;
     CadLine* cadLine2_trimTo_;
+    Point2F  ptWhat_;
 //<INTERNALS>
-    CadLine* selectLine_( const Point2F& pt, Display& view );
-    void calculateIntersection_(Point2F& pt0, Point2F& pt1);
+    //CadLine* selectLine_( const Point2F& pt, Display& view );
+    void     calculateIntersection_(Point2F& pt0, Point2F& pt1);
+    QString  hint(void) const;
 };
 
 }//namespace T2l

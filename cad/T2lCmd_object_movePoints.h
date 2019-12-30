@@ -31,6 +31,7 @@ public:
     virtual void enterPoint( const Point2F& pt, Display& view );
     virtual void enterReset( Display& view );
     virtual void enterMove ( const Point2F& pt, Display& view );
+    virtual QString hint(void) const;
 protected:
 //<DATA>
     Point2FCol points_;

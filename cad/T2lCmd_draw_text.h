@@ -29,6 +29,8 @@ public:
     virtual void enterPoint( const T2l::Point2F& pt, T2l::Display& view );
     virtual void enterMove ( const T2l::Point2F& pt, T2l::Display& view );
     virtual void enterText( const QString& /*text*/);
+    virtual QString dialogTml() const;
+    virtual QString hint(void) const;
 protected:
 //<DATA>
 };

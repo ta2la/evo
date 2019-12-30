@@ -10,7 +10,6 @@ INCLUDEPATH += ./ \
                ../../hg/hg_display \
                ../../hg/hg_interact \
                ../../base/base/include \
-               ../../base/base_ex/include \
                ../../infrastructure/command_registry/include \
                ../../infrastructure/command_registry_ex/include \
                ../../cvz/cvz-engine/include \

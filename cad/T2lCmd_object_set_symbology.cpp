@@ -23,12 +23,16 @@
 #include "T2lCadSettings.h"
 #include "T2lGObjectPool.h"
 #include "T2lRefColSelection.h"
+#include "T2lFilterCadObject.h"
+#include "T2lActiveFile.h"
+#include "T2lFilterCol.h"
+#include "T2lFilterFile.h"
 
 using namespace T2l;
 
 //===================================================================
 Cmd_object_set_symbology::Cmd_object_set_symbology(void) :
-    Cmd("set symbology")
+    CmdCad("set symbology")
 {
 }
 
@@ -49,7 +53,6 @@ void Cmd_object_set_symbology::enterPoint( const Point2F& pt, T2l::Display& view
     UpdateLock l;
 
     if (selected.count() > 0) {
-
         for ( long i = 0; i < selected.count(); i++ )
         {	CadLine* cadLine = dynamic_cast<CadLine*>(selected.get(i)->object());
             if (cadLine == NULL) continue;
@@ -58,10 +61,18 @@ void Cmd_object_set_symbology::enterPoint( const Point2F& pt, T2l::Display& view
         }
 
         selected.unselectAll();
-
     }
     else {
-        for ( long i = 0; i < pack->scene()->count(); i++ ) {
+        FilterCol filterCol(FilterCol::FT_AND);
+        GFile* activeFile = ActiveFile::active().file();
+        FilterFile filterFile(activeFile);
+        filterCol.add(&filterFile);
+        FilterCadObject filter(FilterCadObject::ECO_LINE);
+        filterCol.add(&filter);
+        foundFill(pt, view, &filterCol);
+        foundSelectFirst();
+
+        /*for ( long i = 0; i < pack->scene()->count(); i++ ) {
             T2l::Ref* ref = pack->scene()->get(i);
 
             if ( ref->identifiedByPoint(view.getRefCanvas(), pt) )
@@ -72,8 +83,51 @@ void Cmd_object_set_symbology::enterPoint( const Point2F& pt, T2l::Display& view
                 cadLine->isSelectedSet(true);
                 break;
             }
-        }
+        }*/
     }
+}
+
+//===================================================================
+void Cmd_object_set_symbology::enterReset ( T2l::Display& view )
+{
+    UpdateLock l;
+
+    RefColSelection& selected = GObjectPool::instance().selected();
+    selected.unselectAll();
+
+    if (foundSelectedCount() >= 0) {
+        foundSelectFirst();
+    }
+}
+
+//===================================================================
+QString Cmd_object_set_symbology::dialogTml() const
+{
+    QString result;
+
+    result += CadSettings::instance().colorEditor("");
+
+    result += "TC;CT;text: <hup>;;";
+    result += CadSettings::instance().widthEditor();
+
+    //===================================================
+    result = result.replace("TC", "type: control");
+    result = result.replace("CT", "control: text");
+    result = result.replace("CB", "control: button");
+    result = result.replace(";", "\n");
+
+    return result;
+}
+
+//===================================================================
+QString Cmd_object_set_symbology::hint(void) const
+{
+    RefColSelection& selected = GObjectPool::instance().selected();
+
+    if (selected.count() == 0) {
+        return "enter point select object";    }
+
+    return "enter point to change symbology on selected objects";
 }
 
 //===================================================================

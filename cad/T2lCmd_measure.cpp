@@ -27,6 +27,8 @@
 #include "T2lGFile.h"
 #include "T2lEntityText.h"
 
+#include <QTextStream>
+
 #include <iostream>
 #include <assert.h>
 #include <sstream>
@@ -49,35 +51,26 @@ Cmd_measure::~Cmd_measure(void)
 void Cmd_measure::enterPoint( const Point2F& pt, Display& view )
 {	UpdateLock l;
 
-    //cout << "xy: " << pt.x() << " " << pt.y() << endl;
-
     GFile* file = ActiveFile::active().file();
     if ( file == NULL ) return;
 
-    if (points_.count() == 0) {
-        points_.add(Point2<double>(pt.x(), pt.y()));
-    }
-    else {
-        /*points_.add(recalculateOrtho_(pt));
-
-        Vector2F offset = file->getOffset();
-        offset.multiply(-1);
-
-        points_.getRef(0).add(offset);
-        points_.getRef(1).add(offset);
-
-        CadLine* line = new CadLine(points_, file);
-        line->setColor(CadSettings::instance().color());
-        line->setWidth(CadSettings::instance().width());*/
-        points_.clean();
-    }
+    points_.add(Point2<double>(pt.x(), pt.y()));
 
     EntityPack* pack = view.entityPack();
     pack->cleanDynamic();
     pack->dynamicRefresh();
-
-    //cout << "xy: " << pt.x() << ", " << pt.y() << endl;
 }
+
+//===================================================================
+void Cmd_measure::enterReset( Display& view )
+{
+    points_.clean();
+
+    EntityPack* pack = view.entityPack();
+    pack->cleanDynamic();
+    pack->dynamicRefresh();
+}
+
 
 //===================================================================
 void Cmd_measure::enterMove( const Point2F& pt, Display& view )
@@ -93,12 +86,19 @@ void Cmd_measure::enterMove( const Point2F& pt, Display& view )
     //<STEP> Dynamic drawing
     pack->cleanDynamic();
 	
-    EntityLine* line = new EntityLine( Color::GRAY, 0.15 );
-    line->points().points().add( points_.get(0) );
-    line->points().points().add( pt );
-    pack->addDynamic(line);
+    for ( int i = 1; i <= points_.count(); i++ ) {
+        EntityLine* line = new EntityLine( Color::ORANGE, 1.1 );
+        line->points().points().add( points_.get(i-1) );
+        if ( i == points_.count() ) {
+            line->points().points().add( pt );
+        }
+        else {
+            line->points().points().add( points_.get(i) );
+        }
+        pack->addDynamic(line);
+    }
 
-    stringstream info;
+    /*stringstream info;
     double dx = points_.get(0).x();
     double dy = points_.get(0).y();
     info << "l: " << sqrt(dx*dx + dy*dy);
@@ -106,9 +106,41 @@ void Cmd_measure::enterMove( const Point2F& pt, Display& view )
     Point2F ptOff2(pt);
     ptOff2.add(Vector2F(10,8));
     EntityText* text2 = new EntityText( info.str().c_str(), ptOff2 );
-    pack->addDynamic(text2);
+    pack->addDynamic(text2);*/
 
     pack->dynamicRefresh();
+}
+
+//===================================================================
+QString Cmd_measure::hint(void) const
+{
+    QString result;
+    QTextStream stream(&result);
+
+    if ( points_.count() == 0) {
+        stream << "enter first point or reset";
+    }
+    else if (points_.count() == 1) {
+        Point2F pt = points_.get(0);
+        stream << "position: " << pt.x() << "," << pt.y();
+        stream << " - enter next point or reset";
+    }
+    else {
+        double dist = 0;
+
+        for ( int i = 1; i < points_.count(); i++ ) {
+            Point2F p0 = points_.get(i-1);
+            Point2F p1 = points_.get(i);
+
+            dist += Vector2F(p0, p1).getLength();
+        }
+
+        stream << "length: " << dist;
+        stream << " - enter next point or reset";
+    }
+
+    stream.flush();
+    return result;
 }
 
 //===================================================================

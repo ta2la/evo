@@ -39,3 +39,32 @@ AfileAttr* AfileRecord::attrsGet(const char* name, int index)
 }
 
 //=============================================================================
+QString AfileRecord::getValue(const char* name, const QString& implicit, int index)
+{
+    AfileAttr* attr = attrsGet(name, index);
+    if (attr == nullptr) return implicit;
+    return attr->value();
+}
+
+//=============================================================================
+double AfileRecord::getValue(const char* name, double implicit)
+{
+    QString value = getValue(name);
+    if (value.isEmpty()) return implicit;
+
+    return value.toDouble();
+}
+
+//=============================================================================
+Point2F AfileRecord::getValue(const char* name, const Point2F& implicit, int index)
+{
+    QString value = getValue(name, "", index);
+    if (value.isEmpty()) return implicit;
+
+    QStringList values = value.split(" ");
+    if (values.count() < 2) return implicit;
+
+    return Point2F(values.at(0).toDouble(), values.at(1).toDouble());
+}
+
+//=============================================================================

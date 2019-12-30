@@ -15,7 +15,7 @@
 //=============================================================================
 #pragma once
 
-#include <T2lCmd.h>
+#include <T2lCmdCad.h>
 #include <T2lPoint2.h>
 #include "T2lPoint2Col.h"
 
@@ -25,19 +25,23 @@ namespace T2l
 class CadLine;
 
 //===================================================================
-class Cmd_object_mocopy_parallel : public Cmd {
+class Cmd_object_mocopy_parallel : public CmdCad {
 //===================================================================
 public:
     Cmd_object_mocopy_parallel(void);
     virtual ~Cmd_object_mocopy_parallel(void);
 //===================================================================
-    virtual void enterPoint( const Point2F& pt, Display& view );
-    virtual void enterMove ( const Point2F& pt, Display& view );
+    virtual void    enterPoint( const Point2F& pt, Display& view );
+    virtual void    enterMove ( const Point2F& pt, Display& view );
+    virtual QString dialogTml() const;
+    virtual QString hint(void) const;
+    virtual void    enterReset ( T2l::Display& view );
 protected:
 //<DATA>
-    CadLine* cadLine_;
+    //CadLine* cadLine_;
 //<INTERNALS>
     void calculateNew_(const Point2F& pt, const Point2FCol& ptsOld, Point2FCol& ptsNew);
+    CadLine* getLine() const;
 };
 
 }//namespace T2l

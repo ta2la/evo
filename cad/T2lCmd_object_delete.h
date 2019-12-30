@@ -15,19 +15,21 @@
 //=============================================================================
 #pragma once
 
-#include <T2lCmd.h>
+#include <T2lCmdCad.h>
 #include <T2lPoint2.h>
 
 namespace T2l {
 
 //===================================================================
-class Cmd_object_delete : public T2l::Cmd {
+class Cmd_object_delete : public T2l::CmdCad {
 //===================================================================
 public:
 	Cmd_object_delete(void);
     virtual ~Cmd_object_delete(void);
 //===================================================================
     virtual void enterPoint( const T2l::Point2F& pt, T2l::Display& view );
+    virtual void enterReset ( T2l::Display& view );
+    QString hint(void) const;
 protected:
 //<DATA>
     T2l::Point2F previous;

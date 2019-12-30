@@ -57,10 +57,10 @@ QString ActiveFile::firstFileName_()
 {
 
 
-    QString fileName = QDir::homePath() +  "/Development/KADLUB/cvz/samples/storage/empty.t2l";
+    QString fileName = QDir::homePath() +  "/Development/KADLUB/cvz/samples/cad/t2l/seed.t2l";
 
 #ifdef WINDOWS
-    fileName = QDir::homePath() + "g:/home/KADLUB/cvz/samples/storage";
+    fileName = QDir::homePath() + "c:/HOME/KADLUB/cvz/samples/storage/cad/t2l";
 #endif
 
     cout << endl;

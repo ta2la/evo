@@ -31,13 +31,13 @@ public:
     Cmd_pixann_painter(void);
     virtual ~Cmd_pixann_painter(void);
 
-    //QString nextSampleFile_();
+    static QString dialogTml_brushsize(const char* size);
 //===================================================================
     virtual void    enterPoint( const Point2F& pt, Display& view );
     virtual void    enterMove ( const Point2F& pt, Display& view );
     virtual void    enterReset( Display& view );
     virtual QString dialog() const;
-    //virtual void    enterText( const QString& text);
+    QString dialogTml() const;
     virtual QString hint(void) const;
     static QString dialog_owrite();
 protected:

@@ -56,7 +56,9 @@ public:
 
     virtual Box2F boundDisplable();
 
-    int gid() {return gid_; }
+    virtual ObjectDisplable* clone() { return nullptr; }
+
+    int  gid() {return gid_; }
 
     int  groupGet() { return group_; }
     void groupSet(int group) { group_ = group; }

@@ -22,18 +22,38 @@
 #include "T2lObjectDisplable.h"
 #include "T2lCadObject_image.h"
 #include "T2lGFile.h"
+#include "T2lRefColSelection.h"
+#include "T2lGObjectPool.h"
+#include "T2lFilterFile.h"
 
 using namespace T2l;
 
 //===================================================================
 Cmd_object_delete::Cmd_object_delete(void) :
-    Cmd("delete")
+    CmdCad("delete")
 {
+    UpdateLock l;
+
+    RefColSelection& selected = GObjectPool::instance().selected();
+    selected.unselectAll();
 }
 
 //===================================================================
 Cmd_object_delete::~Cmd_object_delete(void)
 {
+}
+
+//===================================================================
+void Cmd_object_delete::enterReset ( T2l::Display& view )
+{
+    UpdateLock l;
+
+    RefColSelection& selected = GObjectPool::instance().selected();
+    selected.unselectAll();
+
+    if (foundSelectedCount() > 0) {
+        foundSelectFirst();
+    }
 }
 
 //===================================================================
@@ -46,7 +66,27 @@ void Cmd_object_delete::enterPoint( const Point2F& pt, T2l::Display& view )
 	
     UpdateLock l;
 
-	bool done = false;
+    RefColSelection& selected = GObjectPool::instance().selected();
+
+    if ( selected.count() == 0 ) {
+        GFile* activeFile = ActiveFile::active().file();
+        FilterFile file(activeFile);
+
+        foundClean();
+        foundFill(pt, view, &file);
+        foundSelectFirst();
+    }
+    else {
+        for ( long i = 0; i < selected.count(); i++ ) {
+            GObject* object = selected.get(i)->object();
+            delete object;
+        }
+
+        selected.unselectAll();
+        foundClean();
+    }
+
+    /*bool done = false;
     for ( long i = 0; i < pack->scene()->count(); i++ )
     {	T2l::Ref* ref = pack->scene()->get(i);
         GObject* objex = ref->object();
@@ -73,7 +113,18 @@ void Cmd_object_delete::enterPoint( const Point2F& pt, T2l::Display& view )
 		}
 	}
 
-	previous = pt;
+    previous = pt;*/
+}
+
+//===================================================================
+QString Cmd_object_delete::hint(void) const
+{
+    RefColSelection& selected = GObjectPool::instance().selected();
+
+    if (selected.count() == 0) {
+        return "enter point select object";    }
+
+    return "enter point to delete selected object";
 }
 
 //===================================================================

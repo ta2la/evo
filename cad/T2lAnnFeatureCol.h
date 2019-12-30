@@ -40,8 +40,9 @@ public:
 
     int index(const char* id); //returns -1 if id not found
                                // othervise it returns index
-    QString printCategory(const char* category);
+    QString printCategory(const char* category); //o_on o_off
     QString printHtml();
+    QString printTml(const char* cmd, const char* filter = "", bool owriteShow = false);
 
     int activeFeature_;
 };

@@ -219,6 +219,33 @@ QString Cmd_ann_enter::dialog() const {
 }
 
 //===================================================================
+QString Cmd_ann_enter::dialogTml() const
+{
+    QString result;
+
+    if (pixels_) {
+        result += "TC;CT;text: pixels: <a href='tcview:://#ann_enter_pixels off'>is ON</a>;;";
+    }
+    else {
+        result += "TC;CT;text: pixels: <a href='tcview:://#ann_enter_pixels on'>is OFF</a>;;";
+    }
+
+    result += "TC;CT;text: <hup>;;";
+    AnnFeatureCol& features = AnnFeatureCol::instance();
+    result += "TC;CT;text: categories: ;;";
+    result += features.printTml("ann_set_category");
+
+    //===================================================
+    result = result.replace("TC", "type: control");
+    result = result.replace("CT", "control: text");
+    result = result.replace("CB", "control: button");
+    result = result.replace(";", "\n");
+
+    return result;
+}
+
+
+//===================================================================
 QString Cmd_ann_enter::hint(void) const
 {
     return "enter points and then click reset";

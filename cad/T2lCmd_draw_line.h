@@ -31,7 +31,10 @@ public:
 //<OVERRIDES>
     virtual void    enterPoint ( const T2l::Point2F& pt, T2l::Display& view );
     virtual void    enterMove  ( const T2l::Point2F& pt, T2l::Display& view );
-    virtual QString dialog() const;
+    virtual void    enterReset ( T2l::Display& view );
+    virtual QString dialog()    const;
+    virtual QString dialogTml() const;
+    virtual QString hint(void)  const;
 //<DATA>
     T2l::Point2Col<double> points_;
 //<INTERNALS>

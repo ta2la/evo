@@ -25,6 +25,8 @@
 #include "T2lActiveFile.h"
 #include "T2lCadSettings.h"
 #include "T2lGFile.h"
+#include <QDir>
+#include <QCoreApplication>
 
 #include <iostream>
 #include <assert.h>
@@ -74,6 +76,17 @@ void Cmd_draw_line::enterPoint( const Point2F& pt, Display& view )
 }
 
 //===================================================================
+void Cmd_draw_line::enterReset( Display& view )
+{
+    points_.clean();
+
+    EntityPack* pack = view.entityPack();
+    pack->cleanDynamic();
+    pack->dynamicRefresh();
+}
+
+
+//===================================================================
 void Cmd_draw_line::enterMove( const Point2F& pt, Display& view )
 {   
     if (points_.count() < 1) return;
@@ -119,6 +132,53 @@ Point2F Cmd_draw_line::recalculateOrtho_( const Point2F& pt )
 }
 
 //===================================================================
+QString Cmd_draw_line::dialogTml() const
+{
+    QString ortho = "is not ortho";
+    QString state = "off";
+    if ( CadSettings::instance().ortho() ) {
+        ortho = "is ortho";
+        state = "on";
+    }
+
+    QString result;
+
+    result += "TC;CT;text: ";
+    if ( CadSettings::instance().ortho() ) {
+        result += "is ortho";
+    }
+    else {
+        result += "is not ortho";
+    }
+    result += ":;;";
+
+    result += "TC;CB;icon: ";
+    QDir dir(QCoreApplication::applicationDirPath());
+    dir.cdUp();
+    result += dir.path() + "/resource/sett_ortho";
+    if ( !CadSettings::instance().ortho() ) result += "_not";
+    result += ".png;";
+    result += "cmd: cad_set_ortho;;";
+
+    result += "TC;CT;text: <hup>;;";
+
+    result += CadSettings::instance().colorEditor("");
+
+    result += "TC;CT;text: <hup>;;";
+    result += CadSettings::instance().widthEditor();
+
+    //===================================================
+    result = result.replace("TC", "type: control");
+    result = result.replace("CT", "control: text");
+    result = result.replace("CB", "control: button");
+    result = result.replace(";", "\n");
+
+
+
+    return result;
+}
+
+//===================================================================
 QString Cmd_draw_line::dialog() const {
     QString result;
 
@@ -147,6 +207,16 @@ QString Cmd_draw_line::dialog() const {
     result.append( "</p>" );
 
     return result;
+}
+
+//===================================================================
+QString Cmd_draw_line::hint(void) const
+{
+    if (points_.count() == 0) {
+        return "enter first point";
+    }
+
+    return "enter second point or reset";
 }
 
 //===================================================================

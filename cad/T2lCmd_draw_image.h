@@ -16,6 +16,7 @@
 #pragma once
 
 #include <T2lCmd.h>
+#include <QStringList>
 
 namespace T2l {
 
@@ -28,6 +29,12 @@ public:
 //===================================================================
     virtual void enterPoint( const T2l::Point2F& pt, T2l::Display& view );
     virtual void enterMove ( const T2l::Point2F& pt, T2l::Display& view );
+    virtual QString dialogTml() const;
+
+    bool    ptEntered_;
+    Point2F pt_;
+
+    QStringList getFilesUp_(const QString& dirPath, const QStringList& extensions) const;
 };
 
 } //namespace T2l

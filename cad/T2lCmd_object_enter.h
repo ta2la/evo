@@ -28,6 +28,8 @@ public:
 //===================================================================
     virtual void enterPoint( const T2l::Point2F& pt, T2l::Display& view );
     virtual void enterMove ( const T2l::Point2F& pt, T2l::Display& view );
+
+    virtual QString dialogTml() const;
 };
 
 } //namespace T2l

@@ -26,6 +26,7 @@
 #include "T2lBox2.h"
 #include "T2lStoredItem.h"
 #include "T2lActiveFile.h"
+#include "T2lStyleChange.h"
 
 #include <assert.h>
 #include <iostream>
@@ -34,7 +35,7 @@ using namespace T2l;
 using namespace std;
 
 //===================================================================
-CadObject_symbol::CadObject_symbol(const Point2F& position, GFile* parent, ESymbol style) :
+CadObject_symbol::CadObject_symbol(const Point2F& position, GFile* parent, const char* style) :
     ObjectDisplable(Point2Col<double>(position), parent),
     style_(style)
 {
@@ -51,12 +52,15 @@ void CadObject_symbol::display(EntityList& list, RefCol* scene)
 {
     if (parent_ == NULL) return;
 
+    StyleChange* selChange = NULL;
+
     if (isSelected()) {
-        Style* styleCircle = Style::createPointStyle(Color::MAGENTA, Style::SYMBOL_CIRCLE_FILLED, 5, "void");
-        list.add( new EntityPoint( position(), *styleCircle, true, ANGLE_ZERO_VIEW, AngleXcc(0), NULL ) );
+        selChange = new StyleChange(Color::MAGENTA, 1);
     }
 
-    list.add( new EntityPoint( position(), *getSymbolStyle(style_, isSelected()), false, ANGLE_ZERO_VIEW, AngleXcc(0), NULL ) );
+    Style* style = parent()->styles().getStyle(style_.c_str());
+
+    list.add( new EntityPoint( position(), *style, false, ANGLE_ZERO_VIEW, AngleXcc(0), selChange ) );
 }
 
 //===================================================================
@@ -88,7 +92,7 @@ void CadObject_symbol::saveToStored(StoredItem& item, GFile* file)
     item.add(new StoredAttrSTR("type",   "entity"));
     item.add(new StoredAttrSTR("entity", "symbol"));
 
-    StoredAttrSTR* attrSymbol = new StoredAttrSTR("symbol", getSymbolStyle(style_, false)->id() );
+    StoredAttrSTR* attrSymbol = new StoredAttrSTR("symbol", style_.c_str() );
     item.add(attrSymbol);
 
     StoredAttrNUM* attrBeg = new StoredAttrNUM("point");
@@ -120,51 +124,48 @@ bool CadObject_symbol::loadFromStored(StoredItem* item, GFile* parent)
     string symbolStr(symbol->getAsSTR()->value().toStdString());
     //cout << "reading symbol: "<< symbolStr << endl;
 
-    new CadObject_symbol( point, parent, mapSymbolIdToEnum( symbolStr.c_str() ));
+    new CadObject_symbol( point, parent, symbolStr.c_str() );
 }
 
 //====================================================================
-Style* CadObject_symbol::getSymbolStyle( ESymbol symbol, bool selectedArg )
+Style* CadObject_symbol::getSymbolStyle( ESymbol symbol )
 {
-    static Style* styleVoid         = NULL;
-    static Style* styleInheritance  = NULL;
-    static Style* styleAgregation   = NULL;
-    static Style* stylePoint        = NULL;
-
-    static Style* styleVoidS        = NULL;
-    static Style* styleInheritanceS = NULL;
-    static Style* styleAgregationS  = NULL;
-    static Style* stylePointS        = NULL;
-
-    double size = 3;
-    if (selectedArg) size++;
+    static Style* styleVoid         = nullptr;
+    static Style* styleInheritance  = nullptr;
+    static Style* styleAgregation   = nullptr;
+    static Style* stylePoint        = nullptr;
 
     switch (symbol) {
     case SYMBOL_AGREGATION:
-        if (styleAgregation == NULL) {
-            styleAgregation  = Style::createPointStyle( Color::BLUE, Style::SYMBOL_CIRCLE_FILLED, 3, "agregation");
-            styleAgregationS = Style::createPointStyle( Color::MAGENTA, Style::SYMBOL_CIRCLE_FILLED, 4, "agregation_s");
-        }
-        return selectedArg ? styleAgregationS : styleAgregation;
+        if (styleAgregation == nullptr) styleAgregation = Style::createPointStyle
+                ( Color::BLUE, Style::SYMBOL_CIRCLE_FILLED, 3, "agregation");
+        return styleAgregation;
     case SYMBOL_INHERITANCE:
-        if (styleInheritance == NULL) {
-            styleInheritance  = Style::createPointStyle( Color::RED, Style::SYMBOL_CIRCLE_FILLED, 3, "inheritance");
-            styleInheritanceS = Style::createPointStyle( Color::MAGENTA, Style::SYMBOL_CIRCLE_FILLED, 4, "inheritance_s");
-        }
-        return selectedArg ? styleInheritanceS : styleInheritance;
+        if (styleInheritance == nullptr) styleInheritance  = Style::createPointStyle
+                ( Color::RED, Style::SYMBOL_CIRCLE_FILLED, 3, "inheritance");
+        return styleInheritance;
     case SYMBOL_POINT:
-        if (stylePoint == NULL) {
-            stylePoint  = Style::createPointStyle( Color::GRAY, Style::SYMBOL_CIRCLE_FILLED, 1, "point");
-            stylePointS = Style::createPointStyle( Color::MAGENTA, Style::SYMBOL_CIRCLE_FILLED, 2.5, "point_s");
-        }
-        return selectedArg ? styleInheritanceS : styleInheritance;
+        if (stylePoint == nullptr) stylePoint  = Style::createPointStyle
+                ( Color::GRAY, Style::SYMBOL_CIRCLE_FILLED, 1, "point");
+        return styleInheritance;
     }
 
-    if (styleVoid == NULL) {
-        styleVoid = Style::createPointStyle(Color::BLUE,   Style::SYMBOL_CIRCLE, 1.5, "void");
-        styleVoidS = Style::createPointStyle(Color::MAGENTA, Style::SYMBOL_CIRCLE, 1.5, "void_s");
+    if (styleVoid == nullptr) styleVoid = Style::createPointStyle(Color::BLUE,   Style::SYMBOL_CIRCLE, 1.5, "void");
+
+    return styleVoid;
+}
+
+//====================================================================
+const char* CadObject_symbol::mapEnumToId(ESymbol symbol)
+{
+    switch (symbol) {
+    case SYMBOL_VOID:        return "void";
+    case SYMBOL_AGREGATION:  return "agregation";
+    case SYMBOL_INHERITANCE: return "inheritance";
+    case SYMBOL_POINT:       return "inheritance";
     }
-    return selectedArg ? styleVoidS : styleVoid;
+
+    return "void";
 }
 
 //====================================================================

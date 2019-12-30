@@ -28,6 +28,7 @@
 #include "T2lEntityLine.h"
 #include "T2lSfeatArea.h"
 #include "T2lBox2.h"
+#include "T2lEntityArea.h"
 
 using namespace T2l;
 using namespace std;
@@ -35,7 +36,9 @@ using namespace std;
 //===================================================================
 CadObject_text::CadObject_text(const QString& text, const Point2<double>& position, GFile* parent) :
     ObjectDisplable(position, parent),
-    text_(text)
+    text_(text),
+    back_(false),
+    backColor_(Color::GRAY)
 {
     if (parent != NULL) parent->add(this);
 }
@@ -103,17 +106,25 @@ Box2F CadObject_text::bound_()
 //===================================================================
 void CadObject_text::display(EntityList& list, RefCol* scene)
 {
-    if (parent_ == NULL) return;
-
     QString name = text_;
     if (name.isEmpty()) name = "???";
 
     Point2F p = position();
 
+    Box2F bound = bound_();
+
+    if (back_)
+    {
+        Style* stylea = new Style("");
+        stylea->sfeats().add( new SfeatArea(backColor_, 255));
+        EntityArea* area = new EntityArea( *stylea, true, NULL);
+        Point2FCol& pline = area->points().points();
+        for ( int i = 0; i < 4; i++) pline.add( Point2F(bound.getPoint(i)));
+        list.add(area);
+    }
+
     EntityText* text = new EntityText( name, p );
     list.add(text);
-
-    Box2F bound = bound_();
 
     if (isSelected()) {
         EntityLine* lineT = new EntityLine( Color(255, 0, 255), 0.15, NULL );

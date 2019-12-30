@@ -24,6 +24,7 @@
 #include "T2lPoint2.h"
 #include "T2lActiveFile.h"
 #include "T2lCmdQueue.h"
+#include "T2lEntityText.h"
 
 using namespace T2l;
 
@@ -31,10 +32,6 @@ using namespace T2l;
 Cmd_draw_text::Cmd_draw_text(void) :
     Cmd("draw text")
 {
-    /*CmdQueue* queue = dynamic_cast<CmdQueue*>(CmdQueue::instance());
-    if (queue) {
-        queue->setConsumeText(true);
-    }*/
 }
 
 //===================================================================
@@ -77,15 +74,44 @@ void Cmd_draw_text::enterMove( const Point2F& pt, Display& view )
     pack->cleanDynamic();
 
     EntityList list;
-
     CadObject_text text(CadSettings::instance().text(), pt, NULL);
     text.display(list, NULL);
-
     for ( long i = 0; i < list.count(); i++ ) {
+        EntityText* text = dynamic_cast<EntityText*>(list.get(i));
         pack->addDynamic(list.get(i));
     }
 
     pack->dynamicRefresh();
+}
+
+//===================================================================
+QString Cmd_draw_text::dialogTml() const
+{
+    QString result;
+    /*result += "TC;CT;text: text: <b>";
+    result += CadSettings::instance().text();
+    result += "</b>;;";
+
+    result += "TC;CT;text: <hup>;;";*/
+
+    result += "TC;control: edit;";
+    result += "text: " + CadSettings::instance().text() + ";";
+    result += "cmd: text \"$TEXT\"";
+    result += ";;";
+
+    //===================================================
+    result = result.replace("TC", "type: control");
+    result = result.replace("CT", "control: text");
+    result = result.replace("CB", "control: button");
+    result = result.replace(";", "\n");
+
+    return result;
+}
+
+//===================================================================
+QString Cmd_draw_text::hint(void) const
+{
+    return "enter point to position text";
 }
 
 //===================================================================

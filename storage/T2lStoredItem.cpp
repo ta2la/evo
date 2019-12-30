@@ -1,5 +1,5 @@
 //
-// Copyright (C) 2018 Petr Talla. [petr.talla@gmail.com]
+// Copyright (C) 2018, 2019 Petr Talla. [petr.talla@gmail.com]
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,7 +14,9 @@
 // limitations under the License.
 //=============================================================================
 #include "T2lStoredItem.h"
+
 #include <QFileInfo>
+#include <QTextStream>
 
 using namespace T2l;
 

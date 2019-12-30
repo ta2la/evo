@@ -16,6 +16,7 @@
 #pragma once
 
 #include <T2lAfileAttr.h>
+#include "T2lPoint2.h"
 
 #include <string>
 #include <QList>
@@ -35,6 +36,9 @@ public:
     int        attrsCount() { return attrs_.count(); }
     AfileAttr& attrsGet(int index) { return attrs_[index]; }
     AfileAttr* attrsGet(const char* name, int index = 0);
+    QString    getValue(const char* name, const QString& implicit = "", int index = 0);
+    double     getValue(const char* name, double implicit);
+    Point2F    getValue(const char* name, const Point2F& implicit, int index = 0);
 //=============================================================================
 protected:
 //<DATA>

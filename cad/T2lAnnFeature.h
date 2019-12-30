@@ -20,7 +20,6 @@
 #include "T2lItem.h"
 #include "T2lItemCol.h"
 #include "T2lColor.h"
-//#include "T2lColorBox.h"
 
 #include <string>
 
@@ -59,8 +58,6 @@ protected:
     unsigned char transp_;
 
     bool          canOwrite_;
-
-    //ColorBox      colorBox_;
 };
 
 } // namespace T2l

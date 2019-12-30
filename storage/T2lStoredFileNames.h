@@ -15,14 +15,14 @@
 //=============================================================================
 #pragma once
 
-#include "T2lAfile.h"
-#include <QString.h>
+#include <QString>
 
 namespace T2l
 {
 
 class StoredItem;
 class GFile;
+class Afile;
 
 //====================================================================
 class StoredFileNames {
@@ -33,16 +33,18 @@ public:
 
 
 //<METHODS>
-    static QString filePathForImage(const QString& imagePath, const char* extension = "t2i");
-    static void loadForImage(Afile& afile, const QString& imagePath);
+    static QString filePathForImage (const QString& imagePath, const char* extension = "t2i");
+    static void    loadForImage     (Afile& afile, const QString& imagePath);
 
-    static bool isFileImage(const QString fileName);
-    static QString t2lDescriptor(const QString fileName);
+    static bool    isFileImage      (const QString fileName);
+    static QString t2lDescriptor    (const QString fileName);
+
+    static QString getExeUpDir();
+    static QString getVariable      (const char* name);
 //====================================================================
 protected:
 //<OVERRIDES>
-
-    //<DATA>
+//<DATA>
 //<INTERNALS>
     StoredFileNames(void);
 //<FRIENDS>

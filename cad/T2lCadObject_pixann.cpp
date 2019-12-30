@@ -55,11 +55,19 @@ CadObject_pixann::CadObject_pixann( const Point2Col<double>& points, GFile* pare
 
     AnnFeatureCol& features = AnnFeatureCol::instance();
 
+    int ccount = image_->colorCount();
+
+    QVector<QRgb> colors(features.count());
+
     for (int i = 0; i < features.count(); i++) {
         AnnFeature* feature = features.get(i);
         Color c = feature->backColor();
-        image_->setColor(i, QColor(c.r(), c.g(), c.b(), feature->transp()).rgba());
+        //image_->setColor(i, QColor(c.r(), c.g(), c.b(), feature->transp()).rgba());
+        colors[i] = QColor(c.r(), c.g(), c.b(), feature->transp()).rgba();
     }
+
+    image_->setColorCount(features.count());
+    image_->setColorTable(colors);
 
     image_->fill(0);
 
@@ -167,6 +175,20 @@ bool CadObject_pixann::loadFromStored( StoredItem* item, GFile* file )
     path += fileName;
 
     pixann->image_->load(path);
+
+    AnnFeatureCol& features = AnnFeatureCol::instance();
+
+    QVector<QRgb> colors(features.count());
+
+    for (int i = 0; i < features.count(); i++) {
+        AnnFeature* feature = features.get(i);
+        Color c = feature->backColor();
+        //image_->setColor(i, QColor(c.r(), c.g(), c.b(), feature->transp()).rgba());
+        colors[i] = QColor(c.r(), c.g(), c.b(), feature->transp()).rgba();
+    }
+
+    image_->setColorCount(features.count());
+    image_->setColorTable(colors);
 
     return true;
 }

@@ -77,16 +77,8 @@ AfileRecord* Afile::recordGet(const char* value, int index, const char* attrName
 }
 
 //=============================================================================
-void Afile::load(GLoadSave& loadSave)
+void Afile::loadStream (QTextStream& in)
 {
-    if (fullName_.isEmpty() == false) return;
-    fullName_ = loadSave.fileName();
-
-    QString fileStr;
-    loadSave.load(fileStr);
-
-    QTextStream in(&fileStr);
-
     AfileRecord* record = new AfileRecord();
 
     while( !in.atEnd()) {
@@ -119,6 +111,54 @@ void Afile::load(GLoadSave& loadSave)
     else {
         delete record;
     }
+}
+
+
+//=============================================================================
+void Afile::load(GLoadSave& loadSave)
+{
+    if (fullName_.isEmpty() == false) return;
+    fullName_ = loadSave.fileName();
+
+    QString fileStr;
+    loadSave.load(fileStr);
+
+    QTextStream in(&fileStr);
+    
+    loadStream(in);
+
+    /*AfileRecord* record = new AfileRecord();
+
+    while( !in.atEnd()) {
+        QString line = in.readLine();
+
+        int indexOfColons = line.indexOf(':');
+
+        if ( indexOfColons < 0 ) {
+            if ( record->attrsCount() != 0) {
+                records_.append(record);
+                record = new AfileRecord();
+            }
+        }
+
+        string attrName = line.left(indexOfColons).toStdString();
+
+        int indexOfData = indexOfColons;
+        while ( ( indexOfData+1 < line.size() ) && ( line.at(indexOfData+1) == ' ' ) ) {
+            indexOfData++;
+        }
+
+        QString attrValue = line.right(line.size()-indexOfData-1);
+
+        record->attrs_.append(AfileAttr(attrName.c_str(), attrValue));
+    }
+
+    if ( record->attrsCount() != 0) {
+        records_.append(record);
+    }
+    else {
+        delete record;
+    }*/
 }
 
 //=============================================================================

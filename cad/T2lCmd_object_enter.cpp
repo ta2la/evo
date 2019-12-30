@@ -22,6 +22,10 @@
 #include "T2lEntityPoint.h"
 #include "T2lCadSettings.h"
 #include "T2lActiveFile.h"
+#include "T2lGFile.h"
+
+#include <QDir>
+#include <QCoreApplication>
 
 #include <iostream>
 #include <assert.h>
@@ -43,8 +47,6 @@ Cmd_object_enter::~Cmd_object_enter(void)
 //===================================================================
 void Cmd_object_enter::enterPoint( const T2l::Point2F& pt, Display& view )
 {
-    //cout << "PT: " << pt.x() << " | " << pt.y() << endl;
-
     UpdateLock l;
     new CadObject_symbol(pt, ActiveFile::active().file(), CadSettings::instance().symbol());
 
@@ -58,7 +60,6 @@ void Cmd_object_enter::enterPoint( const T2l::Point2F& pt, Display& view )
 void Cmd_object_enter::enterMove( const T2l::Point2F& pt, Display& view )
 {
     //<STEP> Searching scene.
-
     T2l::EntityPack* pack = view.entityPack();
     if ( pack == NULL ) { assert(0); return; }
     if ( pack->scene() == NULL ) return;
@@ -67,12 +68,78 @@ void Cmd_object_enter::enterMove( const T2l::Point2F& pt, Display& view )
     pack->cleanDynamic();
 
     EntityList list;
-    static Style* styleCircle = Style::createPointStyle( Color::BLACK, Style::SYMBOL_CIRCLE_FILLED, 3.0, "" );
-    list.add(new EntityPoint( Point2F(pt.x(), pt.y()), *styleCircle ));
+    CadObject_symbol symbol(pt, ActiveFile::active().file(), CadSettings::instance().symbol());
+    symbol.display(list, NULL);
     for ( long i = 0; i < list.count(); i++ ) {
         pack->addDynamic(list.get(i));
     }
+
     pack->dynamicRefresh();
+}
+
+//===================================================================
+QString symbolButton(const char* symbol) {
+    QString result;
+
+    result += "TC;CB;icon: ";
+    QDir dir(QCoreApplication::applicationDirPath());
+    dir.cdUp();
+    result += dir.path() + "/resource/symbol_" + symbol + ".png;";
+    result += QString("cmd: cad_set_symbol ") + symbol + ";;";
+
+    return result;
+}
+
+//===================================================================
+QString symbolButtonStr(const QString& symbol) {
+    QString result;
+
+    result += "TC;CT;text: [";
+    result += symbol;
+    result += QString("];cmd: cad_set_symbol ") + symbol + ";;";
+
+    return result;
+}
+
+//===================================================================
+QString symbolImageFile(const QString& symbol) {
+    QDir dir = QFileInfo(ActiveFile::active().file()->filePath()).dir();
+    dir.cdUp();
+    dir.cd("t2l");
+    QString fileName(symbol);
+    fileName += (".png");
+    return dir.absoluteFilePath(fileName);
+}
+
+//===================================================================
+QString Cmd_object_enter::dialogTml() const
+{
+    QString result;
+
+    GFile* file = ActiveFile::active().file();
+    for ( int i = 0; i < file->styles().count(); i++) {
+        QString symbolId  = file->styles().get(i)->style()->id();
+        QString imageFile = symbolImageFile(symbolId);
+
+        if (QFileInfo(imageFile).exists()) {
+            result += "TC;CB;icon: ";
+            result += imageFile + ";";
+            result += QString("cmd: cad_set_symbol ") + symbolId + ";;";
+        }
+        else {
+            result += symbolButtonStr(symbolId);
+        }
+
+    }
+
+    //===================================================
+    result = result.replace("TEXT", "type: control;control: text;text");
+    result = result.replace("TC", "type: control");
+    result = result.replace("CT", "control: text");
+    result = result.replace("CB", "control: button");
+    result = result.replace(";", "\n");
+
+    return result;
 }
 
 //===================================================================

@@ -27,6 +27,8 @@
 #include <sstream>
 #include <QString>
 
+#include "T2lStyleChange.h"
+
 using namespace T2l;
 using namespace std;
 
@@ -47,9 +49,17 @@ CadLine::~CadLine(void)
 //===================================================================
 void CadLine::display(EntityList& list, RefCol* scene)
 {
-    if (parent_ == NULL) return;
+    if (parent_ == nullptr) return;
 
-    EntityLine* line = new EntityLine( color(), width(), NULL );
+    static StyleChange* change = new StyleChange(Color::GRAY_LIGHT, 0);
+    StyleChange* changeActive = NULL;
+    GFile* activeFile = ActiveFile::active().file();
+    //GFile* parentFile = parent();
+    if ( parent() != activeFile ) {
+        changeActive = change;
+    }
+
+    EntityLine* line = new EntityLine( color(), width(), changeActive );
     for ( int i = 0; i < points_.count(); i++ ) {
         Point2F pti = points_.get(i);
         pti.add(parent()->getOffset());
@@ -154,6 +164,16 @@ string CadLine::print()
     ss << "LINE: " << "color: " << (int)color().r() << "," << (int)color().g() << "," << (int)color().b();
 
     return ss.str();
+}
+
+//=========================================================================
+ObjectDisplable* CadLine::clone()
+{
+    CadLine* line = new CadLine(points_, parent_);
+    line->setColor(color_);
+    line->setWidth(width_);
+
+    return line;
 }
 
 //=========================================================================

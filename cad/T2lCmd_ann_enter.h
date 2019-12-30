@@ -34,6 +34,7 @@ public:
     virtual void enterReset ( T2l::Display& view );
     virtual QString dialog() const;
     virtual QString hint(void) const;
+    virtual QString dialogTml() const;
 
     static QString printCategory(const char* category);
     static void pixelsSet(bool pixels) { pixels_ = pixels; }

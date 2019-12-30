@@ -24,7 +24,7 @@
 #include <T2lPoint.h>
 #include <T2lColor.h>
 
-static const double fps=10.0; // animated frames per second
+static const double fps=8.0; // animated frames per second
 
 namespace T2l
 {

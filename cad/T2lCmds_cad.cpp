@@ -31,11 +31,17 @@
 #include "T2lCmd_object_movePoints.h"
 #include "T2lCmd_object_delete.h"
 #include "T2lCmd_object_mocopy_parallel.h"
+#include "T2lCmd_object_copy.h"
 #include "T2lCmd_object_set_symbology.h"
 #include "T2lCadSettings.h"
 #include "T2lCmd_viewinfo.h"
 #include "T2lFilterColor.h"
 #include "T2lWidgetFile.h"
+#include "T2lCmd_object_select.h"
+#include "T2lRefColSelection.h"
+#include "T2lUpdateLock.h"
+
+#include "T2lWidget3d.h"
 
 //geogebra
 #include "T2lActiveFile.h"
@@ -48,6 +54,8 @@
 #include "T2lCmd_measure.h"
 #include "T2lCmd_object_trimtoother.h"
 #include "T2lCmd_object_trim.h"
+#include "T2lCmd_change_text.h"
+#include "T2lCadObject_image.h"
 
 #include "TcArg.h"
 #include "TcArgVal.h"
@@ -56,6 +64,8 @@
 #include "T2lFilter.h"
 #include "T2lScene.h"
 #include "T2lGObjectPool.h"
+
+#include "T2lTuple.h"
 
 //hg
 #include "T2lCmdQueue.h"
@@ -121,9 +131,83 @@ int Cmds_cad::view_new(TcCmdContext* context, TcArgCol& args)
 }
 
 //=============================================================================
-int Cmds_cad::cmd_xy(TcCmdContext* /*context*/, TcArgCol& args)
+Tuple<double> read2coords(TcArgCol& args)
 {
     DisplayCol& vc = DisplayCol::instance();
+    if ( vc.count() == 0 ) return Tuple<double>({0, 0});
+
+    if (args.count() < 2 ) {
+        args.appendError("you must enter 2 coordinates");
+        return Tuple<double>();
+    }
+
+    TcArgVal* val1 = args.at(1)->getAsVal();
+
+    string xStr;
+    string yStr;
+
+    if (args.count() > 2) { //TODO hack
+        TcArgVal* val2 = args.at(2)->getAsVal();
+
+        xStr = val1->value();
+        yStr = val2->value();
+
+        if (xStr == "") xStr = string("-") + val1->name();
+        if (yStr == "") yStr = string("-") + val2->name();
+    }
+    else {
+        if ( (args.count() == 2) && (val1->name() == "") ) {
+            args.appendError("you must enter 2 coordinates");
+            return Tuple<double>();
+        }
+        else {
+            xStr = string("-") + val1->name();
+            yStr = val1->value();
+        }
+    }
+
+    double v0 = stod(xStr);
+    double v1 = stod(yStr);
+
+    return Tuple<double>({v0, v1});
+}
+
+
+//=============================================================================
+int Cmds_cad::cmd_dx(TcCmdContext* /*context*/, TcArgCol& args)
+{
+    int result = args.count();
+
+    Tuple<double> dxy = read2coords(args);
+
+    Point2F pt = CmdQueue::queue().lastPoint();
+    pt.add(Vector2F(dxy.get(0), dxy.get(1)));
+
+    CmdQueue::queue().enterPointStright(pt, *DisplayCol::instance().active());
+
+    return args.count()-result;
+}
+
+//=============================================================================
+int Cmds_cad::cmd_da(TcCmdContext* /*context*/, TcArgCol& args)
+{
+    int result = args.count();
+
+    Tuple<double> da = read2coords(args);
+
+    Point2F pt = CmdQueue::queue().lastPoint();
+    Vector2F delta(AngleXcc(da.get(0)), da.get(1));
+    pt.add(delta);
+
+    CmdQueue::queue().enterPointStright( pt, *DisplayCol::instance().active());
+
+    return args.count()-result;
+}
+
+//=============================================================================
+int Cmds_cad::cmd_xy(TcCmdContext* /*context*/, TcArgCol& args)
+{
+/*    DisplayCol& vc = DisplayCol::instance();
     if ( vc.count() == 0 ) return 0;
 
     if (args.count() < 2 ) {
@@ -155,11 +239,16 @@ int Cmds_cad::cmd_xy(TcCmdContext* /*context*/, TcArgCol& args)
     }
 
     double x = stod(xStr);
-    double y = stod(yStr);
+    double y = stod(yStr);*/
 
-    CmdQueue::queue().enterPointStright(Point2F(x,y), *DisplayCol::instance().active());
+    int result = args.count();
 
-    return 0;
+    Tuple<double> dxy = read2coords(args);
+
+    CmdQueue::queue().enterPointStright( Point2F(dxy.get(0), dxy.get(1)),
+                                        *DisplayCol::instance().active());
+
+    return args.count()-result;
 }
 
 //=============================================================================
@@ -207,6 +296,20 @@ int Cmds_cad::cmd_object_move(TcCmdContext* /*context*/, TcArgCol& /*args*/)
 }
 
 //=============================================================================
+int Cmds_cad::cmd_object_select(TcCmdContext* /*context*/, TcArgCol& /*args*/)
+{
+    CmdQueue::queue().add( new Cmd_object_select(), false );
+    return 0;
+}
+
+//=============================================================================
+int Cmds_cad::cad_change_text(TcCmdContext* /*context*/, TcArgCol& /*args*/)
+{
+    CmdQueue::queue().add( new Cmd_change_text(), false );
+    return 0;
+}
+
+//=============================================================================
 int Cmds_cad::cmd_object_movepoints(TcCmdContext* /*context*/, TcArgCol& /*args*/)
 {
     CmdQueue::queue().add( new Cmd_object_movePoints(), false );
@@ -237,6 +340,23 @@ int Cmds_cad::cmd_object_mocopy_parallel(TcCmdContext* /*context*/, TcArgCol& ar
 }
 
 //=============================================================================
+int Cmds_cad::cmd_object_copy(TcCmdContext* /*context*/, TcArgCol& args)
+{
+    CmdQueue::queue().add( new Cmd_object_copy(), false );
+
+    string result ( "<br>offset:"
+                    " <a href='tcview:://#cad_set_offset 5'> [5]</a>"
+                    " <a href='tcview:://#cad_set_offset 10'> [10]</a>"
+                    " <a href='tcview:://#cad_set_offset 20'> [20]</a>"
+                  );
+
+    args.appendVal(result.c_str(), "result");
+
+    return 1;
+}
+
+
+//=============================================================================
 int Cmds_cad::cmd_object_trimtoother(TcCmdContext* /*context*/, TcArgCol& /*args*/)
 {
     CmdQueue::queue().add( new Cmd_object_trimtoother(), false );
@@ -259,6 +379,30 @@ int Cmds_cad::cad_set_width(TcCmdContext* /*context*/, TcArgCol& args)
     double width = atof(arg1->getAsVal()->value());
 
     CadSettings::instance().setWidth(width);
+    return 0;
+}
+
+//=============================================================================
+int Cmds_cad::cad_set_3dheight1(TcCmdContext* /*context*/, TcArgCol& args)
+{
+    if ( args.count() <= 1 ) return args.appendError("you must enter the value");
+    TcArg* arg1 = args.getAsCol()->at(1);
+
+    double  h = atof(arg1->getAsVal()->value());
+
+    CadSettings::instance().d3Height1Set(h);
+    return 0;
+}
+
+//=============================================================================
+int Cmds_cad::cad_set_3dheight2(TcCmdContext* /*context*/, TcArgCol& args)
+{
+    if ( args.count() <= 1 ) return args.appendError("you must enter the value");
+    TcArg* arg1 = args.getAsCol()->at(1);
+
+    double  h = atof(arg1->getAsVal()->value());
+
+    CadSettings::instance().d3Height2Set(h);
     return 0;
 }
 
@@ -301,9 +445,18 @@ int Cmds_cad::cad_set_color(TcCmdContext* /*context*/, TcArgCol& args)
     if ( args.count() <= 1 ) return args.appendError("you must enter the color");
     TcArg* arg1 = args.getAsCol()->at(1);
 
+    bool second = false;
+    if (args.count() > 2) second = true;
+
     Color color = Color::read(arg1->getAsVal()->value());
 
-    CadSettings::instance().setColor(color);
+    if ( second ) {
+        CadSettings::instance().setColor2(color);
+    }
+    else {
+        CadSettings::instance().setColor(color);
+    }
+
     return 0;
 }
 
@@ -316,6 +469,31 @@ int Cmds_cad::cad_set_offset(TcCmdContext* /*context*/, TcArgCol& args)
     double offset = atof(arg1->getAsVal()->value());
 
     CadSettings::instance().offsetSet(fabs(offset));
+
+    return 0;
+}
+
+
+//=============================================================================
+int Cmds_cad::cad_set_featcmd(TcCmdContext* /*context*/, TcArgCol& args)
+{
+    if ( args.count() <= 1 ) return args.appendError("you must enter the command");
+    TcArg* arg1 = args.getAsCol()->at(1);
+
+    CadSettings::instance().featureCmdSet(arg1->getAsVal()->value());
+
+    return 0;
+}
+
+//=============================================================================
+int Cmds_cad::cad_set_grid(TcCmdContext* /*context*/, TcArgCol& args)
+{
+    if ( args.count() <= 1 ) return args.appendError("you must enter the grid span");
+    TcArg* arg1 = args.getAsCol()->at(1);
+
+    double span = atof(arg1->getAsVal()->value());
+
+    CadSettings::instance().gridSet(fabs(span));
 
     return 0;
 }
@@ -335,9 +513,23 @@ int Cmds_cad::cad_set_symbol(TcCmdContext* /*context*/, TcArgCol& args)
 }
 
 //=============================================================================
+int Cmds_cad::cad_set_image2points(TcCmdContext* /*context*/, TcArgCol& args)
+{
+    CadSettings::instance().image2pointsSet(!CadSettings::instance().image2points());
+    return 0;
+}
+
+//=============================================================================
 int Cmds_cad::cad_set_ortho(TcCmdContext* /*context*/, TcArgCol& /*args*/)
 {
     CadSettings::instance().orthoSet( !CadSettings::instance().ortho() );
+    return 0;
+}
+
+//=============================================================================
+int Cmds_cad::cad_set_unselect_mode(TcCmdContext* /*context*/, TcArgCol& /*args*/)
+{
+    CadSettings::instance().unselectModeSet( !CadSettings::instance().unselectMode() );
     return 0;
 }
 
@@ -384,4 +576,37 @@ int Cmds_cad::cad_set_size(TcCmdContext* /*context*/, TcArgCol& args)
 
     return 0;
 }
+
+//=============================================================================
+int Cmds_cad::cad_set_active_image(TcCmdContext* /*context*/, TcArgCol& args)
+{
+    if ( args.count() <= 1 ) return args.appendError("you must enter the image");
+    TcArg* arg1 = args.getAsCol()->at(1);
+
+    if ( arg1->getAsVal() )
+    CadSettings::instance().imageSymbolFileSet(arg1->getAsVal()->value());
+    return 0;
+}
+
+//=============================================================================
+int Cmds_cad::cad_unselect_all(TcCmdContext* /*context*/, TcArgCol& args)
+{
+    UpdateLock l;
+
+    RefColSelection& selected = GObjectPool::instance().selected();
+    selected.unselectAll();
+
+    return 0;
+}
+
+//=============================================================================
+int Cmds_cad::cmd_3dwidget(TcCmdContext* /*context*/, TcArgCol& /*args*/)
+{
+    Widget3d* w = new Widget3d;
+    w->resize(600, 500);
+    w->show();
+
+    return 0;
+}
+
 //=============================================================================

@@ -21,6 +21,15 @@
 #include "T2lStoredFactory.h"
 #include "T2lStoredAttrNUM.h"
 #include "T2lStoredAttrSTR.h"
+#include "T2lAfile.h"
+#include "T2lAfileRecord.h"
+#include "T2lSitemCircle.h"
+#include "T2lSitemArea.h"
+#include "T2lSitemLine.h"
+#include "T2lSitemText.h"
+#include "T2lStoredAttrNUM.h"
+#include "T2lActiveFile.h"
+#include "T2lWidgetFileCol.h"
 
 #include <QFileInfo>
 #include <QDir>
@@ -45,6 +54,19 @@ GFile::GFile( const QString& filePath, GLoadSave* loadSave ) :
     if (loadSave_ == NULL) {
         loadSave_ = new GLoadSave(filePath);
     }
+
+    styles_.load();
+    loadSymbols();
+}
+
+//====================================================================
+void GFile::close()
+{
+    if ( WidgetFileCol().count() > 1 ) {
+        if (this == ActiveFile::active().active().file() ) return;
+    }
+    unload();
+    delete this;
 }
 
 //====================================================================
@@ -67,9 +89,6 @@ void GFile::unload()
 QString GFile::qualifiedFilePath(const char* path)
 {
     QString qpath(path);
-    if (qpath.left(3) != "../") return "";
-
-    qpath.remove("../");
 
     QFileInfo fi(filePath_);
     QString result = fi.absoluteDir().absolutePath();
@@ -139,12 +158,12 @@ void GFile::load_(GLoadSave* loadSave)
 
     UpdateLock l;
 
+    StoredItem* item = new StoredItem();
+
     QString fileStr;
     loadSave->load(fileStr);
 
     QTextStream in(&fileStr);
-
-    StoredItem* item = new StoredItem();
 
     while( !in.atEnd()) {
         QString line = in.readLine();
@@ -238,6 +257,72 @@ void GFile::save_(const QString& fileName)
     }
 
     dirty_ = false;
+}
+
+//====================================================================
+void GFile::loadSymbols()
+{
+    QFile file("C:/HOME/KADLUB/cvz/samples/cad/t2l/symbols.t2l");
+    bool opened = file.open(QIODevice::ReadOnly | QIODevice::Text );
+    if (opened == false) return;
+
+    QTextStream in(&file);
+
+    Afile afile;
+    afile.loadStream(in);
+
+    for (int ir = 0; ir < afile.recordCount(); ir++) {
+        AfileRecord* rec = afile.recordGet(ir);
+
+        QString type = rec->getValue("type", "UNKNOWN");
+
+        if (type == "symbol") {
+            AfileAttr* attrId = rec->attrsGet("id");
+            if ( attrId != nullptr ) {
+                Style* style = new Style(attrId->value().toStdString().c_str());
+                styles_.add(new StyleItem(style));
+            }
+        }
+        else if (type == "sitem") {
+            QString sitemType = rec->getValue("sitem", "UNKNOWN");
+
+            Color color(Color::BLACK);
+            AfileAttr* colorAttr = rec->attrsGet("color", 0);
+            if ( colorAttr ) color = Color::read( colorAttr->value().toStdString().c_str() );
+
+            if ( sitemType == "circle") {
+                Point2F point = rec->getValue("point-num", Point2F(0,0));
+                double  radius = rec->getValue("radius", 2.0);
+                bool    fill   = ( rec->getValue("fill", "true") == "false" ) ? false : true;
+                double  width  = rec->getValue("width", 0.005);
+
+                SitemCircle* circle = new SitemCircle(point, radius, color, fill, width );
+                styles_.lastSymbol()->symbol()->items().add(circle);
+            }
+            else if ( sitemType == "area" ) {
+                SitemArea* area = new SitemArea(color);
+                for ( int i = 0; rec->getValue("point-num", "", i).isEmpty() == false; i++ ) {
+                    area->points().points().points().add(rec->getValue("point-num", Point2F(0,0), i));
+                }
+                styles_.lastSymbol()->symbol()->items().add(area);
+            }
+            else if ( sitemType == "line" ) {
+                SitemLine* line = new SitemLine( color, rec->getValue("width", 0.002) );
+                for ( int i = 0; rec->getValue("point-num", "", i).isEmpty() == false; i++ ) {
+                    line->points().points().add(rec->getValue("point-num", Point2F(0,0), i));
+                }
+                styles_.lastSymbol()->symbol()->items().add(line);
+            }
+            else if (sitemType == "text") {
+                QString text = rec->getValue("text");
+                Point2F position = rec->getValue("point-num", Point2F(0, 0));
+                double height = rec->getValue("height", 2);
+
+                SitemText* sitemText = new SitemText(text, position, height, color );
+                styles_.lastSymbol()->symbol()->items().add(sitemText);
+            }
+        }
+    }
 }
 
 //====================================================================
