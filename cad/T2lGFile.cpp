@@ -30,6 +30,7 @@
 #include "T2lStoredAttrNUM.h"
 #include "T2lActiveFile.h"
 #include "T2lWidgetFileCol.h"
+#include "T2lStoredFileNames.h"
 
 #include <QFileInfo>
 #include <QDir>
@@ -262,7 +263,8 @@ void GFile::save_(const QString& fileName)
 //====================================================================
 void GFile::loadSymbols()
 {
-    QFile file("C:/HOME/KADLUB/cvz/samples/cad/t2l/symbols.t2l");
+    QString fileName = StoredFileNames::getExeUpDir() + "/documents/t2l/symbols.t2l";
+    QFile file(fileName);
     bool opened = file.open(QIODevice::ReadOnly | QIODevice::Text );
     if (opened == false) return;
 

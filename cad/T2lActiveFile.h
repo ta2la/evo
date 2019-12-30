@@ -43,10 +43,8 @@ public:
 protected:
 //<DATA>
     GFile*                  file_;
-
     static ActiveFile*      instance_;
 //<INTERNALS>
-    static QString firstFileName_();
 //<FRIENDS>
     friend class ObjectDisplable;
 };

@@ -38,7 +38,7 @@ CadLine::CadLine( const Point2Col<double>& points, GFile* parent ) :
     color_(Color::BLUE),
     width_(0.25)
 {
-    if (parent != NULL) parent->add(this);
+    if (parent != nullptr) parent->add(this);
 }
 
 //===================================================================
@@ -47,15 +47,14 @@ CadLine::~CadLine(void)
 }
 
 //===================================================================
-void CadLine::display(EntityList& list, RefCol* scene)
+void CadLine::display(EntityList& list, RefCol* /*scene*/)
 {
     if (parent_ == nullptr) return;
 
+    //non-active files are gray
     static StyleChange* change = new StyleChange(Color::GRAY_LIGHT, 0);
-    StyleChange* changeActive = NULL;
-    GFile* activeFile = ActiveFile::active().file();
-    //GFile* parentFile = parent();
-    if ( parent() != activeFile ) {
+    StyleChange* changeActive = nullptr;
+    if ( parent() != ActiveFile::active().file() ) {
         changeActive = change;
     }
 
@@ -69,7 +68,7 @@ void CadLine::display(EntityList& list, RefCol* scene)
 
     if ( isSelected() == false ) return;
 
-    line = new EntityLine( Color(255, 0, 255), width()+0.25, NULL );
+    line = new EntityLine( Color::MAGENTA, width()+0.25, nullptr );
     for ( int i = 0; i < points_.count(); i++ ) {
         Point2F pti = points_.get(i);
         pti.add(parent()->getOffset());
@@ -77,7 +76,6 @@ void CadLine::display(EntityList& list, RefCol* scene)
     }
     list.add( line );
 }
-
 
 //=========================================================================
 bool CadLine::loadFromStored( StoredItem* item, GFile* file )

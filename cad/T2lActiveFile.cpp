@@ -18,6 +18,7 @@
 #include "T2lActiveFile.h"
 #include "T2lGFileObjects.h"
 #include "T2lGFileCol.h"
+#include "T2lStoredFileNames.h"
 
 //hg
 #include "T2lStoredItem.h"
@@ -53,31 +54,14 @@ ActiveFile::~ActiveFile()
 }
 
 //====================================================================
-QString ActiveFile::firstFileName_()
-{
-
-
-    QString fileName = QDir::homePath() +  "/Development/KADLUB/cvz/samples/cad/t2l/seed.t2l";
-
-#ifdef WINDOWS
-    fileName = QDir::homePath() + "c:/HOME/KADLUB/cvz/samples/storage/cad/t2l";
-#endif
-
-    cout << endl;
-
-    cout << QCoreApplication::applicationDirPath().toStdString() << endl;
-
-    return fileName;
-}
-
-//====================================================================
 ActiveFile& ActiveFile::active()
 {
     if ( instance_ == NULL) {
         UpdateLock l;
 
         instance_ = new ActiveFile();
-        GFile* file = new GFileObjects(firstFileName_());
+        QString seed = StoredFileNames::getExeUpDir() + "documents/t2l/implicit.t2l";
+        GFile* file = new GFileObjects(seed);
         GFileCol::instance().add(file);
         instance_->file_ = file;
         instance_->file()->load();
