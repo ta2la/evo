@@ -18,7 +18,7 @@
 
 //base
 #include "T2lItem.h"
-#include "T2lItemCol.h"
+//#include "T2lItemCol.h"
 #include "T2lColor.h"
 
 #include <string>

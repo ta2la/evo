@@ -62,7 +62,6 @@ public:
 
     int  groupGet() { return group_; }
     void groupSet(int group) { group_ = group; }
-
 //===================================================================
 //<OVERRIDES>
     virtual bool loadFromStored(StoredItem* item, GFile* parent) = 0;
@@ -73,8 +72,8 @@ protected:
     Point2FCol points_;
     int        gid_;
     int        group_;
-
 //<INTERNALS>
+    void displayChange_(EntityList& list);
 //<FRIENDS>
     friend class ActiveFile;
     friend class ObjectDisplable;

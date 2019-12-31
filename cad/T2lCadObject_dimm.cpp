@@ -84,7 +84,9 @@ void CadObject_dimm::display(EntityList& list, RefCol* scene)
     EntityText* text = new EntityText( lengthStr, Point2F(x, y) );
     list.add(text);
 
-    if ( isSelected() == false ) return;
+    displayChange_(list);
+
+    /*if ( isSelected() == false ) return;
 
     line = new EntityLine( Color(255, 0, 255), width()+0.25, NULL );
     for ( int i = 1; i < points_.count(); i++ ) {
@@ -92,7 +94,7 @@ void CadObject_dimm::display(EntityList& list, RefCol* scene)
         pti.add(parent()->getOffset());
         line->points().points().add( pti );
     }
-    list.add( line );
+    list.add( line );*/
 }
 
 

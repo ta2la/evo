@@ -101,7 +101,9 @@ void CadObject_line3::display(EntityList& list, RefCol* scene)
     }
     list.add(line);
 
-    if ( isSelected() == false ) return;
+    displayChange_(list);
+
+    /*if ( isSelected() == false ) return;
 
     line = new EntityLine( Color(255, 0, 255), width()+0.25, NULL );
     for ( int i = 0; i < points_.count(); i++ ) {
@@ -109,7 +111,7 @@ void CadObject_line3::display(EntityList& list, RefCol* scene)
         pti.add(parent()->getOffset());
         line->points().points().add( pti );
     }
-    list.add( line );
+    list.add( line );*/
 }
 
 

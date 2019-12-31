@@ -56,7 +56,6 @@ public:
         REGISTER_CMD( "cad_set_text",               cad_set_text,               "cad" );
         REGISTER_CMD( "cad_set_size",               cad_set_size,               "cad" );
         REGISTER_CMD( "text",                       cad_set_text,               "cad" );
-        REGISTER_CMD( "viewinfo",                   cad_viewinfo,               "cad" );
         REGISTER_CMD( "cad_set_size",               cad_set_size,               "cad" );
         REGISTER_CMD( "cad_open_in_active_view",    cad_open_in_active_view,    "cad" );
         REGISTER_CMD( "change_text",                cad_change_text,            "cad" );
@@ -99,7 +98,6 @@ private:
     CMD_FCE( cad_set_symbol );
     CMD_FCE( cad_set_ortho );
     CMD_FCE( cad_set_text );
-    CMD_FCE( cad_viewinfo );
     CMD_FCE( cad_set_size );
     CMD_FCE( cad_open_in_active_view );
     CMD_FCE( cad_change_text );

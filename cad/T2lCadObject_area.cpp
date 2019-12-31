@@ -81,16 +81,7 @@ void CadObject_area::display(EntityList& list, RefCol* scene)
 
     list.add( entityArea );
 
-    if ( isSelected() == false ) return;
-
-    EntityLine* lineSel = new EntityLine( Color(255, 0, 255), 1, NULL );
-    for ( int i = 0; i < points_.count(); i++ ) {
-        Point2F pti = points_.get(i);
-        pti.add(parent()->getOffset());
-        lineSel->points().points().add( pti );
-    }
-    lineSel->points().points().add( points_.get(0) );
-    list.add( lineSel );
+    displayChange_(list);
 }
 
 

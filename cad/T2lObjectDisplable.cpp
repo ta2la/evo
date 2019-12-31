@@ -18,6 +18,7 @@
 #include "T2lGFile.h"
 #include "T2lCanvas.h"
 #include "T2lActiveFile.h"
+#include "T2lStyleChange.h"
 
 using namespace T2l;
 
@@ -107,6 +108,32 @@ void ObjectDisplable::modifiedSet_()
 {
     GObject::modifiedSet_();
     if (parent_ != NULL) parent_->dirty_ = true;
+}
+
+//=========================================================================
+void ObjectDisplable::displayChange_(EntityList& list)
+{
+    if (parent_ == nullptr) return;
+
+    StyleChange* changeActive = nullptr;
+
+    if ( isSelected() ) {
+        static StyleChange* change = new StyleChange(Color::MAGENTA, 0.3);
+        changeActive = change;
+    }
+    else { //non-active files are gray
+        static StyleChange* change = new StyleChange(Color::GRAY_LIGHT, 0);
+
+        if ( parent() != ActiveFile::active().file() ) {
+            changeActive = change;
+        }
+    }
+
+    if (changeActive == nullptr) return;
+
+    for ( int i = 0; i < list.count(); i++ ) {
+        list.get(i)->styleChangeSet(changeActive);
+    }
 }
 
 //=========================================================================

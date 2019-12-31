@@ -34,7 +34,7 @@
 #include "T2lCmd_object_copy.h"
 #include "T2lCmd_object_set_symbology.h"
 #include "T2lCadSettings.h"
-#include "T2lCmd_viewinfo.h"
+//#include "T2lCmd_viewinfo.h"
 #include "T2lFilterColor.h"
 #include "T2lWidgetFile.h"
 #include "T2lCmd_object_select.h"
@@ -551,13 +551,6 @@ int Cmds_cad::cad_set_text(TcCmdContext* /*context*/, TcArgCol& args)
     arg1->toString(text);
     CadSettings::instance().textSet(text.c_str());
 
-    return 0;
-}
-
-//=============================================================================
-int Cmds_cad::cad_viewinfo(TcCmdContext* /*context*/, TcArgCol& /*args*/)
-{
-    CmdQueue::queue().add( new Cmd_viewinfo(), false );
     return 0;
 }
 

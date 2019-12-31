@@ -72,6 +72,8 @@ bool CadObject_text::loadFromStored( StoredItem* item, GFile* parent )
     if (text->getAsSTR() == NULL) return false;
 
     CadObject_text* objectText = new CadObject_text( text->value().toStdString().c_str(), p2, parent );
+
+    return true;
 }
 
 //===================================================================
@@ -137,6 +139,8 @@ void CadObject_text::display(EntityList& list, RefCol* scene)
         lineB->points().points().add( bound.getPoint(3) );
         list.add( lineB );
     }
+
+    displayChange_(list);
 }
 
 //===================================================================

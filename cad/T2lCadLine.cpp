@@ -51,14 +51,7 @@ void CadLine::display(EntityList& list, RefCol* /*scene*/)
 {
     if (parent_ == nullptr) return;
 
-    //non-active files are gray
-    static StyleChange* change = new StyleChange(Color::GRAY_LIGHT, 0);
-    StyleChange* changeActive = nullptr;
-    if ( parent() != ActiveFile::active().file() ) {
-        changeActive = change;
-    }
-
-    EntityLine* line = new EntityLine( color(), width(), changeActive );
+    EntityLine* line = new EntityLine( color(), width() );
     for ( int i = 0; i < points_.count(); i++ ) {
         Point2F pti = points_.get(i);
         pti.add(parent()->getOffset());
@@ -66,15 +59,8 @@ void CadLine::display(EntityList& list, RefCol* /*scene*/)
     }
     list.add( line );
 
-    if ( isSelected() == false ) return;
+    displayChange_(list);
 
-    line = new EntityLine( Color::MAGENTA, width()+0.25, nullptr );
-    for ( int i = 0; i < points_.count(); i++ ) {
-        Point2F pti = points_.get(i);
-        pti.add(parent()->getOffset());
-        line->points().points().add( pti );
-    }
-    list.add( line );
 }
 
 //=========================================================================

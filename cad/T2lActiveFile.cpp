@@ -21,13 +21,13 @@
 #include "T2lStoredFileNames.h"
 
 //hg
-#include "T2lStoredItem.h"
-#include "T2lStoredFactory.h"
-#include "T2lUpdateLock.h"
+//#include "T2lStoredItem.h"
+//#include "T2lStoredFactory.h"
+#include "T2lUpdateLock.h"|
 
 //infrastructure
 #include "TcCmdTransl.h"
-#include "T2lQueue.h"
+//#include "T2lQueue.h"
 
 //qt
 #include <QDir>

@@ -61,6 +61,8 @@ void CadObject_symbol::display(EntityList& list, RefCol* scene)
     Style* style = parent()->styles().getStyle(style_.c_str());
 
     list.add( new EntityPoint( position(), *style, false, ANGLE_ZERO_VIEW, AngleXcc(0), selChange ) );
+
+    displayChange_(list);
 }
 
 //===================================================================

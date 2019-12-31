@@ -181,9 +181,12 @@ void CadObject_image::display(EntityList& list, RefCol* scene)
     eimage->pixmapSet(pixmap_, false);
     list.add(eimage);
 
-    if (isSelected()) {
+    bool notActive = false;
+    if ( parent() != ActiveFile::active().file() ) notActive = true;
+
+    if (isSelected() || notActive ) {
         Style* style = new Style("");
-        style->sfeats().add( new SfeatArea(Color(255, 0, 255), 50));
+        style->sfeats().add( new SfeatArea(Color::MAGENTA, 50));
 
         Box2F boxS = imageBox;
         boxS.inflateBy(1);
@@ -203,6 +206,8 @@ void CadObject_image::display(EntityList& list, RefCol* scene)
 
     EntityText* textEnt = new EntityText( text(), imageBox.getPoint(0) );
     list.add(textEnt);
+
+    displayChange_(list);
 }
 
 //===================================================================
