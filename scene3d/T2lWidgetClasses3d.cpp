@@ -134,18 +134,13 @@ void WidgetClasses3d::paintGL()
       glVertex3d(p, m, p);
    glEnd();
 
-   //ColorClassList& ccl = ColorClassList::instance();
-   //int count = ccl.count();
-
    Scene3d& scene3d = Scene3d::instance();
    int count = scene3d.count();
 
    for (int i = 0; i < count; i++) {
        Scene3dItem cc = scene3d.get(i); //ccl.get(i);
 
-       //Color back = ANN_SETTINGS.annFeatures().get(cc.feature())->backColor();
-
-       if (i == scene3d.itemActive()) {
+              if (i == scene3d.itemActive()) {
            drawPoint(cc.color(), colorToPoint(cc.color()), 12);
        }
        else {

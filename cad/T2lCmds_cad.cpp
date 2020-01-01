@@ -49,7 +49,7 @@
 #include "T2lCmd_draw_line.h"
 #include "T2lCmd_draw_image.h"
 #include "T2lCmd_draw_text.h"
-#include "T2lCmd_draw_imgLink.h"
+//#include "T2lCmd_draw_imgLink.h"
 #include "T2lCmd_view_fit.h"
 #include "T2lCmd_measure.h"
 #include "T2lCmd_object_trimtoother.h"

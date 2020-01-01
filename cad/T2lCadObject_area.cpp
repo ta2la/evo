@@ -14,8 +14,6 @@
 // limitations under the License.
 //=============================================================================
 #include "T2lCadObject_area.h"
-#include "T2lAnnFeature.h"
-#include "T2lAnnFeatureCol.h"
 
 #include "T2lGFile.h"
 #include "T2lCadLine.h"

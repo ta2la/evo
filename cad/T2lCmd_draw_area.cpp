@@ -15,10 +15,10 @@
 //=============================================================================
 #include "T2lCmd_draw_area.h"
 
-#include "T2lAnnFeature.h"
+//#include "T2lAnnFeature.h"
 #include "T2lCadObject_area.h"
 #include "T2lEntityPack.h"
-#include "T2lAnnFeatureCol.h"
+//#include "T2lAnnFeatureCol.h"
 
 #include <T2lUpdateLock.h>
 #include <T2lScene.h>
@@ -103,7 +103,7 @@ void Cmd_draw_area::enterMove( const T2l::Point2F& pt, Display& view )
 }
 
 //===================================================================
-QString Cmd_draw_area::printCategory(const char* category)
+/*QString Cmd_draw_area::printCategory(const char* category)
 {
     QString result;
 
@@ -127,10 +127,10 @@ QString Cmd_draw_area::printCategory(const char* category)
     }
 
     return result;
-}
+}*/
 
 //===================================================================
-QString Cmd_draw_area::dialog() const {
+/*QString Cmd_draw_area::dialog() const {
     QString result;
 
     AnnFeatureCol& featuresCol = AnnFeatureCol::instance();
@@ -149,7 +149,7 @@ QString Cmd_draw_area::dialog() const {
     //TODOX result.append(Cmd_pixann_painter::dialog_owrite());
 
     return result;
-}
+}*/
 
 //===================================================================
 QString Cmd_draw_area::dialogTml() const
