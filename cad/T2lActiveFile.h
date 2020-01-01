@@ -32,7 +32,7 @@ public:
     virtual ~ActiveFile();
 
     static ActiveFile& active();
-    static bool changeActiveFile(GFile* file, bool unload = true);
+    static bool changeActiveFile(GFile* file, bool unload = true, bool fresh = false);
 //<NEIGHBOURS>
     GFile* file() { return file_; }
 //<ITEMS>

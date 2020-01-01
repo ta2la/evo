@@ -63,7 +63,7 @@ void WidgetFileCreator::fitView(GFile* file, WidgetFile* view)
 //===================================================================
 WidgetFile* WidgetFileCreator::newView(GFile* file)
 {
-    ActiveFile::changeActiveFile(file, false);
+    ActiveFile::changeActiveFile(file, false, false);
 
     QFileInfo fileInfo(file->filePath());
 

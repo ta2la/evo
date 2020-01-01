@@ -73,9 +73,14 @@ ActiveFile& ActiveFile::active()
 }
 
 //====================================================================
-bool ActiveFile::changeActiveFile(GFile* file, bool unload)
+bool ActiveFile::changeActiveFile(GFile* file, bool unload, bool fresh)
 {
-    //cout << "changing file to: " << file->filePath().toStdString() << endl;
+    if (instance_!=0 && instance_->file()!=nullptr) {
+        ObjectDisplableCol& objects = instance_->file()->objects();
+        for ( int i = 0; i < objects.count(); i++ ) {
+            objects.get(i)->modifiedSet_();
+        }
+    }
 
     if (instance_) {
         if (unload) instance_->file()->unload();
@@ -84,7 +89,17 @@ bool ActiveFile::changeActiveFile(GFile* file, bool unload)
 
     instance_ = new ActiveFile();
     instance_->file_ = file;
-    instance_->file_->load();
+    if ( instance_->file_->loaded() ) {
+        if ( fresh == false ) {
+            ObjectDisplableCol& objects = instance_->file()->objects();
+            for ( int i = 0; i < objects.count(); i++ ) {
+                objects.get(i)->modifiedSet_();
+            }
+        }
+    }
+    else {
+        instance_->file_->load();
+    }
 
     return true;
 }
