@@ -22,10 +22,10 @@ using namespace T2l;
 using namespace std;
 
 //====================================================================
-StoredAttrNUM::StoredAttrNUM(  const std::string& name, const std::string& value ) :
+StoredAttrNUM::StoredAttrNUM(  const std::string& name, const std::string& value, const char* splitter ) :
     StoredAttr(name)
 {
-    QStringList values = QString(value.c_str()).split(" ");
+    QStringList values = QString(value.c_str()).split(splitter);
 
     for ( int i = 0; i < values.size(); i++ ) {
         string numstr = values.at(i).toStdString();

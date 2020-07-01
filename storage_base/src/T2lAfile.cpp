@@ -126,39 +126,6 @@ void Afile::load(GLoadSave& loadSave)
     QTextStream in(&fileStr);
     
     loadStream(in);
-
-    /*AfileRecord* record = new AfileRecord();
-
-    while( !in.atEnd()) {
-        QString line = in.readLine();
-
-        int indexOfColons = line.indexOf(':');
-
-        if ( indexOfColons < 0 ) {
-            if ( record->attrsCount() != 0) {
-                records_.append(record);
-                record = new AfileRecord();
-            }
-        }
-
-        string attrName = line.left(indexOfColons).toStdString();
-
-        int indexOfData = indexOfColons;
-        while ( ( indexOfData+1 < line.size() ) && ( line.at(indexOfData+1) == ' ' ) ) {
-            indexOfData++;
-        }
-
-        QString attrValue = line.right(line.size()-indexOfData-1);
-
-        record->attrs_.append(AfileAttr(attrName.c_str(), attrValue));
-    }
-
-    if ( record->attrsCount() != 0) {
-        records_.append(record);
-    }
-    else {
-        delete record;
-    }*/
 }
 
 //=============================================================================
@@ -185,6 +152,8 @@ QString Afile::print()
     for (int ri = 0; ri < records_.count(); ri++) {
         AfileRecord* record = records_.at(ri);
 
+        if (ri != 0) out.append("\n");
+
         for (int ai = 0; ai < record->attrsCount(); ai++) {
             QString line;
 
@@ -197,8 +166,6 @@ QString Afile::print()
             out.append(line);
             out.append("\n");
         }
-
-        out.append("\n");
     }
 
     return out;

@@ -27,13 +27,13 @@ class StoredAttrNUM : public StoredAttr {
 public:
 //<ENUMS>
 //<CONSTRUCTION>
-    StoredAttrNUM(const std::string& name, const std::string& value = "");
+    StoredAttrNUM(const std::string& name, const std::string& value = "", const char* splitter = " ");
     StoredAttrNUM(const std::string& name, double value);
     virtual ~StoredAttrNUM(void) {}
 //<ITEMS>
     void   add(double number) { numbers_.push_back(number); }
     int    count() { return numbers_.size(); }
-    double get(int index);
+    double get(int index = 0);
 //<METHODS>
 //====================================================================
 //<OVERRIDES>
