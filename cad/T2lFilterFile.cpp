@@ -42,24 +42,23 @@ bool FilterFile::pass(TcObject* object)
         fabs(0);
     }*/
 
-    if ( displable == NULL ) return false;
-    if ( displable->parent() == NULL ) return false;
-
+    if ( displable == nullptr ) return false;
+    if ( displable->parent() == nullptr ) return false;
     if ( displable->parent() == file_ ) return true;
 
-    if (fileOver_ != NULL) {
+    /*if (fileOver_ != NULL) {
         if ( displable->parent() == fileOver_ ) return true;
-    }
+    }*/
 
     return false;
 }
 
 //=============================================================================
-void FilterFile::setFileOver(GFile* file, const Vector2F& offset)
+/*void FilterFile::setFileOver(GFile* file, const Vector2F& offset)
 {
     fileOver_ = file;
     fileOverOffset_ = offset;
-}
+}*/
 
 //=============================================================================
 std::string FilterFile::print()

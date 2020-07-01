@@ -22,6 +22,7 @@
 #include "T2lPoint2Col.h"
 #include "T2lItem.h"
 #include "T2lStoredObject.h"
+#include "T2lObPointCol.h"
 
 #include <string>
 
@@ -43,9 +44,8 @@ public:
     virtual ~ObjectDisplable(void);
 //<NEIGHBOURS>
     GFile* parent() { return parent_; }
-    Point2FCol& points() { return points_; }
+    ObPointCol& points() { return points_; }
 //<METHODS>
-    //virtual void display(T2l::EntityList& list);// {}
     virtual EIdentified identifiedByPoint(const T2l::Canvas& canvas, const Point2F& pt);
     virtual EIdentified identifiedByBox(const T2l::Canvas& canvas, const Box2F& box);
 
@@ -60,8 +60,10 @@ public:
 
     int  gid() {return gid_; }
 
-    int  groupGet() { return group_; }
-    void groupSet(int group) { group_ = group; }
+    virtual int      snapCount()           { return points().count(); }
+    virtual Point2F  snapGet(int index)    { return points().get(index); }
+    virtual int      snapRawCount()        { return points().count(); }
+    virtual ObPoint& snapRawGet(int index) { return points().getRaw(index); }
 //===================================================================
 //<OVERRIDES>
     virtual bool loadFromStored(StoredItem* item, GFile* parent) = 0;
@@ -69,11 +71,12 @@ public:
 protected:
 //<DATA>
     GFile*     parent_;
-    Point2FCol points_;
+    ObPointCol points_;
     int        gid_;
-    int        group_;
 //<INTERNALS>
     void displayChange_(EntityList& list);
+    void saveAttr_points_(StoredItem& item);
+    static void loadAttr_points_(ObjectDisplable* object, StoredItem* item);
 //<FRIENDS>
     friend class ActiveFile;
     friend class ObjectDisplable;

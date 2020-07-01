@@ -31,19 +31,19 @@ public:
     virtual ~FilterFile();
 //<METHODS>
     GFile* file() { return file_; }
-    void setFileOver(GFile* file, const Vector2F& offset);
+    //void setFileOver(GFile* file, const Vector2F& offset);
 
-    GFile* fileOver() { return fileOver_; }
-    Vector2F fileOverOffset() { return fileOverOffset_; }
+    //GFile* fileOver() { return fileOver_; }
+    //Vector2F fileOverOffset() { return fileOverOffset_; }
 //=============================================================================
 //<OVERRIDES>
     virtual bool pass(TcObject* object);
     virtual std::string print();
 //protected:
     GFile*   file_;
-    GFile*   fileOver_;
+    //GFile*   fileOver_;
 
-    Vector2F fileOverOffset_;
+    //Vector2F fileOverOffset_;
 };
 
 } // namespace T2l

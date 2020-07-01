@@ -152,7 +152,7 @@ Box2F CadObject_image::box(Vector2F offsetArg)
 
         return result;
     }
-    if (points_.count() > 0) {
+    else if (points_.count() > 0) {
         Box2F result;
         Point2F center(points_.get(0));
         center.add(offset);

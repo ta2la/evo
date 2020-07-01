@@ -37,8 +37,9 @@ public:
                double lineWidth = 0.25, unsigned char transp = 80);
     virtual ~AnnFeature(void) {;}
 //<METHODS>
-    const char* id() const             { return id_.c_str(); }
+    const char*      id() const        { return id_.c_str(); }
     const Color&     backColor() const { return backColor_;  }
+    void             backColorSet(const Color& c) { backColor_ = c; }
     const Color&     lineColor() const { return lineColor_;  }
     double           lineWidth() const { return lineWidth_;  }
     unsigned char    transp()    const { return transp_;     }

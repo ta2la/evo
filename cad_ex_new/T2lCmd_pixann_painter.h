@@ -44,6 +44,7 @@ protected:
 //<DATA>
     double         boundSize_;
 //<INTERNALS>
+    //QString dialogTml_masksize_(const char* size);
 };
 
 }//namespace T2l

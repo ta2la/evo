@@ -37,6 +37,8 @@ public:
     virtual QString hint(void)  const;
 //<DATA>
     T2l::Point2Col<double> points_;
+    int gid0_;
+    int index0_;
 //<INTERNALS>
     T2l::Point2F recalculateOrtho_( const T2l::Point2F& pt );
 };

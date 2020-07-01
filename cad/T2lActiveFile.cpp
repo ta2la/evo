@@ -14,27 +14,27 @@
 // limitations under the License.
 //=============================================================================
 
-//cad
+//SELF - cad
 #include "T2lActiveFile.h"
+
 #include "T2lGFileObjects.h"
 #include "T2lGFileCol.h"
+#include "T2lCadSettings.h"
+
+//evo
 #include "T2lStoredFileNames.h"
 
 //hg
-//#include "T2lStoredItem.h"
-//#include "T2lStoredFactory.h"
 #include "T2lUpdateLock.h"|
 
 //infrastructure
 #include "TcCmdTransl.h"
-//#include "T2lQueue.h"
 
-//qt
+// LIB
 #include <QDir>
 #include <QFile>
 #include <QCoreApplication>
 
-//std
 #include <iostream>
 #include <fstream>
 
@@ -100,6 +100,8 @@ bool ActiveFile::changeActiveFile(GFile* file, bool unload, bool fresh)
     else {
         instance_->file_->load();
     }
+
+    CadSettings::instance().imageSymbolFileSet("");
 
     return true;
 }

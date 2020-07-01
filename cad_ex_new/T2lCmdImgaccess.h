@@ -24,6 +24,8 @@
 namespace T2l
 {
 
+class CadObject_image;
+
 //===================================================================
 class CmdImgaccess : public Cmd {
 /// Cmd extension which enables cached access to pixmap used in EntityPack.
@@ -34,6 +36,7 @@ public:
     CmdImgaccess(const QString& name);
     virtual ~CmdImgaccess(void) {};
 //<METHODS>
+    CadObject_image* imgaccess_object(EntityPack* pack);
     QImage* imgaccess(EntityPack* pack);
     Color   imgaccess_color(EntityPack* pack, const Point2I& pt);
     bool   imgaccess_isInside(EntityPack* pack, const Point2I& pt);

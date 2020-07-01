@@ -30,6 +30,7 @@
 #include "T2lFilterCadObject.h"
 #include "T2lFilterCol.h"
 #include "T2lFilterFile.h"
+#include "T2lObPointXy.h"
 
 using namespace T2l;
 
@@ -106,7 +107,6 @@ void Cmd_object_trim::enterPoint( const Point2F& pt, Display& view )
     pack->cleanDynamic();
 
     if ( getLine() == nullptr ) {
-        //FilterCadObject filter(FilterCadObject::ECO_LINE);
         FilterCol filterCol(FilterCol::FT_AND);
         GFile* activeFile = ActiveFile::active().file();
         FilterFile filterFile(activeFile);
@@ -122,11 +122,13 @@ void Cmd_object_trim::enterPoint( const Point2F& pt, Display& view )
     }
     else
     {
-        //int second = 0; if (cadLineEnd_ == 0) second = 1;
-        getLine()->points().getRef(cadLineEnd_) = calculateShortening_(pt);
+        ObPointXy* xy = dynamic_cast<ObPointXy*>(&getLine()->points().getRaw(cadLineEnd_));
+        if (xy != nullptr) {
+            Point2F ptNew = calculateShortening_(pt);
+            xy->move(Vector2F(xy->xy(), ptNew));
+        }
 
         selected.unselectAll();
-        //cadLine_ = NULL;
     }
 
     pack->dynamicRefresh();

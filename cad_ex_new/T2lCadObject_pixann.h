@@ -21,9 +21,12 @@
 #include <T2lPoint2Col.h>
 #include "T2lActiveFile.h"
 #include "T2lColor.h"
+#include "T2lAnnFeatureCol.h"
 
 #include <QImage>
 #include "T2lSize2.h"
+#include <QSet>
+#include <QVector>
 
 namespace T2l
 {
@@ -47,6 +50,18 @@ public:
     Point2I& origin() { return originLB_; }
     int      w()      { return image_->width(); }
     int      h()      { return image_->height(); }
+
+    void simplify();
+    QSet<int> colors();
+    void statistcs(QVector<int>& colors, QVector<int>& counts);
+    QPair<int, int> binPair();
+    QPair<int, int> binarize(AnnFeatureCol& features);
+
+    bool expand(QImage& image, const Point2I& position, int colorIndex, int cellSize);
+    void expandAll(int colorIndex, int size);
+
+    void printBound(int boundSize, int colorIndex, const Color& color, int transp);
+    void printMark();
 //===================================================================
 //<OVERRIDES>
     virtual void display(EntityList& list, RefCol* scene);
@@ -59,6 +74,8 @@ protected:
 //<DATA>
 //<INTERNALS>
 public:
+    void mergeIn_(CadObject_pixann* target, const Vector2I& offset);
+
     Point2I originLB_;
     QImage* image_;
 };

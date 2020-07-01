@@ -30,6 +30,7 @@
 #include "T2lFilterCadObject.h"
 #include "T2lFilterCol.h"
 #include "T2lFilterFile.h"
+#include "T2lObPointXy.h"
 
 using namespace T2l;
 
@@ -135,8 +136,18 @@ void Cmd_object_trimtoother::enterPoint( const Point2F& pt, Display& view )
 
             calculateIntersection_(pt0, pt1);
 
-            cadLine1_trimWhat_->points().getRef(0) = pt0;
-            cadLine1_trimWhat_->points().getRef(1) = pt1;
+            ObPointXy* xy0 = dynamic_cast<ObPointXy*>(&cadLine1_trimWhat_->points().getRaw(0));
+            ObPointXy* xy1 = dynamic_cast<ObPointXy*>(&cadLine1_trimWhat_->points().getRaw(1));
+            if (xy0!=nullptr && xy1!=0) {
+                xy0->move(Vector2F(xy0->xy(), pt0));
+                xy1->move(Vector2F(xy1->xy(), pt1));
+            }
+
+            selected.unselectAll();
+
+
+            /*TOODOOcadLine1_trimWhat_->points().getRef(0) = pt0;
+            cadLine1_trimWhat_->points().getRef(1) = pt1;*/
 
             selected.unselectAll();
             cadLine1_trimWhat_ = nullptr;

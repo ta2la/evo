@@ -18,6 +18,11 @@
 #include <T2lScene.h>
 #include <T2lDisplay.h>
 #include "T2lStyle.h"
+#include "T2lSfeatLine.h"
+#include "T2lCmdQueue.h"
+#include "T2lTentativeImplementationCad.h"
+#include "T2lObPointXy.h"
+#include "T2lObPointRel.h"
 
 #include "T2lCadLine.h"
 #include "T2lEntityLine.h"
@@ -36,7 +41,8 @@ using namespace std;
 
 //===================================================================
 Cmd_draw_line::Cmd_draw_line(void) :
-    Cmd("draw line")
+    Cmd("draw line"),
+    gid0_(0)
 {
 }
 
@@ -50,12 +56,31 @@ void Cmd_draw_line::enterPoint( const Point2F& pt, Display& view )
 {	UpdateLock l;
 
     GFile* file = ActiveFile::active().file();
-    if ( file == NULL ) return;
+    if ( file == nullptr ) return;
+
+    int glue = false;
+    if ( CadSettings::instance().grid() < 0 ) glue = true;
 
     if (points_.count() == 0) {
+        gid0_ = 0;
+        if ( glue ) {
+            TentativeImplementationCad* tent = dynamic_cast<TentativeImplementationCad*>(CmdQueue::queue().tentative_);
+            gid0_   = tent->gid_;
+            index0_ = tent->index_;
+        }
+
         points_.add(Point2<double>(pt.x(), pt.y()));
     }
     else {
+        int gid1   = 0;
+        int index1 = 0;
+
+        if ( glue ) {
+            TentativeImplementationCad* tent = dynamic_cast<TentativeImplementationCad*>(CmdQueue::queue().tentative_);
+            gid1   = tent->gid_;
+            index1 = tent->index_;
+        }
+
         points_.add(recalculateOrtho_(pt));
 
         Vector2F offset = file->getOffset();
@@ -64,9 +89,30 @@ void Cmd_draw_line::enterPoint( const Point2F& pt, Display& view )
         points_.getRef(0).add(offset);
         points_.getRef(1).add(offset);
 
-        CadLine* line = new CadLine(points_, file);
+        CadLine* line = new CadLine(Point2FCol(), file);
+
+        if (gid0_ <= 0) {
+            line->points().append(ObPointXy(points_.get(0)));
+            cout << "point0 is real";
+        }
+        else {
+            line->points().append(ObPointRel(gid0_, index0_, points_.get(0)));
+            cout << "point0 is snap";
+        }
+
+        if (gid1 <= 0) {
+            line->points().append(ObPointXy(points_.get(1)));
+            cout << " - point1 is real\n";
+        }
+        else {
+            line->points().append(ObPointRel(gid1, index1, points_.get(1)));
+            cout << " - point1 is snap\n";
+        }
+
         line->setColor(CadSettings::instance().color());
         line->setWidth(CadSettings::instance().width());
+        line->setSymbolBeg(CadSettings::instance().symbolLineBeg());
+        line->setSymbolEnd(CadSettings::instance().symbolLineEnd());
         points_.clean();
     }
 
@@ -134,46 +180,28 @@ Point2F Cmd_draw_line::recalculateOrtho_( const Point2F& pt )
 //===================================================================
 QString Cmd_draw_line::dialogTml() const
 {
-    QString ortho = "is not ortho";
-    QString state = "off";
-    if ( CadSettings::instance().ortho() ) {
-        ortho = "is ortho";
-        state = "on";
-    }
-
     QString result;
-
-    result += "TC;CT;text: ";
-    if ( CadSettings::instance().ortho() ) {
-        result += "is ortho";
-    }
-    else {
-        result += "is not ortho";
-    }
-    result += ":;;";
-
-    result += "TC;CB;icon: ";
-    QDir dir(QCoreApplication::applicationDirPath());
-    dir.cdUp();
-    result += dir.path() + "/resource/sett_ortho";
-    if ( !CadSettings::instance().ortho() ) result += "_not";
-    result += ".png;";
-    result += "cmd: cad_set_ortho;;";
-
-    result += "TC;CT;text: <hup>;;";
 
     result += CadSettings::instance().colorEditor("");
 
     result += "TC;CT;text: <hup>;;";
     result += CadSettings::instance().widthEditor();
 
+    GFile* file = ActiveFile::active().file();
+
+    result += "TC;CT;text: <hup>;;";
+    result += "TC;CT;text: beg:;;";
+    result += GFile::symbolsTml(file->stylesLineBeg(), "line_beg");
+
+    result += "TC;CT;text: <hup>;;";
+    result += "TC;CT;text: end:;;";
+    result += GFile::symbolsTml(file->stylesLineEnd(), "line_end");
+
     //===================================================
     result = result.replace("TC", "type: control");
     result = result.replace("CT", "control: text");
     result = result.replace("CB", "control: button");
     result = result.replace(";", "\n");
-
-
 
     return result;
 }

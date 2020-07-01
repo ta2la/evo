@@ -29,13 +29,13 @@
 #include "T2lSitemText.h"
 #include "T2lStoredAttrNUM.h"
 #include "T2lActiveFile.h"
-#include "T2lWidgetFileCol.h"
 #include "T2lStoredFileNames.h"
+#include "T2lWidgetFileCol.h"
 
-#include <QFileInfo>
-#include <QDir>
 #include <QFile>
+#include <QFileInfo>
 #include <QTextStream>
+#include <QDir>
 
 #include <string>
 #include <fstream>
@@ -50,6 +50,7 @@ GFile::GFile( const QString& filePath, GLoadSave* loadSave ) :
     loadSave_(loadSave),
     skipImage_(false),
     dirty_(false),
+    maxGid_(0),
     widgetCount_(0)
 {
     if (loadSave_ == NULL) {
@@ -106,6 +107,8 @@ void GFile::add(ObjectDisplable* object)
             (object->parent_ == this) ); //TODO -inconsistent
     object->parent_ = this;
 
+    if (object->gid() >= maxGid()) maxGid_ = object->gid()+1;
+
     dirty_ = true;
 }
 
@@ -140,7 +143,10 @@ Box2F GFile::bound()
 //====================================================================
 int GFile::maxGid()
 {
-    int maxGid = 0;
+    maxGid_++;
+    return maxGid_;
+
+    /*int maxGid = 0;
 
     for (int i = 0; i < objects_.count(); i++) {
         int idi = objects_.get(i)->gid();
@@ -148,7 +154,7 @@ int GFile::maxGid()
         maxGid = idi;
     }
 
-    return maxGid;
+    return maxGid;*/
 }
 
 //====================================================================
@@ -158,6 +164,8 @@ void GFile::load_(GLoadSave* loadSave)
     loaded_ = true;
 
     UpdateLock l;
+
+    QList<StoredItem*> items;
 
     StoredItem* item = new StoredItem();
 
@@ -173,7 +181,8 @@ void GFile::load_(GLoadSave* loadSave)
 
         if ( indexOfColons < 0 ) {
             if ( item->count() > 0 ) {
-                StoredFactory::instance().executeStoredLoad(item, this);
+                //StoredFactory::instance().executeStoredLoad(item, this);
+                items.append(item);
             }
             item = new T2l::StoredItem();
             continue;
@@ -203,7 +212,23 @@ void GFile::load_(GLoadSave* loadSave)
     }
 
     if ( item->count() > 0 ) {
-        StoredFactory::instance().executeStoredLoad(item, this);
+        //StoredFactory::instance().executeStoredLoad(item, this);
+        items.append(item);
+    }
+
+    for (int i = 0; i < items.count(); i++) {
+        StoredAttr* gidAttr = item->get("sys_GID");
+        if ( gidAttr != nullptr ) {
+            if (gidAttr->getAsNUM() != nullptr) {
+                int gid = gidAttr->getAsNUM()->get();
+                if (maxGid_ < gid) maxGid_ = gid;
+            }
+        }
+    }
+
+    for (int i = 0; i < items.count(); i++) {
+        StoredFactory::instance().executeStoredLoad(items[i], this);
+        delete items[i];
     }
 
     dirty_ = false;
@@ -260,10 +285,62 @@ void GFile::save_(const QString& fileName)
     dirty_ = false;
 }
 
+//===================================================================
+QString GFile::symbolImageFile(const QString& symbol) {
+    QDir dir = QFileInfo(ActiveFile::active().file()->filePath()).dir();
+    dir.cdUp();
+    dir.cd("t2l");
+    QString fileName(symbol);
+    fileName += (".png");
+    return dir.absoluteFilePath(fileName);
+}
+
+//====================================================================
+QString GFile::symbolsTml(StyleCol& styles, const char* what)
+{
+    QString result;
+
+    for ( int i = 0; i < styles.count(); i++ ) {
+        QString symbolId  = styles.get(i)->style()->id();
+        QString imageFile = symbolImageFile(symbolId);
+
+        if (QFileInfo(imageFile).exists()) {
+            result += "TC;CB;icon: ";
+            result += imageFile + ";";
+        }
+        else {
+            result += "TC;CT;text: [";
+            result += symbolId;
+            result += "];";
+        }
+
+        result += QString("cmd: cad_set_symbol ") + symbolId;
+        if (string(what).empty() == false) {
+            result += " ";
+            result += what;
+        }
+        result += ";;";
+    }
+
+    return result;
+}
+
 //====================================================================
 void GFile::loadSymbols()
 {
     QString fileName = StoredFileNames::getExeUpDir() + "/documents/t2l/symbols.t2l";
+    loadSymbols(fileName, styles_);
+
+    fileName = StoredFileNames::getExeUpDir() + "/documents/t2l/symbols_line_beg.t2l";
+    loadSymbols(fileName, stylesLineBeg_);
+
+    fileName = StoredFileNames::getExeUpDir() + "/documents/t2l/symbols_line_end.t2l";
+    loadSymbols(fileName, stylesLineEnd_);
+}
+
+//====================================================================
+void GFile::loadSymbols(const QString& fileName, StyleCol& styles)
+{
     QFile file(fileName);
     bool opened = file.open(QIODevice::ReadOnly | QIODevice::Text );
     if (opened == false) return;
@@ -282,7 +359,7 @@ void GFile::loadSymbols()
             AfileAttr* attrId = rec->attrsGet("id");
             if ( attrId != nullptr ) {
                 Style* style = new Style(attrId->value().toStdString().c_str());
-                styles_.add(new StyleItem(style));
+                styles.add(new StyleItem(style));
             }
         }
         else if (type == "sitem") {
@@ -299,21 +376,21 @@ void GFile::loadSymbols()
                 double  width  = rec->getValue("width", 0.005);
 
                 SitemCircle* circle = new SitemCircle(point, radius, color, fill, width );
-                styles_.lastSymbol()->symbol()->items().add(circle);
+                styles.lastSymbol()->symbol()->items().add(circle);
             }
             else if ( sitemType == "area" ) {
                 SitemArea* area = new SitemArea(color);
                 for ( int i = 0; rec->getValue("point-num", "", i).isEmpty() == false; i++ ) {
                     area->points().points().points().add(rec->getValue("point-num", Point2F(0,0), i));
                 }
-                styles_.lastSymbol()->symbol()->items().add(area);
+                styles.lastSymbol()->symbol()->items().add(area);
             }
             else if ( sitemType == "line" ) {
                 SitemLine* line = new SitemLine( color, rec->getValue("width", 0.002) );
                 for ( int i = 0; rec->getValue("point-num", "", i).isEmpty() == false; i++ ) {
                     line->points().points().add(rec->getValue("point-num", Point2F(0,0), i));
                 }
-                styles_.lastSymbol()->symbol()->items().add(line);
+                styles.lastSymbol()->symbol()->items().add(line);
             }
             else if (sitemType == "text") {
                 QString text = rec->getValue("text");
@@ -321,7 +398,7 @@ void GFile::loadSymbols()
                 double height = rec->getValue("height", 2);
 
                 SitemText* sitemText = new SitemText(text, position, height, color );
-                styles_.lastSymbol()->symbol()->items().add(sitemText);
+                styles.lastSymbol()->symbol()->items().add(sitemText);
             }
         }
     }

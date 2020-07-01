@@ -14,6 +14,7 @@ INCLUDEPATH += ./ \
                ../../hg/hg_display \
                ../../hg/hg_interact \
                ../../base/base/include \
+               ../../base/naray \
                ../../infrastructure/command_registry \
                ../../infrastructure/command_registry_ex \
                ../../infrastructure/object_registry \
@@ -22,9 +23,8 @@ INCLUDEPATH += ./ \
                ../../evo/scene3d \
                ../../evo/storage_base/include \
                ../../evo/storage \
-               ../../evo/cad
+               ../../evo/cad \
                ../../evo/scene3d
-
 
 SOURCES     += ./*.cpp
 HEADERS     += ./*.h

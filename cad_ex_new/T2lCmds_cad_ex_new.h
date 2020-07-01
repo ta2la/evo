@@ -29,7 +29,11 @@ public:
 //<REGISTRATOR>
     static bool registerCmds_()
     {
-        REGISTER_CMD( "viewinfo",                   cad_viewinfo,               "cad" );
+        REGISTER_CMD( "viewinfo",                cad_viewinfo,              "cad" );
+        REGISTER_CMD( "cad_set_color2d_size_x",  cad_set_color2d_size_x,    "cad" );
+        REGISTER_CMD( "cad_set_color2d_size_y",  cad_set_color2d_size_y,    "cad" );
+        REGISTER_CMD( "cad_set_color2d_mode",    cad_set_color2d_mode,      "cad" );
+
         return true;
     }
 private:
@@ -37,6 +41,9 @@ private:
     Cmds_cad_ex_new();
 
     CMD_FCE( cad_viewinfo );
+    CMD_FCE( cad_set_color2d_size_x );
+    CMD_FCE( cad_set_color2d_size_y );
+    CMD_FCE( cad_set_color2d_mode );
 };
 
 } //namespace T2l

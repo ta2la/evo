@@ -20,6 +20,10 @@
 #include "T2lObjectDisplable.h"
 #include "T2lActiveFile.h"
 #include "T2lColor.h"
+#include "T2lCanvas.h"
+#include "T2lCadTextItem.h"
+
+#include <QList>
 
 class QPixmap;
 
@@ -33,13 +37,19 @@ class CadObject_text : public ObjectDisplable {
 //===================================================================
 public:
 //<CONSTRUCTION>
-    CadObject_text(const QString& text, const Point2<double>& position, GFile* parent);
+    CadObject_text( const QString& text, const Point2<double>& position, GFile* parent );
+    CadObject_text(QList<CadTextItem> text, const Point2<double>& position, GFile* parent,
+                   const Color& color = Color::BLACK, bool back = false,
+                   const Color& colorBack = Color::GRAY, int gid = 0);
+
     ~CadObject_text(void);
 //<METHODS>
     const Point2F position(void) const { return Point2F(points_.get(0).x(), points_.get(0).y()); }
-    void setText(const QString& text) { text_ = text; }
-    QString text() const { return text_; }
+    void setText(const QString& text);
+    QString text() const;
     void setBack(const Color& color) { back_ = true; backColor_ = color; }
+    void setColor(const Color& color) { color_ = color; }
+    //void setBold(bool bold) { bold_ = bold; }
 //===================================================================
 //<OVERRIDES>
     virtual void display(EntityList& list, RefCol* scene);
@@ -48,12 +58,16 @@ public:
     virtual void saveToStored(StoredItem& item, GFile* file);
 protected:
 //<DATA>
-    QString     text_;
+    QList<CadTextItem> text_;
 
     bool        back_; //TODO shortcut use style instead
     Color       backColor_;
+
+    Color       color_;
+
+    //bool bold_;
 //<INTERNALS>
-    Box2F bound_();
+    Box2F bound_(const Canvas& canvas);
 };
 
 } // namespace T2l

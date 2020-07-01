@@ -22,7 +22,7 @@ INCLUDEPATH += ./ \
                ../../evo/scene3d \
                ../../evo/storage_base/include \
                ../../evo/storage \
-               ../../evo/cad
+               ../../evo/cad \
                ../../evo/scene3d
 
 

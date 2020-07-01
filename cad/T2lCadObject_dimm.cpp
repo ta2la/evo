@@ -40,7 +40,7 @@ CadObject_dimm::CadObject_dimm( const Point2Col<double>& points, GFile* parent )
     color_(Color::BLUE),
     width_(0.25)
 {
-    if (parent != NULL) parent->add(this);
+    if (parent != nullptr) parent->add(this);
 }
 
 //===================================================================
@@ -49,7 +49,7 @@ CadObject_dimm::~CadObject_dimm(void)
 }
 
 //===================================================================
-void CadObject_dimm::display(EntityList& list, RefCol* scene)
+void CadObject_dimm::display(EntityList& list, RefCol* /*scene*/)
 {
     if (parent_ == nullptr) return;
 
@@ -63,38 +63,37 @@ void CadObject_dimm::display(EntityList& list, RefCol* scene)
     p1.add( Vector2F(ptC, points_.get(1) ) );
 
     EntityLine* line = new EntityLine( Color(0, 0, 0), 0.15 );
-
     line->points().points().add( p0 );
     line->points().points().add( p1 );
     list.add( line );
 
+    EntityLine* line0 = new EntityLine( Color(0, 0, 0), 0.05 );
+    line0->points().points().add( points_.get(0) );
+    line0->points().points().add( p0 );
+    list.add( line0 );
+
+    EntityLine* line1 = new EntityLine( Color(0, 0, 0), 0.05 );
+    line1->points().points().add( points_.get(1) );
+    line1->points().points().add( p1 );
+    list.add( line1 );
+
     Style* styleCircle0 = Style::createPointStyle(Color::BLACK, Style::SYMBOL_CIRCLE_FILLED, 2, "void");
-    list.add( new EntityPoint( p0, *styleCircle0, true, ANGLE_ZERO_VIEW, AngleXcc(0), NULL ) );
+    list.add( new EntityPoint( p0, *styleCircle0, true, ANGLE_ZERO_VIEW, AngleXcc(0), nullptr ) );
 
     Style* styleCircle1 = Style::createPointStyle(Color::BLACK, Style::SYMBOL_CIRCLE_FILLED, 2, "void");
-    list.add( new EntityPoint( p1, *styleCircle1, true, ANGLE_ZERO_VIEW, AngleXcc(0), NULL ) );
+    list.add( new EntityPoint( p1, *styleCircle1, true, ANGLE_ZERO_VIEW, AngleXcc(0), nullptr ) );
 
     double x = ( p0.x() + p1.x() ) / 2.0;
     double y = ( p0.y() + p1.y() ) / 2.0;
 
     Vector2F dist(p0, p1);
-    int length = (int)dist.getLength();
+    int length = static_cast<int>(dist.getLength());
     QString lengthStr = QString::number(length);
 
     EntityText* text = new EntityText( lengthStr, Point2F(x, y) );
     list.add(text);
 
     displayChange_(list);
-
-    /*if ( isSelected() == false ) return;
-
-    line = new EntityLine( Color(255, 0, 255), width()+0.25, NULL );
-    for ( int i = 1; i < points_.count(); i++ ) {
-        Point2F pti = points_.get(i);
-        pti.add(parent()->getOffset());
-        line->points().points().add( pti );
-    }
-    list.add( line );*/
 }
 
 

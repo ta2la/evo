@@ -27,12 +27,13 @@ public:
 	Cmd_draw_image(void);
     virtual ~Cmd_draw_image(void);
 //===================================================================
-    virtual void enterPoint( const T2l::Point2F& pt, T2l::Display& view );
-    virtual void enterMove ( const T2l::Point2F& pt, T2l::Display& view );
-    virtual QString dialogTml() const;
+    virtual void    enterPoint( const T2l::Point2F& pt, T2l::Display& view );
+    virtual void    enterMove ( const T2l::Point2F& pt, T2l::Display& view );
+    virtual QString dialogTml () const;
+    virtual QString hint (void) const;
 
-    bool    ptEntered_;
-    Point2F pt_;
+    //bool    ptEntered_;
+    //Point2F pt_;
 
     QStringList getFilesUp_(const QString& dirPath, const QStringList& extensions) const;
 };

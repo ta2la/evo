@@ -20,71 +20,146 @@
 #include "T2lScene.h"
 #include <iostream>
 #include "T2lCadObject_symbol.h"
+#include "T2lCadSettings.h"
+#include "T2lObPoint.h"
+#include "T2lEntityLine.h"
 
 using namespace T2l;
 using namespace std;
 
 //=============================================================================
 TentativeImplementationCad::TentativeImplementationCad() :
-    choice_(CHOICE_ENDPOINT)
+    choice_(CHOICE_POINT_VIRTUAL)
 {
+
 }
 
 //=============================================================================
 void TentativeImplementationCad::enterTentative( const Point2F& pt, Display& view )
 {
+    if (CadSettings::instance().grid() > 0) {
+        choice_ = CHOICE_GRID;
+    }
+    else if ( CadSettings::instance().grid() == 0 ) {
+        choice_ = CHOICE_POINT_VIRTUAL;
+    }
+    else if ( CadSettings::instance().grid() == -1 ) {
+        choice_ = CHOICE_POINT_TRUE;
+    }
+    else {
+        choice_ = CHOICE_POINT_TRUE_OFFSET;
+    }
+
     Point2F PT = pt;
 
     if (choice_ == CHOICE_GRID) {
-        int x = pt.x();
-        x /= 10; x *= 10; x += 5;
+        int grid = CadSettings::instance().grid();
 
-        int y = pt.y();
-        y /= 10; y *= 10; y += 5;
+        int x = static_cast<int>(pt.x());
+        x /= grid; x *= grid; x += grid/2;
+
+        int y = static_cast<int>(pt.y());
+        y /= grid; y *= grid; y += grid/2;
 
         PT = Point2F(x, y);
     }
-    else if (choice_ == CHOICE_ENDPOINT) {
+    else if (choice_ == CHOICE_POINT_VIRTUAL) {
         EntityPack* pack = view.entityPack();
-        if ( pack == NULL ) { assert(0); return; }
-        if ( pack->scene() == NULL ) return;
+        if ( pack == nullptr ) { assert(0); return; }
+        if ( pack->scene() == nullptr ) return;
 
         int count = pack->scene()->count();
 
-        PT = Point2F(-10e12,-10e12);
+        int XX = -1000000000;
+        PT = Point2F(XX,XX);
 
         for ( long i = 0; i < count; i++ )
         {	Ref* ref = pack->scene()->get(i);
 
-            CadObject_symbol* symbol = dynamic_cast<CadObject_symbol*>(ref->object());
-            if ( symbol != nullptr ) {
-                if ( symbol->parent() == nullptr ) continue;
+            ObjectDisplable* objdisp = dynamic_cast<ObjectDisplable*>(ref->object());
+            if (objdisp == nullptr) continue;
 
-                Point2F pti = symbol->points().get(0);
-                if ( Vector2F(pti, pt).getLengthSq() < Vector2F(PT, pt).getLengthSq() ) {
-                    PT = pti;
-                }
-            }
-
-            CadLine* cadLine = dynamic_cast<CadLine*>(ref->object());
-            if ( cadLine == nullptr ) continue;
-            if ( cadLine->parent() == nullptr ) continue;
-
-            for (int i = 0; i < cadLine->points().count(); i++) {
-                Point2F pti = cadLine->points().get(i);
+            for (int i = 0; i < objdisp->snapCount(); i++) {
+                Point2F pti = objdisp->snapGet(i);
                 if ( Vector2F(pti, pt).getLengthSq() > Vector2F(PT, pt).getLengthSq() ) continue;
                 PT = pti;
             }
         }
 
-        if ( (PT.x() == -10e12) && (PT.y() == -10e12) ) {
+        int X = static_cast<int>(PT.x());
+        int Y = static_cast<int>(PT.y());
+        if ( X==XX && Y==XX ) {
             PT = pt;
+        }
+    }
+    else { // CHOICE_POINT_TRUE, CHOICE_POINT_TRUE_OFFSET
+        EntityPack* pack = view.entityPack();
+        if ( pack == nullptr ) { assert(0); return; }
+        if ( pack->scene() == nullptr ) return;
+
+        int count = pack->scene()->count();
+
+        int XX = -1000000000;
+        PT = Point2F(XX,XX);
+
+        int gid   = 0;
+        int index = 0;
+
+        ObjectDisplable* objsel = nullptr;
+
+        for ( long i = 0; i < count; i++ )
+        {	Ref* ref = pack->scene()->get(i);
+
+            ObjectDisplable* objdisp = dynamic_cast<ObjectDisplable*>(ref->object());
+            if (objdisp == nullptr) continue;
+
+            bool snappable = true;
+
+            for (int i = 0; i < objdisp->snapRawCount(); i++) {
+                if ( objdisp->snapRawGet(i).getAsRel() != nullptr ) {
+                    snappable = false;
+                    break;
+                }
+            }
+
+            if ( snappable == false ) break;
+
+            for (int i = 0; i < objdisp->snapRawCount(); i++) {
+                Point2F pti = objdisp->snapRawGet(i).xy();
+                if ( Vector2F(pti, pt).getLengthSq() > Vector2F(PT, pt).getLengthSq() ) continue;
+                PT    = pti;
+                gid   = objdisp->gid();
+                index = i;
+
+                objsel = objdisp;
+            }
+        }
+
+        int X = static_cast<int>(PT.x());
+        int Y = static_cast<int>(PT.y());
+        if ( X==XX && Y==XX ) {
+            PT = pt;
+        }
+
+        gid_   = gid;
+        index_ = index;
+
+        if (objsel != nullptr) {
+            for ( int i = 1; i < objsel->points().count(); i++ ) {
+                EntityLine* line = new EntityLine( Color(255, 0, 255), 2 );
+                line->points().points().add( objsel->points().get(i-1) );
+                line->points().points().add( objsel->points().get(i) );
+                entities_.add(line);
+            }
         }
     }
 
     TentativeImplementation::enterTentative_(PT, view);
+}
 
-    //cout << "TENTATIVE CAD AT XY: " << PT.x() << " " << PT.y() << endl;
+void TentativeImplementationCad::afterConsumation()
+{
+    gid_ = 0;
 }
 
 //=============================================================================

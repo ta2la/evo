@@ -27,6 +27,8 @@
 #include "T2lStoredItem.h"
 #include "T2lActiveFile.h"
 #include "T2lStyleChange.h"
+#include "T2lCanvas.h"
+#include "T2lEnPointMmRel.h"
 
 #include <assert.h>
 #include <iostream>
@@ -60,6 +62,7 @@ void CadObject_symbol::display(EntityList& list, RefCol* scene)
 
     Style* style = parent()->styles().getStyle(style_.c_str());
 
+    //EnPointMmRel ptr( position(), Vector2F(5, 0));
     list.add( new EntityPoint( position(), *style, false, ANGLE_ZERO_VIEW, AngleXcc(0), selChange ) );
 
     displayChange_(list);
@@ -68,15 +71,16 @@ void CadObject_symbol::display(EntityList& list, RefCol* scene)
 //===================================================================
 CadObject_symbol::EIdentified CadObject_symbol::identifiedByPoint(const Canvas& canvas, const Point2F& pt)
 {
-    if (parent_ == NULL) return IDENTIFIED_NO;
+    if (parent_ == nullptr) return IDENTIFIED_NO;
+
+    Point2F ptx(2, 2);
+    ptx = canvas.mapPaperToReal(ptx);
+    double exp = ptx.x()/1000.0;
 
     Box2F box;
-
     box.inflateTo( position() );
-    box.inflateBy(4);
-
+    box.inflateBy( exp );
     if ( box.isInside(pt) ) return IDENTIFIED_YES;
-
     return IDENTIFIED_NO;
 }
 

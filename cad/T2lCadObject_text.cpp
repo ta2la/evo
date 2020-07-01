@@ -14,6 +14,8 @@
 // limitations under the License.
 //=============================================================================
 #include "T2lGFile.h"
+#include "T2lScene.h"
+#include "T2lDisplay.h"
 #include "T2lCadObject_text.h"
 #include "T2lEntityList.h"
 #include "T2lEntityText.h"
@@ -29,6 +31,8 @@
 #include "T2lSfeatArea.h"
 #include "T2lBox2.h"
 #include "T2lEntityArea.h"
+#include "T2lCadSettings.h"
+#include "T2lEntityEnLinear.h"
 
 using namespace T2l;
 using namespace std;
@@ -36,16 +40,52 @@ using namespace std;
 //===================================================================
 CadObject_text::CadObject_text(const QString& text, const Point2<double>& position, GFile* parent) :
     ObjectDisplable(position, parent),
-    text_(text),
     back_(false),
-    backColor_(Color::GRAY)
+    backColor_(Color::GRAY),
+    color_(Color::BLACK)
 {
-    if (parent != NULL) parent->add(this);
+    setText(text);
+    if (parent != nullptr) parent->add(this);
+}
+
+//===================================================================
+CadObject_text::CadObject_text( QList<CadTextItem> text, const Point2<double>& position, GFile* parent,
+                                const Color& color, bool back, const Color& colorBack, int gid ) :
+    ObjectDisplable(position, parent, gid),
+    text_(text),
+    color_(color),
+    back_(back),
+    backColor_(colorBack)
+{
+    if (parent != nullptr) parent->add(this);
 }
 
 //===================================================================
 CadObject_text::~CadObject_text(void)
 {
+}
+
+//===================================================================
+void CadObject_text::setText(const QString& text)
+{
+    QStringList texts = text.split("//");
+    text_.clear();
+    for (int i = 0; i < texts.count(); i++) {
+        text_.append(CadTextItem(texts[i], 2, false));
+    }
+}
+
+//===================================================================
+QString CadObject_text::text() const
+{
+    QString result;
+
+    for (int i = 0; i < text_.count(); i++) {
+        if ( i != 0 ) result.append("//");
+        result.append(text_[i].text_);
+    }
+
+    return result;
 }
 
 //===================================================================
@@ -61,17 +101,66 @@ bool CadObject_text::loadFromStored( StoredItem* item, GFile* parent )
 
     StoredAttr* pa = item->get("point", 0);
     if (pa == NULL) return false;
-
     StoredAttrNUM* p = pa->getAsNUM();
     if (p == NULL) return false;
-
     Point2<double> p2( p->get(0), p->get(1));
 
-    StoredAttr* text = item->get("text");
-    if (text == NULL) return false;
-    if (text->getAsSTR() == NULL) return false;
+    QList<CadTextItem> titems;
 
-    CadObject_text* objectText = new CadObject_text( text->value().toStdString().c_str(), p2, parent );
+    for ( int i = 0; true; i++ ) {
+        StoredAttr* text = item->get("text", i);
+        if (text == NULL) {
+            if ( i == 0 ) return false;
+            else break;
+        }
+        QString value = text->value();
+
+        int first = value.indexOf("|");
+        if ( first < 0 ) {
+            titems.append( CadTextItem(value, 2, false) );
+            break;
+        }
+
+        QString size = value.left(first);
+        value = value.right(value.length()-first-1);
+
+        int second = value.indexOf("|");
+        QString bolds = value.left(second);
+        value = value.right(value.length()-second-1);
+        bool bold = false;
+        if (bolds == "b") bold = true;
+
+        titems.append( CadTextItem(value, size.toDouble(), bold) );
+    }
+
+    StoredAttr* color = item->get("color");
+    Color c = Color::BLACK;
+    if ( color ) {
+        if (color->getAsSTR() ) {
+            c = Color::read(color->value().toStdString().c_str());
+
+        }
+    }
+
+    bool backUse = false;
+    Color cBack = Color::WHITE;
+    StoredAttr* color_back = item->get("color_back");
+    if (color_back ) {
+        if (color_back->getAsSTR() ) {
+            cBack = Color::read(color_back->value().toStdString().c_str());
+            backUse = true;
+        }
+    }
+
+    int gidValue = 0;
+    StoredAttr* gidAttr = item->get("sys_GID");
+    if ( gidAttr != nullptr ) {
+        if (gidAttr->getAsNUM() != nullptr) {
+            gidValue = gidAttr->getAsNUM()->get();
+        }
+    }
+
+    new CadObject_text( titems, p2, parent, c, backUse, cBack, gidValue );
 
     return true;
 }
@@ -79,11 +168,33 @@ bool CadObject_text::loadFromStored( StoredItem* item, GFile* parent )
 //===================================================================
 void CadObject_text::saveToStored(StoredItem& item, GFile* file)
 {
-    //cout << "object image" << endl;
+    StoredAttrNUM* attrGID = new StoredAttrNUM("sys_GID");
+    attrGID->add(gid());
+    item.add(attrGID);
 
     item.add( new StoredAttrSTR("type",       "entity") );
     item.add( new StoredAttrSTR("entity",     "text") );
-    item.add( new StoredAttrSTR("text",       text_) );
+
+    for ( int i = 0; i < text_.count(); i++ ) {
+        QString text;
+        text += QString::number(text_[i].textSize());
+        text += "|";
+        if ( text_[i].textBold() ) {
+            text += "b|";
+        }
+        else {
+            text += "n|";
+        }
+        text += text_[i].text();
+
+        item.add( new StoredAttrSTR("text", text ) );
+    }
+
+    item.add(new StoredAttrSTR("color", color_.write().c_str()));
+
+    if ( back_ ) {
+        item.add(new StoredAttrSTR("color_back", backColor_.write().c_str()));
+    }
 
     StoredAttrNUM* attrBeg = new StoredAttrNUM("point");
     attrBeg->add(position().x());
@@ -92,15 +203,28 @@ void CadObject_text::saveToStored(StoredItem& item, GFile* file)
 }
 
 //===================================================================
-Box2F CadObject_text::bound_()
+Box2F CadObject_text::bound_(const Canvas& canvas)
 {
     Point2F p = position();
 
-    double width = 3*text_.length();
-    double above = 1;
-    double below = 4;
+    double length = text_[0].text().length();
+    for ( int i = 1; i < text_.length(); i++) {
+        int lengthi = text_[i].text().length();
+        if (lengthi < length) continue;
+        length = lengthi;
+    }
 
-    Box2F result( IntervalF(p.x(), p.x()+width), IntervalF(p.y()+above, p.y()-below) );
+    double width = 0.003*length+0.004;
+    double above = 0.001;
+    double below = 0.004 + 0.005*(text_.count()-1) + 0.002;
+    double left  = 0.002;
+
+    width = canvas.mapPaperToReal(Point2F(width, 0)).x();
+    above = canvas.mapPaperToReal(Point2F(above, 0)).x();
+    below = canvas.mapPaperToReal(Point2F(below, 0)).x();
+    left  = canvas.mapPaperToReal(Point2F(left, 0)).x();
+
+    Box2F result( IntervalF(p.x()-left, p.x()+width), IntervalF(p.y()+above, p.y()-below) );
 
     return result;
 }
@@ -108,36 +232,53 @@ Box2F CadObject_text::bound_()
 //===================================================================
 void CadObject_text::display(EntityList& list, RefCol* scene)
 {
-    QString name = text_;
-    if (name.isEmpty()) name = "???";
-
     Point2F p = position();
 
-    Box2F bound = bound_();
+    Scene* scener = dynamic_cast<Scene*>(scene);
+    Display* display = nullptr;
+    if (scener) display = scener->entities().display();
 
     if (back_)
     {
-        Style* stylea = new Style("");
-        stylea->sfeats().add( new SfeatArea(backColor_, 255));
-        EntityArea* area = new EntityArea( *stylea, true, NULL);
-        Point2FCol& pline = area->points().points();
-        for ( int i = 0; i < 4; i++) pline.add( Point2F(bound.getPoint(i)));
+        Color back = backColor_;
+        if (selected_) back = Color::MAGENTA;
+
+        double length = text_[0].text().length();
+        for ( int i = 1; i < text_.length(); i++) {
+            int lengthi = text_[i].text().length();
+            if (lengthi < length) continue;
+            length = lengthi;
+        }
+
+        double width = 3.0*length+0.004;
+        double above = 0.0;
+        double below = 4.0 + 5*(text_.count()-1) + 2;
+        double left  = 0.5;
+
+        EntityEnLinear* area = new EntityEnLinear(backColor_, backColor_, 150);
+        area->pointAdd( Point2F(position()), Point2F(     0,      0 ) );
+        area->pointAdd( Point2F(position()), Point2F( width,      0 ) );
+        area->pointAdd( Point2F(position()), Point2F( width, -below ) );
+        //area->pointAdd( Point2F(bound.getPoint(3)), Point2F(     0, -below ) );
+        area->pointAdd( Point2F(position()), Point2F(     0, -below ) );
         list.add(area);
     }
 
-    EntityText* text = new EntityText( name, p );
-    list.add(text);
+    Point2F poff = p;
+    Point2F offset(0, 0);
 
-    if (isSelected()) {
-        EntityLine* lineT = new EntityLine( Color(255, 0, 255), 0.15, NULL );
-        lineT->points().points().add( bound.getPoint(0) );
-        lineT->points().points().add( bound.getPoint(1) );
-        list.add( lineT );
+    Color c = color_;
+    if (isSelected() && back_==false) c = Color::MAGENTA;
 
-        EntityLine* lineB = new EntityLine( Color(255, 0, 255), 0.15, NULL );
-        lineB->points().points().add( bound.getPoint(2) );
-        lineB->points().points().add( bound.getPoint(3) );
-        list.add( lineB );
+    for (int i = 0; i < text_.count(); i++) {
+        double size = text_[i].textSize();
+        bool   bold = text_[i].textBold();
+
+        EntityText* text = new EntityText( text_[i].text(), poff, POSITION_H_LEFT, POSITION_V_TOP,
+                                    Style::createTextStyle(c, size, "", bold),
+                                    true, AngleXcc(0), offset );
+        list.add(text);
+        offset.add(Vector2F(0,-text_[i].textSize()*0.75));
     }
 
     displayChange_(list);
@@ -148,7 +289,7 @@ CadObject_text::EIdentified CadObject_text::identifiedByPoint(const Canvas& canv
 {
     if (parent_ == NULL) return IDENTIFIED_NO;
 
-    Box2F box = bound_();
+    Box2F box = bound_(canvas);
 
     if ( box.isInside(pt) ) return IDENTIFIED_YES;
 

@@ -19,6 +19,8 @@
 #include "T2lRef.h"
 #include "T2lCadObject_image.h"
 #include "T2lScene.h"
+#include "T2lCadObject_image.h"
+#include "T2lEntityPack.h"
 
 #include <QPixmap>
 
@@ -31,11 +33,9 @@ CmdImgaccess::CmdImgaccess(const QString& name) :
 }
 
 //===================================================================
-QImage* CmdImgaccess::imgaccess(EntityPack* pack)
+CadObject_image* CmdImgaccess::imgaccess_object(EntityPack* pack)
 {
     if (pack == NULL) return nullptr;
-
-    if (img_.isNull() == false) return &img_;
 
     int count = pack->scene()->count();
     for ( long i = 0; i < count; i++ )
@@ -44,9 +44,32 @@ QImage* CmdImgaccess::imgaccess(EntityPack* pack)
         CadObject_image* image = dynamic_cast<CadObject_image*>(ref->object());
         if (image == NULL) continue;
 
+        return image;
+    }
+
+    return nullptr;
+}
+
+//===================================================================
+QImage* CmdImgaccess::imgaccess(EntityPack* pack)
+{
+    if (img_.isNull() == false) return &img_;
+
+    CadObject_image* object = imgaccess_object(pack);
+    if (object == nullptr) return nullptr;
+    img_ = object->pixmap()->toImage();
+
+
+/*    int count = pack->scene()->count();
+    for ( long i = 0; i < count; i++ )
+    {
+        Ref* ref = pack->scene()->get(i);
+        CadObject_image* image = dynamic_cast<CadObject_image*>(ref->object());
+        if (image == NULL) continue;
+
         img_ = image->pixmap()->toImage();
         if (img_.isNull() == false) return &img_;
-    }
+    }*/
 
     return &img_;
 }

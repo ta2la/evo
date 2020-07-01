@@ -211,7 +211,7 @@ string CadObject_line3::print()
 //=========================================================================
 ObjectDisplable* CadObject_line3::clone()
 {
-    CadObject_line3* line = new CadObject_line3(points_, parent_, 100, 100);
+    CadObject_line3* line = new CadObject_line3(points_.pointCol(), parent_, 100, 100);
     line->setColor(color_);
     line->setWidth(width_);
 

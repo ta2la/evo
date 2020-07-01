@@ -18,11 +18,10 @@
 #include "T2lObjectDisplable.h"
 #include "T2lObjectDisplableCol.h"
 #include "T2lItem.h"
+#include "T2lStyleCol.h"
 
 #include <QString>
 #include <QList>
-
-#include "T2lStyleCol.h"
 
 namespace T2l {
 
@@ -75,8 +74,14 @@ public:
     bool dirty() { return dirty_; }
 
     StyleCol& styles() { return styles_; }
+    StyleCol& stylesLineBeg() { return stylesLineBeg_; }
+    StyleCol& stylesLineEnd() { return stylesLineEnd_; }
 
     void loadSymbols();
+
+    static QString symbolsTml(StyleCol& styles, const char* what = "");
+    static void loadSymbols(const QString& fileName, StyleCol& styles);
+    static QString symbolImageFile(const QString& symbol);
 //=============================================================================
 //<OVERRIDES>
 protected:
@@ -88,7 +93,12 @@ protected:
     GLoadSave*         loadSave_;
     bool               skipImage_;
     bool               dirty_;
+
     StyleCol           styles_;
+    StyleCol           stylesLineBeg_;
+    StyleCol           stylesLineEnd_;
+
+    int                maxGid_;
 public:
     int                widgetCount_;
 //<FRIENDS>

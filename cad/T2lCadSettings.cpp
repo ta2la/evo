@@ -13,11 +13,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //=============================================================================
-
+// SELF
 #include "T2lCadSettings.h"
+
+#include "T2lActiveFile.h"
+#include "T2lGFile.h"
+
+// evo
 #include "T2lStoredFileNames.h"
-#include <string>
+
+// hg
 #include "T2lCmdQueue.h"
+
+// LIB
+#include <QFileInfo>
+#include <QDir>
+#include <QImage>
+
+#include <string>
 
 using namespace T2l;
 using namespace std;
@@ -27,11 +40,16 @@ CadSettings::CadSettings() :
     color_(Color::GRAY_DARK),
     width_(0.5),
     ortho_(false),
+    keepRatio_(true),
     offset_(10),
     imageSymbolFile_("../pig.png"),
     image2points_(true),
+    imageSymbolFile_image_(nullptr),
+    imageSymbolFile_imageFile_(""),
     text_("null text"),
     symbol_("point"),
+    symbolLineBeg_("null"),
+    symbolLineEnd_("null"),
     size_(10),
     sizeRelative_(1),
     brushSize_(20),
@@ -42,6 +60,8 @@ CadSettings::CadSettings() :
     d3Height1_(1000),
     d3Height2_(1000)
 {
+    multiText_.append(CadTextItem("null", 2, false));
+    multiTextCurrentSet(0);
 }
 
 //====================================================================
@@ -60,6 +80,16 @@ QString CadSettings::printBrushsize()
     result.append(QString("<a href='tcview:://#ann_set_brushsize 600'>[600]</a> "));
 
     return result;
+}
+
+//=============================================================================
+int CadSettings::multiTextCurrentSet(int current)
+{
+    if (multiText_.count() == 0) multiText_.append(CadTextItem("22222222", 2, false));
+
+    if (current < 0) current = 0;
+    if (current >= multiText_.count()) current = 0;
+    multiTextCurrent_ = current;
 }
 
 //=============================================================================
@@ -122,8 +152,6 @@ QString widthEditorButton(QString width)
 QString CadSettings::offsetEditor()
 {
     QString result;
-
-    //result += "TC;CT; text: offset:;;";
 
     result += "TC;control: edit;";
     result += "text: " + QString::number(offset()) + ";";
@@ -216,5 +244,29 @@ void CadSettings::gridSet(double grid)
     CmdQueue::queue().gridSet(grid);
 }
 
+//=============================================================================
+void CadSettings::imageSymbolFileSet( const char* file)
+{
+    imageSymbolFile_ = file;
+    if (imageSymbolFile_.empty()) {
+        imageSymbolFile_imageFile_ = "";
+        imageSymbolFile_image_     = nullptr;
+    }
+}
+
+//=============================================================================
+QImage* CadSettings::imageSymbolFile_image()
+{
+    QString imagePath = imageSymbolFile();
+
+    if ( imagePath == imageSymbolFile_imageFile_.c_str() )
+        return imageSymbolFile_image_;
+
+    if ( imageSymbolFile_image_ != nullptr ) delete imageSymbolFile_image_;
+
+    imageSymbolFile_image_ = new QImage(imagePath);
+
+    return imageSymbolFile_image_;
+}
 
 //=============================================================================

@@ -26,7 +26,6 @@
 #include "T2lCadObject_ann.h"
 #include "T2lCadSettings.h"
 #include "T2lCadObject_image.h"
-#include "T2lCmd_ann_enter.h"
 
 //hg
 #include <T2lScene.h>
@@ -297,14 +296,6 @@ QString Cmd_pixann_painter::dialogTml() const
     result += "TC;CT;text: <hup>;;";
     result += "TC;CT;text: <a href='tcview:://#ann_feat_owrite all on'>[owrite all ON]</a>;;";
     result += "TC;CT;text: <a href='tcview:://#ann_feat_owrite all off'>[owrite all OFF]</a>;;";
-
-    /*result += "TC;CT;text: <hup>;;";
-    result += "TC;CT;text: owrite on:;;";
-    result += features.printTml("ann_feat_owrite single off", "o_on");
-
-    result += "TC;CT;text: <hup>;;";
-    result += "TC;CT;text: owrite off:;;";
-    result += features.printTml("ann_feat_owrite single on", "o_off");*/
 
     //===================================================
     result = result.replace("TC", "type: control");

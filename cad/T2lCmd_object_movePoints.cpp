@@ -25,6 +25,7 @@
 #include "T2lPoint2.h"
 #include "T2lEntityLine.h"
 #include "T2lActiveFile.h"
+#include "T2lObPointXy.h"
 
 #include "iostream"
 
@@ -73,11 +74,13 @@ void Cmd_object_movePoints::enterPoint( const Point2F& pt, Display& view )
             if ( activeFile != displable->parent_) continue;
 
             for ( int p = 0; p < displable->points_.count(); p++ ) {
-                Point2F pti = displable->points_.get(p);
-                if ( box.isInside(pti) == false) continue;
-                displable->points_.getRef(p).add(delta);
-                displable->modifiedSet_();
+                ObPointXy* xy = dynamic_cast<ObPointXy*>(&displable->points().getRaw(p));
+                if (xy == nullptr) continue;
+                if ( box.isInside(xy->xy()) == false) continue;
+                xy->move(delta);
             }
+
+            displable->modifiedSet_();
         }
 
         points_.clean();

@@ -17,7 +17,6 @@
 
 #include "T2lCmd.h"
 #include "T2lGFile.h"
-//#include "T2lCadObject_refFile.h"
 #include "T2lPoint2Col.h"
 
 namespace T2l {

@@ -86,7 +86,9 @@ void Cmd_object_mocopy_parallel::enterPoint( const Point2F& pt, Display& view )
         CadLine*  objLine   = dynamic_cast<CadLine*>(object);
 
         Point2FCol ptsNew;
-        calculateNew_(pt, objLine->points(), ptsNew);
+        Point2FCol ptsOld = objLine->points().pointCol();
+        calculateNew_(pt, ptsOld, ptsNew);
+
         CadLine* line = new CadLine(ptsNew, ActiveFile::active().file());
         line->setColor(objLine->color());
         line->setWidth(objLine->width());
@@ -129,7 +131,8 @@ void Cmd_object_mocopy_parallel::enterMove( const Point2F& pt, Display& view )
     pack->cleanDynamic();
 
     Point2FCol ptsNew;
-    calculateNew_(pt, cadLine->points(), ptsNew);
+    Point2FCol ptsOld = cadLine->points().pointCol();
+    calculateNew_(pt, ptsOld, ptsNew);
 
     EntityLine* line = new EntityLine( cadLine->color(), 1 );
     line->points().points().add( ptsNew.get(0) );

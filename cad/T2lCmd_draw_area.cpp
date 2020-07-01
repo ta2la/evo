@@ -103,55 +103,6 @@ void Cmd_draw_area::enterMove( const T2l::Point2F& pt, Display& view )
 }
 
 //===================================================================
-/*QString Cmd_draw_area::printCategory(const char* category)
-{
-    QString result;
-
-    QString readable = category;
-    readable.replace("_", " ");
-
-    AnnFeatureCol& feats = AnnFeatureCol::instance();
-    string categoryActive(feats.get(feats.activeFeature())->id());
-
-    if ( categoryActive == category) {
-        result.append("<b>");
-        result.append(readable);
-        result.append("</b>");
-    }
-    else {
-        result.append(QString("<a href='tcview:://#ann_set_category "));
-        result.append(category);
-        result.append("'>");
-        result.append(readable);
-        result.append("</a>");
-    }
-
-    return result;
-}*/
-
-//===================================================================
-/*QString Cmd_draw_area::dialog() const {
-    QString result;
-
-    AnnFeatureCol& featuresCol = AnnFeatureCol::instance();
-
-    result.append(QString("pixels: <a href='tcview:://#ann_enter_pixels on'>is off</a><br>"));
-
-    result.append("categories: ");
-
-    for ( int i = 0; i < featuresCol.count(); i++ ) {
-        AnnFeature* featurei = featuresCol.get(i);
-        result.append( printCategory(featurei->id()) );
-        result.append("&nbsp;&nbsp;");
-    }
-
-    result.append("<br><br>");
-    //TODOX result.append(Cmd_pixann_painter::dialog_owrite());
-
-    return result;
-}*/
-
-//===================================================================
 QString Cmd_draw_area::dialogTml() const
 {
     QString result;

@@ -23,6 +23,7 @@
 #include "T2lCadSettings.h"
 #include "T2lActiveFile.h"
 #include "T2lGFile.h"
+#include "T2lEnPointMmRel.h"
 
 #include <QDir>
 #include <QCoreApplication>
@@ -91,46 +92,10 @@ QString symbolButton(const char* symbol) {
 }
 
 //===================================================================
-QString symbolButtonStr(const QString& symbol) {
-    QString result;
-
-    result += "TC;CT;text: [";
-    result += symbol;
-    result += QString("];cmd: cad_set_symbol ") + symbol + ";;";
-
-    return result;
-}
-
-//===================================================================
-QString symbolImageFile(const QString& symbol) {
-    QDir dir = QFileInfo(ActiveFile::active().file()->filePath()).dir();
-    dir.cdUp();
-    dir.cd("t2l");
-    QString fileName(symbol);
-    fileName += (".png");
-    return dir.absoluteFilePath(fileName);
-}
-
-//===================================================================
 QString Cmd_object_enter::dialogTml() const
 {
-    QString result;
-
     GFile* file = ActiveFile::active().file();
-    for ( int i = 0; i < file->styles().count(); i++) {
-        QString symbolId  = file->styles().get(i)->style()->id();
-        QString imageFile = symbolImageFile(symbolId);
-
-        if (QFileInfo(imageFile).exists()) {
-            result += "TC;CB;icon: ";
-            result += imageFile + ";";
-            result += QString("cmd: cad_set_symbol ") + symbolId + ";;";
-        }
-        else {
-            result += symbolButtonStr(symbolId);
-        }
-
-    }
+    QString result = GFile::symbolsTml(file->styles());
 
     //===================================================
     result = result.replace("TEXT", "type: control;control: text;text");

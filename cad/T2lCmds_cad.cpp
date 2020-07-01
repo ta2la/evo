@@ -407,6 +407,29 @@ int Cmds_cad::cad_set_3dheight2(TcCmdContext* /*context*/, TcArgCol& args)
 }
 
 //=============================================================================
+int Cmds_cad::cad_set_text_bold(TcCmdContext* /*context*/, TcArgCol& /*args*/)
+{
+    int current = CadSettings::instance().multiTextCurrent();
+    bool bold = CadSettings::instance().multiText()[current].textBold();
+    CadSettings::instance().multiText()[current].textBoldSet( !bold );
+    return 0;
+}
+
+//=============================================================================
+int Cmds_cad::cad_set_text_size(TcCmdContext* /*context*/, TcArgCol& args)
+{
+    if ( args.count() <= 1 ) return args.appendError("you must enter the value");
+    TcArg* arg1 = args.getAsCol()->at(1);
+
+    double  s = atof(arg1->getAsVal()->value());
+
+    int current = CadSettings::instance().multiTextCurrent();
+    CadSettings::instance().multiText()[current].textSizeSet(s);
+
+    return 0;
+}
+
+//=============================================================================
 int Cmds_cad::cmd_object_set_symbology(TcCmdContext* /*context*/, TcArgCol& args)
 {
     CmdQueue::queue().add( new Cmd_object_set_symbology(), false );
@@ -493,7 +516,7 @@ int Cmds_cad::cad_set_grid(TcCmdContext* /*context*/, TcArgCol& args)
 
     double span = atof(arg1->getAsVal()->value());
 
-    CadSettings::instance().gridSet(fabs(span));
+    CadSettings::instance().gridSet(span);
 
     return 0;
 }
@@ -507,7 +530,21 @@ int Cmds_cad::cad_set_symbol(TcCmdContext* /*context*/, TcArgCol& args)
     string text;
     arg1->toString(text);
 
-    CadSettings::instance().symbolSet(text.c_str());
+    if ( args.count() == 2 ) {
+        CadSettings::instance().symbolSet(text.c_str());
+    }
+    else {
+        TcArg* arg2 = args.getAsCol()->at(2);
+        string text2;
+        arg2->toString(text2);
+
+        if (text2 == "line_beg") {
+            CadSettings::instance().symbolLineBegSet(text.c_str());
+        }
+        else if (text2 == "line_end") {
+            CadSettings::instance().symbolLineEndSet(text.c_str());
+        }
+    }
 
     return 0;
 }
@@ -520,9 +557,23 @@ int Cmds_cad::cad_set_image2points(TcCmdContext* /*context*/, TcArgCol& args)
 }
 
 //=============================================================================
+int Cmds_cad::cad_set_keep_ratio(TcCmdContext* /*context*/, TcArgCol& args)
+{
+    CadSettings::instance().keepRatioSet(!CadSettings::instance().keepRatio());
+    return 0;
+}
+
+//=============================================================================
 int Cmds_cad::cad_set_ortho(TcCmdContext* /*context*/, TcArgCol& /*args*/)
 {
     CadSettings::instance().orthoSet( !CadSettings::instance().ortho() );
+    return 0;
+}
+
+//=============================================================================
+int Cmds_cad::cad_set_background_use(TcCmdContext* /*context*/, TcArgCol& /*args*/)
+{
+    CadSettings::instance().backgroundUseSet( !CadSettings::instance().backgroundUse() );
     return 0;
 }
 
@@ -540,7 +591,6 @@ int Cmds_cad::cad_open_in_active_view(TcCmdContext* /*context*/, TcArgCol& /*arg
     return 0;
 }
 
-
 //=============================================================================
 int Cmds_cad::cad_set_text(TcCmdContext* /*context*/, TcArgCol& args)
 {
@@ -549,10 +599,39 @@ int Cmds_cad::cad_set_text(TcCmdContext* /*context*/, TcArgCol& args)
 
     string text;
     arg1->toString(text);
-    CadSettings::instance().textSet(text.c_str());
+
+    int current = CadSettings::instance().multiTextCurrent();
+    CadSettings::instance().multiText()[current].textSet(text.c_str());
 
     return 0;
 }
+
+//=============================================================================
+int Cmds_cad::cad_text_append(TcCmdContext* /*context*/, TcArgCol& args)
+{
+    CadSettings::instance().multiText().append(CadTextItem("-", 2, false));
+    int count = CadSettings::instance().multiText().count();
+    CadSettings::instance().multiTextCurrentSet(count-1);
+
+    return 0;
+}
+
+//=============================================================================
+int Cmds_cad::cad_text_delete(TcCmdContext* /*context*/, TcArgCol& args)
+{
+    int current = CadSettings::instance().multiTextCurrent();
+    CadSettings::instance().multiText().removeAt(current);
+    if ( CadSettings::instance().multiText().count() == 0) {
+        CadSettings::instance().multiText().append(CadTextItem("-", 2, false));
+        CadSettings::instance().multiTextCurrentSet(0);
+        return 0;
+    }
+
+    CadSettings::instance().multiTextCurrentSet(current-1);
+
+    return 0;
+}
+
 
 //=============================================================================
 int Cmds_cad::cad_set_size(TcCmdContext* /*context*/, TcArgCol& args)
@@ -566,6 +645,22 @@ int Cmds_cad::cad_set_size(TcCmdContext* /*context*/, TcArgCol& args)
     QString size(text.c_str());
 
     CadSettings::instance().setSize(size.toDouble());
+
+    return 0;
+}
+
+//=============================================================================
+int Cmds_cad::cad_set_text_active(TcCmdContext* /*context*/, TcArgCol& args)
+{
+    if ( args.count() <= 1 ) return args.appendError("you must enter the symbol");
+    TcArg* arg1 = args.getAsCol()->at(1);
+
+    string text;
+    arg1->toString(text);
+
+    QString active(text.c_str());
+
+    CadSettings::instance().multiTextCurrentSet(active.toInt());
 
     return 0;
 }

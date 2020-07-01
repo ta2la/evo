@@ -25,7 +25,7 @@ class TentativeImplementationCad : public TentativeImplementation {
 //=============================================================================
 public:
 //<ENUMS>
-    enum ETentativeChoice { CHOICE_GRID, CHOICE_ENDPOINT };
+    enum ETentativeChoice { CHOICE_GRID, CHOICE_POINT_TRUE, CHOICE_POINT_VIRTUAL, CHOICE_POINT_TRUE_OFFSET };
 //<CONSTRUCTION>
     TentativeImplementationCad();
     virtual ~TentativeImplementationCad() {}
@@ -34,9 +34,13 @@ public:
 //=============================================================================
 //<OVERRIDES>
     virtual void enterTentative( const Point2F& pt, Display& view );
+    virtual void afterConsumation();
 //protected:
 //<DATA>
     ETentativeChoice choice_;
+
+    int gid_;
+    int index_;
 //<INTERNALS>
 //<FRIENDS>
 };

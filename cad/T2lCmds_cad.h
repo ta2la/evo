@@ -56,18 +56,25 @@ public:
         REGISTER_CMD( "cad_set_text",               cad_set_text,               "cad" );
         REGISTER_CMD( "cad_set_size",               cad_set_size,               "cad" );
         REGISTER_CMD( "text",                       cad_set_text,               "cad" );
+        REGISTER_CMD( "cad_text_append",            cad_text_append,            "cad" );
+        REGISTER_CMD( "cad_text_delete",            cad_text_delete,            "cad" );
         REGISTER_CMD( "cad_set_size",               cad_set_size,               "cad" );
         REGISTER_CMD( "cad_open_in_active_view",    cad_open_in_active_view,    "cad" );
         REGISTER_CMD( "change_text",                cad_change_text,            "cad" );
         REGISTER_CMD( "cad_set_active_image",       cad_set_active_image,       "cad" );
         REGISTER_CMD( "cad_set_featcmd",            cad_set_featcmd,            "cad" );
         REGISTER_CMD( "cad_set_image2points",       cad_set_image2points,       "cad" );
+        REGISTER_CMD( "cad_set_keep_ratio",         cad_set_keep_ratio,         "cad" );
         REGISTER_CMD( "cmd_object_select",          cmd_object_select,          "cad" );
         REGISTER_CMD( "cad_unselect_all",           cad_unselect_all,           "cad" );
         REGISTER_CMD( "cad_set_unselect_mode",      cad_set_unselect_mode,      "cad" );
         REGISTER_CMD( "cad_set_3dheight1",          cad_set_3dheight1,          "cad" );
         REGISTER_CMD( "cad_set_3dheight2",          cad_set_3dheight2,          "cad" );
         REGISTER_CMD( "cmd_3dwidget",               cmd_3dwidget,               "cad" );
+        REGISTER_CMD( "cad_set_text_size",          cad_set_text_size,          "cad" );
+        REGISTER_CMD( "cad_set_background_use",     cad_set_background_use,     "cad" );
+        REGISTER_CMD( "cad_set_text_active",        cad_set_text_active,        "cad" );
+        REGISTER_CMD( "cad_set_text_bold",          cad_set_text_bold,          "cad" );
 
         return true;
     }
@@ -98,18 +105,25 @@ private:
     CMD_FCE( cad_set_symbol );
     CMD_FCE( cad_set_ortho );
     CMD_FCE( cad_set_text );
+    CMD_FCE( cad_text_append );
+    CMD_FCE( cad_text_delete );
     CMD_FCE( cad_set_size );
     CMD_FCE( cad_open_in_active_view );
     CMD_FCE( cad_change_text );
     CMD_FCE( cad_set_active_image );
     CMD_FCE( cad_set_featcmd );
     CMD_FCE( cad_set_image2points );
+    CMD_FCE( cad_set_keep_ratio );
     CMD_FCE( cmd_object_select );
     CMD_FCE( cad_unselect_all );
     CMD_FCE( cad_set_unselect_mode );
     CMD_FCE( cad_set_3dheight1 );
     CMD_FCE( cad_set_3dheight2 );
     CMD_FCE( cmd_3dwidget );
+    CMD_FCE( cad_set_text_size );
+    CMD_FCE( cad_set_background_use );
+    CMD_FCE( cad_set_text_active );
+    CMD_FCE( cad_set_text_bold );
 };
 
 } //namespace T2l

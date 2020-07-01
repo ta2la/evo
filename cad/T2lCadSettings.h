@@ -19,6 +19,7 @@
 #include "T2lColor.h"
 #include "T2lPoint2.h"
 #include "T2lStyle.h"
+#include "T2lCadTextItem.h"
 
 #include <QString>
 
@@ -40,12 +41,11 @@ public:
     static CadSettings& instance() { static CadSettings cs; return cs; }
 //<METHODS>
     const char* imageSymbolFile() { return imageSymbolFile_.c_str(); }
-    void imageSymbolFileSet( const char* file) { imageSymbolFile_ = file; }
+    void imageSymbolFileSet( const char* file);
+    QImage* imageSymbolFile_image();
 
     const QString& text() { return text_; }
     void textSet( const QString& text) { text_ = text; }
-
-    const char* symbol() const { return symbol_.c_str(); }
 
     bool ortho()                  { return ortho_; }
     void orthoSet(bool value)     { ortho_ = value;  }
@@ -65,7 +65,12 @@ public:
     void setWidth( double width ) { width_ = width; }
     QString widthEditor();
 
+    const char* symbol() const { return symbol_.c_str(); }
     void symbolSet ( const char* id) { symbol_ = id; }
+    const char* symbolLineBeg() const { return symbolLineBeg_.c_str(); }
+    void symbolLineBegSet ( const char* id) { symbolLineBeg_ = id; }
+    const char* symbolLineEnd() const { return symbolLineEnd_.c_str(); }
+    void symbolLineEndSet ( const char* id) { symbolLineEnd_ = id; }
 
     double size() const           { return size_; }
     void setSize( double size )   { size_ = size; }
@@ -94,6 +99,9 @@ public:
     bool image2points() const           { return image2points_; }
     void image2pointsSet( bool value )   { image2points_ = value; }    
 
+    bool keepRatio() const            { return keepRatio_; }
+    void keepRatioSet( bool value )   { keepRatio_ = value; }
+
     bool unselectMode() const           { return unselectMode_; }
     void unselectModeSet( bool value )   { unselectMode_ = value; }
 
@@ -106,6 +114,15 @@ public:
     double d3Height2() { return d3Height2_; }
     void   d3Height2Set(double value) { d3Height2_ = value; }
 
+    QList<CadTextItem>& multiText() { return multiText_; }
+    int multiTextCurrent() { return multiTextCurrent_; }
+    int multiTextCurrentSet(int current);
+
+    bool backgroundUse() { return backgroundUse_; }
+    void backgroundUseSet(bool value) { backgroundUse_ = value; }
+
+    /*bool textBold() { return textBold_; }
+    void textBoldSet(bool bold) { textBold_ = bold;}*/
 //=============================================================================
 //<OVERRIDES>
 protected:
@@ -115,14 +132,19 @@ protected:
     double                    width_;
 
     bool                      ortho_;
+    bool                      keepRatio_;
 
     double                    offset_;
 
     std::string               imageSymbolFile_;
     bool                      image2points_;
+    QImage*                   imageSymbolFile_image_;
+    std::string               imageSymbolFile_imageFile_;
 
     QString                   text_;
     std::string               symbol_;
+    std::string               symbolLineBeg_;
+    std::string               symbolLineEnd_;
 
     double                    size_;
     double                    sizeRelative_;
@@ -139,6 +161,11 @@ protected:
     Vector2F                  d3Dir_;
     double                    d3Height1_;
     double                    d3Height2_;
+
+    QList<CadTextItem>        multiText_;
+    int                       multiTextCurrent_;
+    bool                      backgroundUse_;
+    //bool                      textBold_;
 //<HIDDING>
 //<INTERNALS>
 };

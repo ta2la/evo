@@ -60,18 +60,7 @@ CadObject_imageCut::CadObject_imageCut( const Point2Col<double>& points, const Q
     //cout << "size: " << k << " " << W << ", " << H << endl;
 
     QImage image(w, h, QImage::Format_RGB32);
-    /*for ( int x = 0; x < w*5; x+=5) {
-        for ( int y = 0; y < h*5; y+=5) {
-            Point2F p = points.get(0);
-            image.setPixel(x/5, y/5, i.pixel(p.x() + x, -p.y() + y));
-        }
-    }*/
-    /*for ( int x = 0; x < w; x++) {
-        for ( int y = 0; y < h; y++) {
-            Point2F p = points.get(0);
-            image.setPixel(x, y, i.pixel(p.x() + x, -p.y() + y));
-        }
-    }*/
+
     int mod = w/W;
     if (mod < 1) mod = 1;
 

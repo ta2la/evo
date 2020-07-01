@@ -29,6 +29,8 @@
 #include "T2lFilterCadObject.h"
 #include "T2lFilterCol.h"
 #include "T2lFilterFile.h"
+#include "T2lObPoint.h"
+#include "T2lObPointXy.h"
 
 using namespace T2l;
 
@@ -65,12 +67,21 @@ void Cmd_object_copy::enterPoint( const Point2F& pt, Display& view )
             GObject*         object = selected.get(i)->object();
             CadLine*  objLine   = dynamic_cast<CadLine*>(object);
 
+            if (objLine == nullptr) continue;
+
             Point2FCol ptsNew;
-            calculateNew_(pt, objLine->points(), ptsNew);
+            /*calculateNew_(pt, objLine->points(), ptsNew);
 
             ObjectDisplable* obj = objLine->clone();
             for (int i = 0; i < objLine->points().count(); i++) {
                 obj->points().getRef(i).add(delta);
+            }*/
+
+            calculateNew_(pt, objLine->points().pointCol(), ptsNew);
+
+            ObjectDisplable* obj = objLine->clone();
+            for (int i = 0; i < objLine->points().count(); i++) {
+                obj->points().getRaw(i).move(delta);
             }
         }
 
@@ -123,9 +134,13 @@ void Cmd_object_copy::enterMove( const Point2F& pt, Display& view )
         GObject*         object = selected.get(i)->object();
         CadLine*  objLine   = dynamic_cast<CadLine*>(object);
 
+        if (objLine == nullptr) continue;
+
         ObjectDisplable* clone = objLine->clone();
-        for (int i = 0; i < clone->points().count(); i++) {
-            clone->points().getRef(i).add(delta);
+        for ( int i = 0; i < clone->points().count(); i++ ) {
+            ObPointXy* xy = dynamic_cast<ObPointXy*>(&clone->points().getRaw(i));
+            if (xy == nullptr) continue;
+            xy->move(delta);
         }
 
         EntityList list;

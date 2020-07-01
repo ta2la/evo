@@ -16,6 +16,7 @@
 #pragma once
 
 #include <T2lCmd.h>
+#include "T2lCadObject_text.h"
 
 namespace T2l {
 
@@ -33,6 +34,8 @@ public:
     virtual QString hint(void) const;
 protected:
 //<DATA>
+//<HIDDING>
+    static void setProperties(CadObject_text& text);
 };
 
 } //namespace T2l
