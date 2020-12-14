@@ -33,14 +33,14 @@ WidgetFile::WidgetFile(const QString& FileName, const Point2F& origin, double sc
 //=============================================================================
 WidgetFile::~WidgetFile()
 {
-    for ( int i = 0; i < GFileCol::instance().count(); i++ ) {
+    /*for ( int i = 0; i < GFileCol::instance().count(); i++ ) {
         GFile* filei = GFileCol::instance().get(i);
         if (filei->filePath() != fileName_) continue;
         filei->widgetCount_--;
         if ( filei->widgetCount_<= 0 ) {
             delete filei;
         }
-    }
+    }*/
 
     col().remove(this);
 

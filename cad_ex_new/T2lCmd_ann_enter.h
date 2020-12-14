@@ -22,8 +22,11 @@
 
 namespace T2l {
 
+class EntityPack;
+
 //===================================================================
 class Cmd_ann_enter : public T2l::Cmd {
+
 //===================================================================
 public:
     Cmd_ann_enter(void);
@@ -36,11 +39,15 @@ public:
     virtual QString hint(void) const;
     virtual QString dialogTml() const;
 
+    Point2FCol calculateEllipse(const Point2FCol& pts, EntityPack* pack);
+
     static QString printCategory(const char* category);
     static void pixelsSet(bool pixels) { pixels_ = pixels; }
+    static void ellipseSet(bool ellipse) { ellipse_ = ellipse; }
 
     Point2FCol  points_;
     static bool pixels_;
+    static bool ellipse_;
 };
 
 } //namespace T2l

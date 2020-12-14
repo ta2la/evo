@@ -54,7 +54,7 @@ using namespace std;
 
 //===================================================================
 Cmd_pixann_painter::Cmd_pixann_painter(void) :
-    Cmd("pixel area annotation"),
+    Cmd("shape annotation"),
     boundSize_(200)
 {
 }
@@ -267,17 +267,16 @@ QString Cmd_pixann_painter::dialogTml() const
 {
     QString result;
 
-    if ( string(CadSettings::instance().featureCmd()) == "ann_set_category") {
-        result += "TC;CT;text: setting category:;cmd: cad_set_featcmd ann_feat_owrite;;";
-    }
-    else {
-        result += "TC;CT;text: setting feature:;cmd: cad_set_featcmd ann_set_category;;";
-    }
-
-
+    result += CadSettings::instance().pixanSettingsCategory();
     AnnFeatureCol& features = AnnFeatureCol::instance();
     result += features.printTml(CadSettings::instance().featureCmd(), "", true);
+    result += "TC;CT;text: <hup>;;";
+    if ( string(CadSettings::instance().featureCmd()) != "ann_set_category") {
+        result += "TC;CT;text: <a href='tcview:://#ann_feat_owrite all on'>[owrite all ON]</a>;;";
+        result += "TC;CT;text: <a href='tcview:://#ann_feat_owrite all off'>[owrite all OFF]</a>;;";
+    }
 
+    result += "TC;CT;text: <hup>;;";
     result += "TC;CT;text: <hup>;;";
     result += "TC;CT;text: brush size:;;";
     result += dialogTml_brushsize("2");
@@ -292,10 +291,6 @@ QString Cmd_pixann_painter::dialogTml() const
 
     result += "TC;CT;text: <hup>;;";
     result += CadSettings::instance().pixannCircleEditor();
-
-    result += "TC;CT;text: <hup>;;";
-    result += "TC;CT;text: <a href='tcview:://#ann_feat_owrite all on'>[owrite all ON]</a>;;";
-    result += "TC;CT;text: <a href='tcview:://#ann_feat_owrite all off'>[owrite all OFF]</a>;;";
 
     //===================================================
     result = result.replace("TC", "type: control");

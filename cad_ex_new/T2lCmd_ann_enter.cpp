@@ -19,7 +19,6 @@
 #include "T2lCadObject_pixann.h"
 #include "T2lEntityPack.h"
 #include "T2lAnnFeatureCol.h"
-//#include "T2lCmd_pixann_painter.h"
 
 #include "T2lCadObject_ann.h"
 #include <T2lUpdateLock.h>
@@ -27,12 +26,13 @@
 #include <T2lDisplay.h>
 #include "T2lStyle.h"
 #include "T2lCadSettings.h"
-#include "T2lActiveFile.h"
 #include "T2lFilterFile.h"
 #include "T2lEntityText.h"
-//#include "T2lSettingsPhotoMap.h"
 #include "T2lEntityLine.h"
-//#include "T2lPhotoAnnCmds_settings.h"
+#include "T2lEntityPoint.h"
+
+#include "T2lCmd_ann_concave_enter.h"
+#include "T2lCmd_pixann_painter.h"
 
 #include <iostream>
 #include <assert.h>
@@ -41,7 +41,8 @@
 using namespace T2l;
 using namespace std;
 
-bool Cmd_ann_enter::pixels_ = false;
+bool Cmd_ann_enter::pixels_  = false;
+bool Cmd_ann_enter::ellipse_ = false;
 
 //===================================================================
 Cmd_ann_enter::Cmd_ann_enter(void) :
@@ -70,7 +71,12 @@ void Cmd_ann_enter::enterReset( T2l::Display& view )
     if ( pack->scene() == NULL ) return;
 
     if (pixels_) {
-        Box2F boxF = points_.bound();
+        Point2FCol points = points_;
+        if ( ellipse_ && points.count()>=3 ) {
+            points = calculateEllipse(points_, nullptr);
+        }
+
+        Box2F boxF = points.bound();
 
         CadObject_pixann* pixann = nullptr;
         for ( long i = 0; i < pack->scene()->count(); i++ )
@@ -96,14 +102,12 @@ void Cmd_ann_enter::enterReset( T2l::Display& view )
             if (x0 >= pixann->w()) x0 = pixann->w()-1;
             if (y0 >= pixann->h()) y0 = pixann->h()-1;
 
-            //if (Y>pixann->image_->height()-S) Y = pixann->image_->height()-S;
-
             AnnFeatureCol& feats = AnnFeatureCol::instance();
             int pixelCode = feats.activeFeature();
 
             Area2 area;
-            for ( int i = 0; i < points_.count(); i++ ) {
-                area.points().points().add(points_.get(i));
+            for ( int i = 0; i < points.count(); i++ ) {
+                area.points().points().add(points.get(i));
             }
 
             for ( int x=x0; x<=x1; x++) {
@@ -128,9 +132,8 @@ void Cmd_ann_enter::enterReset( T2l::Display& view )
         int active = feats.activeFeature();
         AnnFeature* feat = feats.get(feats.activeFeature());
         string category(feat->id());
-        new CadObject_ann( points_, category.c_str(), filterFile->file() );
 
-        T2l::EntityPack* pack = view.entityPack();
+        new CadObject_ann( points_, category.c_str(), filterFile->file() );
     }
 
     pack->cleanDynamic();
@@ -138,6 +141,52 @@ void Cmd_ann_enter::enterReset( T2l::Display& view )
 
     points_.clean();
 }
+
+//===================================================================
+Point2FCol Cmd_ann_enter::calculateEllipse(const Point2FCol& pts, EntityPack* pack)
+{
+    Point2FCol points = pts;
+
+    Point2F c = points.bound().getCenter();
+    for ( ;true; ) {
+        bool ok = true;
+
+        for ( int i = 1; i < points.count(); i++ ) {
+            Vector2F v0(c, points.get(i-1));
+            Vector2F v1(c, points.get(i));
+
+            if (v0.getAngle().get() > v1.getAngle().get()) {
+                Point2F buff = points.get(i-1);
+                points.getRef(i-1) = points.get(i);
+                points.getRef(i) = buff;
+
+                ok = false;
+            }
+        }
+
+        if (ok) break;
+    }
+
+    /*if (pack != nullptr) {
+        for ( int i = 0; i < points.count(); i++ ) {
+            pack->addDynamic(new EntityText( QString::number(i), points.get(i) ));
+        }
+    }*/
+
+    points = Cmd_ann_concave_enter::concave_calc(points);
+
+    if (pack != nullptr) {
+        for ( int i = 0; i < points.count(); i++) {
+            Style* styleCircle0 = Style::createPointStyle(Color::BLACK, Style::SYMBOL_CIRCLE_FILLED, 0.5, "void");
+            pack->addDynamic( new EntityPoint( points.get(i), *styleCircle0, true, ANGLE_ZERO_VIEW, AngleXcc(0), nullptr ) );
+        }
+    }
+
+    points = Cmd_ann_concave_enter::fitEllipse(points);
+
+    return points;
+}
+
 
 //===================================================================
 void Cmd_ann_enter::enterMove( const T2l::Point2F& pt, Display& view )
@@ -151,13 +200,19 @@ void Cmd_ann_enter::enterMove( const T2l::Point2F& pt, Display& view )
     //<STEP> Dynamic drawing
     pack->cleanDynamic();
 
-    if (points_.count() > 0) {
+    Point2FCol points = points_;
+    points.add(pt);
+
+    if ( pixels_ && ellipse_ && points.count()>=3 ){
+        points = calculateEllipse(points, pack);
+    }
+
+    if (points.count() > 0) {
         EntityLine* line = new EntityLine();
-        for ( int i = 0; i < points_.count(); i++ ) {
-            line->points().points().add(points_.get(i));
+        for ( int i = 0; i < points.count(); i++ ) {
+            line->points().points().add(points.get(i));
         }
-        line->points().points().add(pt);
-        line->points().points().add(points_.get(0));
+        line->points().points().add(points.get(0));
         pack->addDynamic(line);
     }
 
@@ -213,7 +268,6 @@ QString Cmd_ann_enter::dialog() const {
     }
 
     result.append("<br><br>");
-    //TODOX result.append(Cmd_pixann_painter::dialog_owrite());
 
     return result;
 }
@@ -225,15 +279,33 @@ QString Cmd_ann_enter::dialogTml() const
 
     if (pixels_) {
         result += "TC;CT;text: pixels: <a href='tcview:://#ann_enter_pixels off'>is ON</a>;;";
+
+        if (ellipse_) {
+            result += "TC;CT;text: ellipse: <a href='tcview:://#ann_enter_ellipse off'>is ON</a>;;";
+        }
+        else {
+            result += "TC;CT;text: ellipse: <a href='tcview:://#ann_enter_ellipse on'>is OFF</a>;;";
+        }
     }
     else {
         result += "TC;CT;text: pixels: <a href='tcview:://#ann_enter_pixels on'>is OFF</a>;;";
     }
 
     result += "TC;CT;text: <hup>;;";
+    //AnnFeatureCol& features = AnnFeatureCol::instance();
+    //result += "TC;CT;text: categories: ;;";
+    //result += features.printTml("ann_set_category");
+
+    result += CadSettings::instance().pixanSettingsCategory();
+    result += "TC;CT;text: <hup>;;";
+    result += Cmd_pixann_painter::dialog_owrite();
     AnnFeatureCol& features = AnnFeatureCol::instance();
-    result += "TC;CT;text: categories: ;;";
-    result += features.printTml("ann_set_category");
+    result += features.printTml(CadSettings::instance().featureCmd(), "", true);
+    result += "TC;CT;text: <hup>;;";
+    if ( string(CadSettings::instance().featureCmd()) != "ann_set_category") {
+        result += "TC;CT;text: <a href='tcview:://#ann_feat_owrite all on'>[owrite all ON]</a>;;";
+        result += "TC;CT;text: <a href='tcview:://#ann_feat_owrite all off'>[owrite all OFF]</a>;;";
+    }
 
     //===================================================
     result = result.replace("TC", "type: control");

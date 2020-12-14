@@ -85,6 +85,7 @@ public:
     int brushSizeSet(int value)   { brushSize_ = value; }
     QString pixannCirclePrint();
     QString pixannCircleEditor();
+    QString pixanSettingsCategory();
 
     bool pixannCircle()           { return pixannCircle_; }
     bool pixannCircleSet(bool value) { pixannCircle_ = value; }

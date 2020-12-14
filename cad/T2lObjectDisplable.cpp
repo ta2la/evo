@@ -64,15 +64,6 @@ ObjectDisplable::~ObjectDisplable(void)
 //=========================================================================
 void ObjectDisplable::objdispMove(const Vector2F& movement)
 {
-    /*Point2Col<double> points(points_);
-    points_.clean();
-
-    for ( int i = 0; i < points.count(); i++ ) {
-        Point2<double> pti = points.get(i);
-        pti.add(movement);
-        points_.add(pti);
-    }*/
-
     for ( int i = 0; i < points_.count(); i++ ) {
         points_.getRaw(i).move(movement);
     }

@@ -70,7 +70,7 @@ void Cmd_learn_color2d::enterPoint( const T2l::Point2F& pt, Display& view )
             box.inflateTo(Point2F(cmdpts_.get(0).x(), -cmdpts_.get(0).y()));
             box.inflateTo(Point2F(pt.x(), -pt.y()));
 
-            if (CadObject_color2d::colorsObj == nullptr) return;
+            //if (CadObject_color2d::colorsObj == nullptr) return;
 
             GFile* file = ActiveFile::active().file();
             if ( file == nullptr ) return;
@@ -103,9 +103,9 @@ void Cmd_learn_color2d::enterPoint( const T2l::Point2F& pt, Display& view )
                 c.get(1) = qGreen(rgb);
                 c.get(2) = qBlue(rgb);
 
-                Naray2vec& colors = CadObject_color2d::colorsObj->colors();
+                Naray2vec& colors = CadObject_color2d::colorsObjectGet()->colors();
 
-                Point2I xy = CadObject_color2d::colorsObj->colors().calculateBmatch(c);
+                Point2I xy = CadObject_color2d::colorsObjectGet()->colors().calculateBmatch(c);
 
                 for ( int dx = -cext; dx <= cext; dx++) {
 
@@ -132,7 +132,7 @@ void Cmd_learn_color2d::enterPoint( const T2l::Point2F& pt, Display& view )
                 }
             }
 
-            CadObject_color2d::colorsObj->modifiedSet_();
+            CadObject_color2d::colorsObjectGet()->modifiedSet_();
 
             pack->cleanDynamic();
             pack->dynamicRefresh();
@@ -158,8 +158,8 @@ void Cmd_learn_color2d::enterPoint( const T2l::Point2F& pt, Display& view )
                 cc.get(1) = c.green();
                 cc.get(2) = c.blue();
 
-                Point2I xy = CadObject_color2d::colorsObj->colors().calculateBmatch(cc);
-                ColumnF bmatch = CadObject_color2d::colorsObj->colors().get(xy.x(), xy.y());
+                Point2I xy = CadObject_color2d::colorsObjectGet()->colors().calculateBmatch(cc);
+                ColumnF bmatch = CadObject_color2d::colorsObjectGet()->colors().get(xy.x(), xy.y());
                 img.setPixelColor(ix, iy, QColor(bmatch.get(0), bmatch.get(1), bmatch.get(2)));
 
                 //img.setPixelColor(ix, iy, QColor(255, 0, 255));

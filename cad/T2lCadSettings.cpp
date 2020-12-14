@@ -130,6 +130,19 @@ QString CadSettings::pixannCircleEditor()
     return result;
 }
 
+QString CadSettings::pixanSettingsCategory()
+{
+    QString result;
+
+    if ( string(CadSettings::instance().featureCmd()) == "ann_set_category") {
+        result += "TC;CT;text: setting category:;cmd: cad_set_featcmd ann_feat_owrite;;";
+    }
+    else {
+        result += "TC;CT;text: setting feature:;cmd: cad_set_featcmd ann_set_category;;";
+    }
+
+    return result;
+}
 
 //=============================================================================
 QString widthEditorButton(QString width)

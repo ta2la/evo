@@ -39,7 +39,7 @@
 using namespace T2l;
 using namespace std;
 
-CadObject_color2d* CadObject_color2d::colorsObj = nullptr;
+//CadObject_color2d* CadObject_color2d::colorsObj = nullptr;
 
 //===================================================================
 CadObject_color2d::CadObject_color2d( const Point2Col<double>& points, GFile* parent,
@@ -64,6 +64,21 @@ CadObject_color2d::CadObject_color2d( const Point2Col<double>& points, GFile* pa
 //===================================================================
 CadObject_color2d::~CadObject_color2d(void)
 {
+}
+
+//===================================================================
+CadObject_color2d* CadObject_color2d::colorsObjectGet() {
+    if ( ActiveFile::active().file() == nullptr) return nullptr;
+
+    ObjectDisplableCol& objects = ActiveFile::active().file()->objects();
+
+    for (int i = 0; i < objects.count(); i++) {
+        CadObject_color2d* color2d = dynamic_cast<CadObject_color2d*>(objects.get(i));
+        if (color2d == nullptr) continue;
+        return color2d;
+    }
+
+    return nullptr;
 }
 
 //===================================================================

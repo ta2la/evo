@@ -24,6 +24,7 @@
 #include "T2lColor.h"
 
 #include <string>
+#include <QString>
 
 namespace T2l
 {

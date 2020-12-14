@@ -60,13 +60,17 @@ CadObject_pixann::CadObject_pixann( const Point2Col<double>& points, GFile* pare
 
     int ccount = image_->colorCount();
 
-    QVector<QRgb> colors(features.count());
+    QVector<QRgb> colors(256);
 
     for (int i = 0; i < features.count(); i++) {
         AnnFeature* feature = features.get(i);
         Color c = feature->backColor();
         //image_->setColor(i, QColor(c.r(), c.g(), c.b(), feature->transp()).rgba());
         colors[i] = QColor(c.r(), c.g(), c.b(), feature->transp()).rgba();
+    }
+
+    for (int i = features.count(); i < 256; i++) {
+        colors[i] = QColor(255,255,255,0).rgba();
     }
 
     image_->setColorCount(features.count());
@@ -380,9 +384,10 @@ void CadObject_pixann::mergeIn_(CadObject_pixann* target, const Vector2I& offset
             if ( PT.y() < 0 ) continue;
             if ( PT.x() > target->image_->width() ) continue;
             if ( PT.y() > target->image_->width() ) continue;
+            if ( image_->pixelIndex(x, y) == 255) continue;
             target->pixelSet( Point2I(PT.x(), PT.y()), image_->pixelIndex(x, y) );
 
-            cout << image_->pixel(x, y) << ",";
+            //cout << image_->pixel(x, y) << ",";
         }
     }
 }
@@ -392,14 +397,17 @@ void CadObject_pixann::display(EntityList& list, RefCol* scene)
 {
     EntityLine* line = new EntityLine( Color(0, 0, 0), 0.18 );
     Box2F box = boundDisplable();
+    //box.inflateBy(-3);
     for ( int i = 0; i < 5; i++ ) {
         Point2F pti = box.getPoint(i);
         line->points().points().add( pti );
     }
     list.add( line );
 
-    list.add(new EntityImage(Box2F(IntervalF(originLB_.x(), originLB_.x()+image_->width()),
-                                   IntervalF(originLB_.y(), originLB_.y()+image_->height())), image_));
+    EntityImage* image = new EntityImage(Box2F( IntervalF(originLB_.x(), originLB_.x()+image_->width()),
+                                                IntervalF(originLB_.y(), originLB_.y()+image_->height())), image_);
+    list.add(image);
+
 
     if (isSelected() == false) return;
 

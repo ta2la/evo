@@ -23,6 +23,8 @@
 #include "T2lColor.h"
 #include "T2lScene3dItem.h"
 
+#include <QList>
+
 #include <string>
 
 namespace T2l

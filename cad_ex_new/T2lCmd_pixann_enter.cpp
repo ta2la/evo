@@ -151,6 +151,9 @@ QString Cmd_pixann_enter::dialog() const {
 //===================================================================
 QString Cmd_pixann_enter::hint(void) const
 {
+    if (ptEntered_) {
+        return "enter second point to create pixann object";
+    }
     return "enter point to create pixann object";
 }
 

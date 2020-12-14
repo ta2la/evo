@@ -65,7 +65,7 @@ void Cmd_draw_color2d::enterPoint( const T2l::Point2F& pt, Display& /*view*/ )
 //===================================================================
 void Cmd_draw_color2d::enterReset( T2l::Display& view )
 {
-    if ( CadObject_color2d::colorsObj != nullptr ) return;
+    if ( CadObject_color2d::colorsObjectGet() != nullptr ) return;
 
     GFile* file = ActiveFile::active().file();
     if ( file == nullptr ) return;
@@ -81,8 +81,8 @@ void Cmd_draw_color2d::enterReset( T2l::Display& view )
     static QRandomGenerator randX(img->width());
     static QRandomGenerator randY(img->height());
 
-    CadObject_color2d::colorsObj = new CadObject_color2d( points_, file, sizeX_, sizeY_ );
-    Naray2vec& colors = CadObject_color2d::colorsObj->colors();
+    new CadObject_color2d( points_, file, sizeX_, sizeY_ );
+    Naray2vec& colors = CadObject_color2d::colorsObjectGet()->colors();
 
     for (int ix = 0; ix < colors.countX(); ix++ ) {
         for (int iy = 0; iy < colors.countY(); iy++ ) {

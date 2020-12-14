@@ -19,7 +19,6 @@ INCLUDEPATH += ./ \
                ../../infrastructure/object_registry \
                ../../cvz/cvz-engine \
                ../../base/geogebra \
-               ../../evo/scene3d \
                ../../evo/storage_base/include \
                ../../evo/storage \
                ../../evo/cad \

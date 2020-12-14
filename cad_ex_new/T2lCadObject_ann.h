@@ -19,7 +19,6 @@
 #include <T2lGObject.h>
 #include <T2lPoint2.h>
 #include <T2lPoint2Col.h>
-#include "T2lActiveFile.h"
 #include "T2lColor.h"
 
 namespace T2l

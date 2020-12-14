@@ -40,13 +40,14 @@ public:
 //<METHODS>
 //=============================================================================
 //<OVERRIDES>
-protected:
+//protected:
 //<DATA>
     GFile*                  file_;
     static ActiveFile*      instance_;
 //<INTERNALS>
 //<FRIENDS>
     friend class ObjectDisplable;
+    friend class Cmds_photo_ann;
 };
 
 } // manespace T2l

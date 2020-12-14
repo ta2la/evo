@@ -19,7 +19,6 @@
 #include <T2lGObject.h>
 #include <T2lPoint2.h>
 #include <T2lPoint2Col.h>
-#include "T2lActiveFile.h"
 #include "T2lColor.h"
 #include "T2lNaray2vec.h"
 
@@ -36,6 +35,8 @@ public:
 //<CONSTRUCTION>
     CadObject_color2d( const Point2Col<double>& points, GFile* parent, int sizeX, int sizeY );
     ~CadObject_color2d(void);
+
+    static CadObject_color2d* colorsObjectGet();
 //<METHODS>
     Naray2vec& colors() { return colors_; }
 //===================================================================
@@ -45,7 +46,7 @@ public:
     virtual void saveToStored(StoredItem& item, GFile* file);
     virtual std::string print();
 //<DATA>
-    static CadObject_color2d* colorsObj;
+    //static CadObject_color2d* colorsObj;
 protected:
     Naray2vec colors_;
 
