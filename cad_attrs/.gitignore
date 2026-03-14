@@ -1,0 +1,5 @@
+*
+!*.cpp
+!*.h
+!cad_attrs.pro
+!.gitignore
