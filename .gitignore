@@ -1,0 +1,16 @@
+*
+!/cad_3d
+!/cad
+!/ws_server
+!/pulse_server
+!/queue_cmd
+!/route_draw
+!/route_model
+!/cad_qml
+!/em_file_access
+!/cad_3d_scene
+!/cad_attrs
+!/cad_draw
+!/cad_infrastructure
+!/storage
+!/storage_base

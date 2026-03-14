@@ -1,0 +1,8 @@
+*
+!/include
+!/src
+!src/*.cpp
+!include/*.h
+!storage_base.pro
+!.gitignore
+
