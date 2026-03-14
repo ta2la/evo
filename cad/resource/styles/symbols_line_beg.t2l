@@ -1,0 +1,69 @@
+type:             symbol
+id:               null
+
+type:             symbol
+id:               agregation
+
+type:             sitem
+sitem:            circle
+point-num:        0.0 0.0
+radius:           2
+color:            blue
+fill:             true
+
+type:             symbol
+id:               agregation_n
+
+type:             sitem
+sitem:            circle
+point-num:        -0.002 0.0
+radius:           1.5
+color:            blue
+fill:             true
+
+type:             sitem
+sitem:            circle
+point-num:        0.0 0.0
+radius:           1.5
+color:            blue
+fill:             true
+
+type:             sitem
+sitem:            circle
+point-num:        0.0015 0.0
+radius:           1.5
+color:            blue
+fill:             true
+
+type:             symbol
+id:               inheritance
+
+type:             sitem
+sitem:            circle
+point-num:        0.0 0.0
+radius:           2
+color:            red
+fill:             true
+
+type:             symbol
+id:               reference
+
+type:             sitem
+sitem:            circle
+point-num:        0.0 0.0
+radius:           2
+color:            blue
+width:            0.5
+fill:             false
+
+type:             symbol
+id:               road_begin
+
+type:             sitem
+sitem:            circle
+point-num:        0.0 0.0
+radius:           2
+color:            black
+fill:             true
+
+

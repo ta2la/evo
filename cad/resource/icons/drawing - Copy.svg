@@ -1,0 +1,2045 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="744.09448819"
+   height="1052.3622047"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   sodipodi:docname="drawing.svg"
+   inkscape:export-filename="C:\HOME\KADLUB\cvz\apky\cad_exe\resource\ls_dashdotdot.png"
+   inkscape:export-xdpi="270.93353"
+   inkscape:export-ydpi="270.93353">
+  <defs
+     id="defs4">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient4709">
+      <stop
+         style="stop-color:#6464ff;stop-opacity:1;"
+         offset="0"
+         id="stop4711" />
+      <stop
+         style="stop-color:#6464ff;stop-opacity:0;"
+         offset="1"
+         id="stop4713" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient3759">
+      <stop
+         id="stop3767"
+         offset="0"
+         style="stop-color:#c8c8c8;stop-opacity:0.49803922;" />
+      <stop
+         style="stop-color:#969696;stop-opacity:1;"
+         offset="1"
+         id="stop3763" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3759"
+       id="linearGradient3765"
+       x1="35.433071"
+       y1="42.519665"
+       x2="70.866142"
+       y2="60.236198"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3759-2"
+       id="linearGradient3765-5"
+       x1="35.433071"
+       y1="42.519665"
+       x2="70.866142"
+       y2="60.236198"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       id="linearGradient3759-2">
+      <stop
+         id="stop3767-7"
+         offset="0"
+         style="stop-color:#c8c8c8;stop-opacity:0.49803922;" />
+      <stop
+         style="stop-color:#969696;stop-opacity:1;"
+         offset="1"
+         id="stop3763-4" />
+    </linearGradient>
+    <linearGradient
+       gradientTransform="translate(70.93358,0.00396456)"
+       y2="60.236198"
+       x2="70.866142"
+       y1="42.519665"
+       x1="35.433071"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient3785"
+       xlink:href="#linearGradient3759-2"
+       inkscape:collect="always" />
+    <linearGradient
+       gradientTransform="translate(70.872665,0.00396456)"
+       y2="60.236198"
+       x2="70.866142"
+       y1="42.519665"
+       x1="35.433071"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient3785-8"
+       xlink:href="#linearGradient3759-2-1"
+       inkscape:collect="always" />
+    <linearGradient
+       id="linearGradient3759-2-1">
+      <stop
+         id="stop3767-7-7"
+         offset="0"
+         style="stop-color:#c8c8c8;stop-opacity:0.49803922;" />
+      <stop
+         style="stop-color:#969696;stop-opacity:1;"
+         offset="1"
+         id="stop3763-4-7" />
+    </linearGradient>
+    <linearGradient
+       y2="60.236198"
+       x2="70.866142"
+       y1="42.519665"
+       x1="35.433071"
+       gradientTransform="translate(141.72103,0.01468959)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient3841"
+       xlink:href="#linearGradient3759-2-1"
+       inkscape:collect="always" />
+    <linearGradient
+       y2="60.236198"
+       x2="70.866142"
+       y1="42.519665"
+       x1="35.433071"
+       gradientTransform="translate(141.72103,0.01468959)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient3841-0"
+       xlink:href="#linearGradient3759-2-1-6"
+       inkscape:collect="always" />
+    <linearGradient
+       id="linearGradient3759-2-1-6">
+      <stop
+         id="stop3767-7-7-8"
+         offset="0"
+         style="stop-color:#c8c8c8;stop-opacity:0.49803922;" />
+      <stop
+         style="stop-color:#969696;stop-opacity:1;"
+         offset="1"
+         id="stop3763-4-7-5" />
+    </linearGradient>
+    <linearGradient
+       y2="60.236198"
+       x2="70.866142"
+       y1="42.519665"
+       x1="35.433071"
+       gradientTransform="translate(212.60053,0.05268856)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient3881"
+       xlink:href="#linearGradient3759-2-1-6"
+       inkscape:collect="always" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3759-0"
+       id="linearGradient3765-4"
+       x1="35.433071"
+       y1="42.519665"
+       x2="70.866142"
+       y2="60.236198"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       id="linearGradient3759-0">
+      <stop
+         id="stop3767-4"
+         offset="0"
+         style="stop-color:#c8c8c8;stop-opacity:0.49803922;" />
+      <stop
+         style="stop-color:#969696;stop-opacity:1;"
+         offset="1"
+         id="stop3763-3" />
+    </linearGradient>
+    <linearGradient
+       gradientTransform="translate(0.0053833,53.158765)"
+       y2="60.236198"
+       x2="70.866142"
+       y1="42.519665"
+       x1="35.433071"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient3929"
+       xlink:href="#linearGradient3759-0"
+       inkscape:collect="always" />
+    <linearGradient
+       gradientTransform="translate(0.0053833,53.158765)"
+       y2="60.236198"
+       x2="70.866142"
+       y1="42.519665"
+       x1="35.433071"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient3929-2"
+       xlink:href="#linearGradient3759-0-3"
+       inkscape:collect="always" />
+    <linearGradient
+       id="linearGradient3759-0-3">
+      <stop
+         id="stop3767-4-5"
+         offset="0"
+         style="stop-color:#c8c8c8;stop-opacity:0.49803922;" />
+      <stop
+         style="stop-color:#969696;stop-opacity:1;"
+         offset="1"
+         id="stop3763-3-7" />
+    </linearGradient>
+    <linearGradient
+       y2="60.236198"
+       x2="70.866142"
+       y1="42.519665"
+       x1="35.433071"
+       gradientTransform="translate(-0.01431897,106.28442)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient3985"
+       xlink:href="#linearGradient3759-0-3"
+       inkscape:collect="always" />
+    <linearGradient
+       y2="60.236198"
+       x2="70.866142"
+       y1="42.519665"
+       x1="35.433071"
+       gradientTransform="translate(-0.01431897,106.28442)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient3985-5"
+       xlink:href="#linearGradient3759-0-3-8"
+       inkscape:collect="always" />
+    <linearGradient
+       id="linearGradient3759-0-3-8">
+      <stop
+         id="stop3767-4-5-9"
+         offset="0"
+         style="stop-color:#c8c8c8;stop-opacity:0.49803922;" />
+      <stop
+         style="stop-color:#969696;stop-opacity:1;"
+         offset="1"
+         id="stop3763-3-7-2" />
+    </linearGradient>
+    <linearGradient
+       y2="60.236198"
+       x2="70.866142"
+       y1="42.519665"
+       x1="35.433071"
+       gradientTransform="translate(70.90036,106.26014)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient4247"
+       xlink:href="#linearGradient3759-0-3-8"
+       inkscape:collect="always" />
+    <linearGradient
+       y2="60.236198"
+       x2="70.866142"
+       y1="42.519665"
+       x1="35.433071"
+       gradientTransform="translate(70.90036,106.26014)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient4247-2"
+       xlink:href="#linearGradient3759-0-3-8-8"
+       inkscape:collect="always" />
+    <linearGradient
+       id="linearGradient3759-0-3-8-8">
+      <stop
+         id="stop3767-4-5-9-9"
+         offset="0"
+         style="stop-color:#c8c8c8;stop-opacity:0.49803922;" />
+      <stop
+         style="stop-color:#969696;stop-opacity:1;"
+         offset="1"
+         id="stop3763-3-7-2-2" />
+    </linearGradient>
+    <linearGradient
+       y2="60.236198"
+       x2="70.866142"
+       y1="42.519665"
+       x1="35.433071"
+       gradientTransform="translate(141.7129,106.2691)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient4293"
+       xlink:href="#linearGradient3759-0-3-8-8"
+       inkscape:collect="always" />
+    <linearGradient
+       y2="60.236198"
+       x2="70.866142"
+       y1="42.519665"
+       x1="35.433071"
+       gradientTransform="translate(141.7129,106.2691)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient4293-3"
+       xlink:href="#linearGradient3759-0-3-8-8-9"
+       inkscape:collect="always" />
+    <linearGradient
+       id="linearGradient3759-0-3-8-8-9">
+      <stop
+         id="stop3767-4-5-9-9-7"
+         offset="0"
+         style="stop-color:#c8c8c8;stop-opacity:0.49803922;" />
+      <stop
+         style="stop-color:#969696;stop-opacity:1;"
+         offset="1"
+         id="stop3763-3-7-2-2-0" />
+    </linearGradient>
+    <linearGradient
+       y2="60.236198"
+       x2="70.866142"
+       y1="42.519665"
+       x1="35.433071"
+       gradientTransform="translate(212.59007,106.30958)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient4337"
+       xlink:href="#linearGradient3759-0-3-8-8-9"
+       inkscape:collect="always" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3759-8"
+       id="linearGradient3765-1"
+       x1="35.433071"
+       y1="42.519665"
+       x2="70.866142"
+       y2="60.236198"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       id="linearGradient3759-8">
+      <stop
+         id="stop3767-5"
+         offset="0"
+         style="stop-color:#c8c8c8;stop-opacity:0.49803922;" />
+      <stop
+         style="stop-color:#969696;stop-opacity:1;"
+         offset="1"
+         id="stop3763-5" />
+    </linearGradient>
+    <linearGradient
+       gradientTransform="translate(283.6094,106.37727)"
+       y2="60.236198"
+       x2="70.866142"
+       y1="42.519665"
+       x1="35.433071"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient4380"
+       xlink:href="#linearGradient3759-8"
+       inkscape:collect="always" />
+    <linearGradient
+       gradientTransform="translate(283.6094,106.37727)"
+       y2="60.236198"
+       x2="70.866142"
+       y1="42.519665"
+       x1="35.433071"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient4380-3"
+       xlink:href="#linearGradient3759-8-3"
+       inkscape:collect="always" />
+    <linearGradient
+       id="linearGradient3759-8-3">
+      <stop
+         id="stop3767-5-1"
+         offset="0"
+         style="stop-color:#ffc8c8;stop-opacity:1;" />
+      <stop
+         style="stop-color:#ff6464;stop-opacity:1;"
+         offset="1"
+         id="stop3763-5-1" />
+    </linearGradient>
+    <linearGradient
+       y2="60.236198"
+       x2="70.866142"
+       y1="42.519665"
+       x1="35.433071"
+       gradientTransform="translate(354.53375,106.41613)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient4452"
+       xlink:href="#linearGradient3759-8-3"
+       inkscape:collect="always" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3759-7"
+       id="linearGradient3765-9"
+       x1="35.433071"
+       y1="42.519665"
+       x2="70.866142"
+       y2="60.236198"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       id="linearGradient3759-7">
+      <stop
+         id="stop3767-71"
+         offset="0"
+         style="stop-color:#c8c8c8;stop-opacity:0.49803922;" />
+      <stop
+         style="stop-color:#969696;stop-opacity:1;"
+         offset="1"
+         id="stop3763-1" />
+    </linearGradient>
+    <linearGradient
+       gradientTransform="translate(0.03796358,159.36166)"
+       y2="60.236198"
+       x2="70.866142"
+       y1="42.519665"
+       x1="35.433071"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient4491"
+       xlink:href="#linearGradient3759-7"
+       inkscape:collect="always" />
+    <linearGradient
+       gradientTransform="translate(0.03796358,159.36166)"
+       y2="60.236198"
+       x2="70.866142"
+       y1="42.519665"
+       x1="35.433071"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient4491-9"
+       xlink:href="#linearGradient3759-7-0"
+       inkscape:collect="always" />
+    <linearGradient
+       id="linearGradient3759-7-0">
+      <stop
+         id="stop3767-71-9"
+         offset="0"
+         style="stop-color:#c8c8c8;stop-opacity:0.49803922;" />
+      <stop
+         style="stop-color:#969696;stop-opacity:1;"
+         offset="1"
+         id="stop3763-1-2" />
+    </linearGradient>
+    <linearGradient
+       y2="60.236198"
+       x2="70.866142"
+       y1="42.519665"
+       x1="35.433071"
+       gradientTransform="translate(0.01344466,212.59158)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient4596"
+       xlink:href="#linearGradient3759-7-0"
+       inkscape:collect="always" />
+    <linearGradient
+       y2="60.236198"
+       x2="70.866142"
+       y1="42.519665"
+       x1="35.433071"
+       gradientTransform="translate(0.01344466,212.59158)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient4596-2"
+       xlink:href="#linearGradient3759-7-0-9"
+       inkscape:collect="always" />
+    <linearGradient
+       id="linearGradient3759-7-0-9">
+      <stop
+         id="stop3767-71-9-8"
+         offset="0"
+         style="stop-color:#c8c8c8;stop-opacity:0.49803922;" />
+      <stop
+         style="stop-color:#969696;stop-opacity:1;"
+         offset="1"
+         id="stop3763-1-2-1" />
+    </linearGradient>
+    <linearGradient
+       y2="60.236198"
+       x2="70.866142"
+       y1="42.519665"
+       x1="35.433071"
+       gradientTransform="translate(70.928123,212.5673)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient4648"
+       xlink:href="#linearGradient3759-7-0-9"
+       inkscape:collect="always" />
+    <linearGradient
+       y2="60.236198"
+       x2="70.866142"
+       y1="42.519665"
+       x1="35.433071"
+       gradientTransform="translate(70.928123,212.5673)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient4648-7"
+       xlink:href="#linearGradient3759-7-0-9-7"
+       inkscape:collect="always" />
+    <linearGradient
+       id="linearGradient3759-7-0-9-7">
+      <stop
+         id="stop3767-71-9-8-4"
+         offset="0"
+         style="stop-color:#c8c8c8;stop-opacity:0.49803922;" />
+      <stop
+         style="stop-color:#969696;stop-opacity:1;"
+         offset="1"
+         id="stop3763-1-2-1-4" />
+    </linearGradient>
+    <linearGradient
+       y2="60.236198"
+       x2="70.866142"
+       y1="42.519665"
+       x1="35.433071"
+       gradientTransform="translate(141.59109,212.61863)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient4688"
+       xlink:href="#linearGradient3759-7-0-9-7"
+       inkscape:collect="always" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4709"
+       id="linearGradient4715"
+       x1="180.70866"
+       y1="267.51965"
+       x2="200.19685"
+       y2="267.51965"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       y2="60.236198"
+       x2="70.866142"
+       y1="42.519665"
+       x1="35.433071"
+       gradientTransform="translate(70.928123,212.5673)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient4648-76"
+       xlink:href="#linearGradient3759-7-0-9-2"
+       inkscape:collect="always" />
+    <linearGradient
+       id="linearGradient3759-7-0-9-2">
+      <stop
+         id="stop3767-71-9-8-0"
+         offset="0"
+         style="stop-color:#c8c8c8;stop-opacity:0.49803922;" />
+      <stop
+         style="stop-color:#969696;stop-opacity:1;"
+         offset="1"
+         id="stop3763-1-2-1-2" />
+    </linearGradient>
+    <linearGradient
+       y2="60.236198"
+       x2="70.866142"
+       y1="42.519665"
+       x1="35.433071"
+       gradientTransform="translate(212.61885,212.60801)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient4738"
+       xlink:href="#linearGradient3759-7-0-9-2"
+       inkscape:collect="always" />
+    <linearGradient
+       gradientTransform="translate(0.061282,265.68468)"
+       y2="60.236198"
+       x2="70.866142"
+       y1="42.519665"
+       x1="35.433071"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient4491-1"
+       xlink:href="#linearGradient3759"
+       inkscape:collect="always" />
+    <linearGradient
+       y2="60.236198"
+       x2="70.866142"
+       y1="42.519665"
+       x1="35.433071"
+       gradientTransform="translate(70.866147,265.74808)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient4596-6"
+       xlink:href="#linearGradient3759"
+       inkscape:collect="always" />
+    <linearGradient
+       y2="60.236198"
+       x2="70.866142"
+       y1="42.519665"
+       x1="35.433071"
+       gradientTransform="translate(141.73228,265.74808)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient4596-6-6"
+       xlink:href="#linearGradient3759"
+       inkscape:collect="always" />
+    <linearGradient
+       y2="60.236198"
+       x2="70.866142"
+       y1="42.519665"
+       x1="35.433071"
+       gradientTransform="translate(212.59841,265.74807)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient4596-6-3"
+       xlink:href="#linearGradient3759"
+       inkscape:collect="always" />
+    <linearGradient
+       gradientTransform="translate(283.46456,2.2147666e-5)"
+       inkscape:collect="always"
+       xlink:href="#linearGradient3759"
+       id="linearGradient3765-3"
+       x1="35.433071"
+       y1="42.519665"
+       x2="70.866142"
+       y2="60.236198"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       y2="60.236198"
+       x2="70.866142"
+       y1="42.519665"
+       x1="35.433071"
+       gradientTransform="translate(1.218142e-5,336.61422)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient4596-6-3-9"
+       xlink:href="#linearGradient3759"
+       inkscape:collect="always" />
+    <linearGradient
+       y2="60.236198"
+       x2="70.866142"
+       y1="42.519665"
+       x1="35.433071"
+       gradientTransform="translate(141.73229,336.61422)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient4596-6-3-9-9"
+       xlink:href="#linearGradient3759"
+       inkscape:collect="always" />
+    <linearGradient
+       y2="60.236198"
+       x2="70.866142"
+       y1="42.519665"
+       x1="35.433071"
+       gradientTransform="translate(70.866153,336.69881)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient4596-6-3-9-7"
+       xlink:href="#linearGradient3759"
+       inkscape:collect="always" />
+    <linearGradient
+       y2="60.236198"
+       x2="70.866142"
+       y1="42.519665"
+       x1="35.433071"
+       gradientTransform="translate(212.59843,336.61422)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient4596-6-3-9-9-0"
+       xlink:href="#linearGradient3759"
+       inkscape:collect="always" />
+    <linearGradient
+       y2="60.236198"
+       x2="70.866142"
+       y1="42.519665"
+       x1="35.433071"
+       gradientTransform="translate(283.46457,336.61422)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient4596-6-3-9-9-1"
+       xlink:href="#linearGradient3759"
+       inkscape:collect="always" />
+    <linearGradient
+       y2="60.236198"
+       x2="70.866142"
+       y1="42.519665"
+       x1="35.433071"
+       gradientTransform="translate(9.0820589e-7,407.48033)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient4596-6-3-9-9-0-5"
+       xlink:href="#linearGradient3759"
+       inkscape:collect="always" />
+    <linearGradient
+       y2="60.236198"
+       x2="70.866142"
+       y1="42.519665"
+       x1="35.433071"
+       gradientTransform="translate(70.866141,407.48033)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient4596-6-3-9-9-0-5-4"
+       xlink:href="#linearGradient3759"
+       inkscape:collect="always" />
+    <linearGradient
+       y2="60.236198"
+       x2="70.866142"
+       y1="42.519665"
+       x1="35.433071"
+       gradientTransform="translate(141.73227,407.48034)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient4596-6-3-9-9-0-5-4-4"
+       xlink:href="#linearGradient3759"
+       inkscape:collect="always" />
+    <linearGradient
+       y2="60.236198"
+       x2="70.866142"
+       y1="42.519665"
+       x1="35.433071"
+       gradientTransform="translate(212.59842,407.48034)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient4596-6-3-9-9-0-5-4-4-0"
+       xlink:href="#linearGradient3759"
+       inkscape:collect="always" />
+    <linearGradient
+       y2="60.236198"
+       x2="70.866142"
+       y1="42.519665"
+       x1="35.433071"
+       gradientTransform="translate(283.46456,407.48034)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient4596-6-3-9-9-0-5-4-4-0-1"
+       xlink:href="#linearGradient3759"
+       inkscape:collect="always" />
+    <linearGradient
+       y2="60.236198"
+       x2="70.866142"
+       y1="42.519665"
+       x1="35.433071"
+       gradientTransform="translate(6.4999835e-7,478.34647)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient4596-6-3-9-9-0-5-47"
+       xlink:href="#linearGradient3759"
+       inkscape:collect="always" />
+    <linearGradient
+       y2="60.236198"
+       x2="70.866142"
+       y1="42.519665"
+       x1="35.433071"
+       gradientTransform="translate(70.86614,478.34651)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient4596-6-3-9-9-0-5-47-2"
+       xlink:href="#linearGradient3759"
+       inkscape:collect="always" />
+    <linearGradient
+       y2="60.236198"
+       x2="70.866142"
+       y1="42.519665"
+       x1="35.433071"
+       gradientTransform="translate(141.73228,478.34651)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient4596-6-3-9-9-0-5-47-2-2"
+       xlink:href="#linearGradient3759"
+       inkscape:collect="always" />
+    <linearGradient
+       y2="60.236198"
+       x2="70.866142"
+       y1="42.519665"
+       x1="35.433071"
+       gradientTransform="translate(212.59841,478.34647)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient4596-6-3-9-9-0-5-47-2-2-1"
+       xlink:href="#linearGradient3759"
+       inkscape:collect="always" />
+    <linearGradient
+       y2="60.236198"
+       x2="70.866142"
+       y1="42.519665"
+       x1="35.433071"
+       gradientTransform="translate(283.46455,478.34647)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient4596-6-3-9-9-0-5-47-2-2-1-1"
+       xlink:href="#linearGradient3759"
+       inkscape:collect="always" />
+    <linearGradient
+       y2="60.236198"
+       x2="70.866142"
+       y1="42.519665"
+       x1="35.433071"
+       gradientTransform="translate(354.33069,478.34654)"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient4596-6-3-9-9-0-5-47-2-2-1-1-4"
+       xlink:href="#linearGradient3759"
+       inkscape:collect="always" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="2.8284271"
+     inkscape:cx="270.3016"
+     inkscape:cy="770.27742"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="true"
+     inkscape:snap-global="true"
+     inkscape:window-width="3840"
+     inkscape:window-height="2081"
+     inkscape:window-x="4491"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1">
+    <inkscape:grid
+       type="xygrid"
+       id="grid2985"
+       empspacing="10"
+       visible="true"
+       enabled="true"
+       snapvisiblegridlinesonly="true"
+       units="mm"
+       spacingx="1.7716535"
+       spacingy="1.7716535"
+       originx="0"
+       originy="0" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:url(#linearGradient3765);fill-rule:evenodd;stroke:none;stroke-width:0.10000000000000001;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none;fill-opacity:1"
+       id="rect2987"
+       width="35.433071"
+       height="35.433071"
+       x="35.433071"
+       y="42.519665"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/create_line.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <path
+       style="fill:none;stroke:#3232ff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="M 40.748031,70.86612 65.551181,49.606277"
+       id="path3757"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/create_line.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <rect
+       style="fill:url(#linearGradient3785);fill-opacity:1;fill-rule:evenodd;stroke:none"
+       id="rect2987-0"
+       width="35.433071"
+       height="35.433071"
+       x="106.36665"
+       y="42.523624"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/create_symbol.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <path
+       style="fill:none;stroke:#3232ff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="M 118.76171,65.551159 129.39163,54.921238"
+       id="path3757-4"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/create_symbol.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <path
+       style="fill:none;stroke:#3232ff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="M 129.39163,65.551159 118.76171,54.921238"
+       id="path3757-4-2"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/create_symbol.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <rect
+       style="fill:url(#linearGradient3841);fill-opacity:1;fill-rule:evenodd;stroke:none"
+       id="rect2987-0-1"
+       width="35.433071"
+       height="35.433071"
+       x="177.1541"
+       y="42.534348"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/create_image.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <rect
+       style="fill:url(#linearGradient3881);fill-opacity:1;fill-rule:evenodd;stroke:none"
+       id="rect2987-0-1-5"
+       width="35.433071"
+       height="35.433071"
+       x="248.0336"
+       y="42.57235"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/create_text.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <path
+       style="fill:none;stroke:#3232ff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 255.13147,51.415931 21.25984,0"
+       id="path3757-4-1-8"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/create_text.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <path
+       style="fill:none;stroke:#3232ff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 265.76139,70.904119 0,-19.488188"
+       id="path3757-4-2-8-8"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/create_text.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <rect
+       style="fill:#6464c8;fill-opacity:1;stroke:none;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect3904"
+       width="24.80315"
+       height="21.259842"
+       x="182.48032"
+       y="49.606277"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/create_image.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <path
+       sodipodi:type="arc"
+       style="fill:#ffff64;fill-opacity:1;stroke:none"
+       id="path3909"
+       sodipodi:cx="192.22441"
+       sodipodi:cy="32.77557"
+       sodipodi:rx="4.4291339"
+       sodipodi:ry="4.4291339"
+       d="m 196.65354,32.77557 a 4.4291339,4.4291339 0 1 1 -8.85826,0 4.4291339,4.4291339 0 1 1 8.85826,0 z"
+       transform="translate(1.875,25.535714)"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/create_image.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <path
+       style="fill:#64c864;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1"
+       d="m 182.48031,63.779505 24.80315,-7.086614 0,14.173229 -24.80315,0 0,-7.086615"
+       id="path3911"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/create_image.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <rect
+       style="fill:url(#linearGradient3929);fill-opacity:1;fill-rule:evenodd;stroke:none"
+       id="rect2987-2"
+       width="35.433071"
+       height="35.433071"
+       x="35.438454"
+       y="95.678429"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/copy_parallel.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <path
+       style="fill:none;stroke:#3232ff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 38.878414,122.0606 24.80315,-21.25985"
+       id="path3757-7"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/copy_parallel.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <path
+       style="opacity:0.4908257;fill:none;stroke:#3232ff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="M 42.56725,126.24297 67.3704,104.98312"
+       id="path3757-7-5"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/copy_parallel.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <rect
+       style="fill:url(#linearGradient3985);fill-opacity:1;fill-rule:evenodd;stroke:none"
+       id="rect2987-2-7"
+       width="35.433071"
+       height="35.433071"
+       x="35.418755"
+       y="148.80408"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/edit_move.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <rect
+       style="fill:none;stroke:#ff00ff;stroke-opacity:1;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none"
+       id="rect4008"
+       width="23.031496"
+       height="15.944881"
+       x="44.342659"
+       y="164.66464"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/edit_move.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <rect
+       style="fill:none;stroke:#ff00ff;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:2, 2;stroke-dashoffset:0"
+       id="rect4008-0"
+       width="23.031496"
+       height="15.944881"
+       x="38.962318"
+       y="152.41353"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/edit_move.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <path
+       style="fill:none;stroke:#ff00ff;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 42.519685,155.90549 5.314961,5.31496"
+       id="path4208"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/edit_move.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <path
+       style="fill:#ff00ff;fill-opacity:1;stroke:none;stroke-opacity:1"
+       d="m 44.291339,157.67715 5.314961,5.31496 -1.771654,-3.54331 -1.771653,1.77166 3.543307,1.77165"
+       id="path4208-8"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/edit_move.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <rect
+       style="fill:url(#linearGradient4247);fill-opacity:1;fill-rule:evenodd;stroke:none"
+       id="rect2987-2-7-5"
+       width="35.433071"
+       height="35.433071"
+       x="106.33344"
+       y="148.7798"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/edit_move_points.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <rect
+       style="fill:none;stroke:#ff00ff;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect4008-06"
+       width="23.031496"
+       height="15.944881"
+       x="115.25735"
+       y="164.64037"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/edit_move_points.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <path
+       style="fill:none;stroke:#ff00ff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:2,2;stroke-dashoffset:0"
+       d="m 115.15748,180.70864 -5.31496,-26.5748 23.0315,0 5.31496,26.5748"
+       id="path4274"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccc"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/edit_move_points.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <rect
+       style="fill:url(#linearGradient4293);fill-opacity:1;fill-rule:evenodd;stroke:none"
+       id="rect2987-2-7-5-9"
+       width="35.433071"
+       height="35.433071"
+       x="177.14597"
+       y="148.78877"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/edit_trim.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <path
+       style="fill:none;stroke:#ff00ff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 178.93701,182.48029 17.71653,-17.71653"
+       id="path4316"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/edit_trim.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <path
+       style="fill:none;stroke:#ff00ff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:2, 2;stroke-dashoffset:0"
+       d="m 196.60231,164.823 14.17323,-14.17322"
+       id="path4318"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/edit_trim.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <rect
+       style="fill:url(#linearGradient4337);fill-opacity:1;fill-rule:evenodd;stroke:none"
+       id="rect2987-2-7-5-9-6"
+       width="35.433071"
+       height="35.433071"
+       x="248.02316"
+       y="148.82927"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/edit_trimto.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <path
+       style="fill:none;stroke:#ff00ff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 249.81419,182.52077 17.71652,-17.71653"
+       id="path4316-1"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/edit_trimto.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <path
+       style="fill:none;stroke:#ff00ff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:2, 2;stroke-dashoffset:0"
+       d="m 267.47948,164.86348 14.17323,-14.17322"
+       id="path4318-6"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/edit_trimto.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 262.20472,150.59053 14.17323,26.5748"
+       id="path4360"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/edit_trimto.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <rect
+       style="fill:url(#linearGradient4380);fill-opacity:1;fill-rule:evenodd;stroke:none"
+       id="rect2987-1"
+       width="35.433071"
+       height="35.433071"
+       x="319.04248"
+       y="148.89693"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/edit_symbology.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <path
+       style="fill:none;stroke:#3232ff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 324.12331,159.13384 24.80315,0"
+       id="path3757-5"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/edit_symbology.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:#d40000;stroke:#ff3232;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 324.07867,166.20886 24.80315,0"
+       id="path3757-5-4"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/edit_symbology.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:#d40000;stroke:#ff32ff;stroke-width:4;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 324.05969,173.30953 24.80315,0"
+       id="path3757-5-4-7"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/edit_symbology.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254"
+       sodipodi:nodetypes="cc" />
+    <rect
+       style="fill:url(#linearGradient4452);fill-opacity:1.0;fill-rule:evenodd;stroke:none"
+       id="rect2987-1-4"
+       width="35.433071"
+       height="35.433071"
+       x="389.96686"
+       y="148.93579"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/delete.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <path
+       style="fill:none;stroke:#323232;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 395.07874,178.93699 24.80315,-24.80315"
+       id="path4471"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/delete.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <path
+       style="fill:none;stroke:#323232;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 395.07874,154.13384 24.80315,24.80315"
+       id="path4473"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/delete.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <rect
+       style="fill:url(#linearGradient4491);fill-opacity:1;fill-rule:evenodd;stroke:none"
+       id="rect2987-5"
+       width="35.433071"
+       height="35.433071"
+       x="35.471031"
+       y="201.88132"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/info_measure.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="M 42.519685,230.31494 63.779528,209.0551"
+       id="path3757-3"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/info_measure.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 42.519685,230.31494 -1.771654,-1.77166"
+       id="path4512"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/info_measure.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 47.728284,225.07477 45.95663,223.30311"
+       id="path4512-6"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/info_measure.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 53.126286,219.66123 -1.771654,-1.77166"
+       id="path4512-6-4"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/info_measure.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 58.457267,214.37784 -1.771654,-1.77166"
+       id="path4512-6-4-9"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/info_measure.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 63.752321,209.06288 -1.771654,-1.77166"
+       id="path4512-6-4-0"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/info_measure.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <rect
+       style="fill:url(#linearGradient4596);fill-opacity:1;fill-rule:evenodd;stroke:none"
+       id="rect2987-5-7"
+       width="35.433071"
+       height="35.433071"
+       x="35.44651"
+       y="255.11124"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_new.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1.50000000000000000;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0"
+       id="rect4627"
+       width="24.80315"
+       height="21.259842"
+       x="40.748032"
+       y="262.20471"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_new.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <rect
+       style="fill:#6464ff;fill-opacity:1;stroke:none"
+       id="rect4629"
+       width="24.80315"
+       height="7.0866046"
+       x="40.748032"
+       y="262.20471"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_new.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <rect
+       style="fill:url(#linearGradient4648);fill-opacity:1;fill-rule:evenodd;stroke:none"
+       id="rect2987-5-7-4"
+       width="35.433071"
+       height="35.433071"
+       x="106.36118"
+       y="255.08696"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_pan.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <path
+       style="fill:#000000;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1"
+       d="m 124.01575,260.43305 -3.54331,3.54331 1.77165,0 0,7.08661 -7.08661,0 0,-1.77165 -3.54331,3.5433 3.54331,3.54331 0,-1.77165 7.08661,0 0,7.08661 -1.77165,0 3.54331,3.54331 3.54331,-3.54331 -1.77166,0 0,-7.08661 7.08662,0 0,1.77165 3.5433,-3.54331 -3.5433,-3.5433 0,1.77165 -7.08662,0 0,-7.08661 1.77166,0 z"
+       id="path4671"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccccccccccccccccccccc"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_pan.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <rect
+       style="fill:url(#linearGradient4688);fill-opacity:1;fill-rule:evenodd;stroke:none"
+       id="rect2987-5-7-4-6"
+       width="35.433071"
+       height="35.433071"
+       x="177.02414"
+       y="255.13828"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_zoomrect.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <path
+       sodipodi:type="arc"
+       style="fill:url(#linearGradient4715);fill-opacity:1;stroke:#000000;stroke-width:1.5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="path4707"
+       sodipodi:cx="190.45276"
+       sodipodi:cy="268.40549"
+       sodipodi:rx="7.9724441"
+       sodipodi:ry="7.9724383"
+       d="m 198.4252,268.40549 a 7.9724441,7.9724383 0 1 1 -15.94489,0 7.9724441,7.9724383 0 1 1 15.94489,0 z"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_zoomrect.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 196.65354,274.60628 10.62992,10.62992"
+       id="path4717"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_zoomrect.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 187.04481,268.38767 7.08662,0"
+       id="path4719"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_zoomrect.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 190.58812,271.93098 0,-7.08661"
+       id="path4721"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_zoomrect.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <rect
+       style="fill:url(#linearGradient4738);fill-opacity:1;fill-rule:evenodd;stroke:none"
+       id="rect2987-5-7-4-8"
+       width="35.433071"
+       height="35.433071"
+       x="248.0519"
+       y="255.1277"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_fit.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <path
+       style="fill:#000000;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1"
+       d="m 251.5748,265.74801 0,-7.08661 7.08662,0 z"
+       id="path4757"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_fit.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <path
+       style="fill:#000000;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1"
+       d="m 251.5748,287.00785 0,-7.08661 7.08662,7.08661 z"
+       id="path4759"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_fit.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <path
+       style="fill:#000000;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1"
+       d="m 279.92126,258.6614 -7.08661,0 7.08661,7.08661 0,-7.08661"
+       id="path4763"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_fit.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <path
+       style="fill:#000000;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1"
+       d="m 272.83465,287.00785 7.08661,0 0,-7.08661 z"
+       id="path4765"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_fit.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 253.34646,260.43305 5.31496,5.31496"
+       id="path4767"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_fit.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 253.34646,285.2362 5.31496,-5.31496"
+       id="path4769"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_fit.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 272.83465,279.92124 5.31496,5.31496"
+       id="path4771"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_fit.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 278.14961,260.43305 -5.31496,5.31496"
+       id="path4773"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_fit.png"
+       inkscape:export-xdpi="254"
+       inkscape:export-ydpi="254" />
+    <rect
+       style="fill:url(#linearGradient4491-1);fill-opacity:1;fill-rule:evenodd;stroke:none"
+       id="rect2987-5-77"
+       width="35.433071"
+       height="35.433071"
+       x="35.494347"
+       y="308.20435"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/info_measure.png"
+       inkscape:export-xdpi="270.92999"
+       inkscape:export-ydpi="270.92999" />
+    <rect
+       style="fill:#6464ff;fill-opacity:1;stroke:none;stroke-width:0.86602581"
+       id="rect4629-0"
+       width="24.80315"
+       height="5.3149581"
+       x="40.748032"
+       y="313.58267"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_new.png"
+       inkscape:export-xdpi="270.92999"
+       inkscape:export-ydpi="270.92999" />
+    <rect
+       style="fill:#6464ff;fill-opacity:1;stroke:none;stroke-width:0.86602581"
+       id="rect4629-0-6"
+       width="12.401573"
+       height="5.3149834"
+       x="40.748032"
+       y="322.44092"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_new.png"
+       inkscape:export-xdpi="270.92999"
+       inkscape:export-ydpi="270.92999" />
+    <rect
+       style="fill:#6464ff;fill-opacity:1;stroke:none;stroke-width:0.86602581"
+       id="rect4629-0-6-8"
+       width="21.25984"
+       height="5.3149743"
+       x="40.748032"
+       y="331.29919"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_new.png"
+       inkscape:export-xdpi="270.92999"
+       inkscape:export-ydpi="270.92999" />
+    <rect
+       style="fill:url(#linearGradient4596-6);fill-opacity:1;fill-rule:evenodd;stroke:none"
+       id="rect2987-5-7-1"
+       width="35.433071"
+       height="35.433071"
+       x="106.29921"
+       y="308.2677"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_new.png"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1.60356688;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4627-2"
+       width="21.259838"
+       height="28.346443"
+       x="113.38583"
+       y="311.811"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_new.png"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <rect
+       style="fill:#787878;fill-opacity:1;stroke:none;stroke-width:0.65465236"
+       id="rect4629-6"
+       width="21.259836"
+       height="3.5432894"
+       x="113.38583"
+       y="311.81104"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_new.png"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <rect
+       style="fill:#787878;fill-opacity:1;stroke:none;stroke-width:0.65465236"
+       id="rect4629-6-9"
+       width="21.259836"
+       height="3.5432894"
+       x="113.38583"
+       y="336.61417"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_new.png"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <rect
+       style="fill:#787878;fill-opacity:1;stroke:none;stroke-width:0.70710611"
+       id="rect4629-6-9-0"
+       width="3.5432963"
+       height="24.803148"
+       x="113.38583"
+       y="313.58267"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_new.png"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <rect
+       style="fill:#787878;fill-opacity:1;stroke:none;stroke-width:0.70710617"
+       id="rect4629-6-9-0-9"
+       width="3.5432963"
+       height="24.803148"
+       x="131.10237"
+       y="313.58267"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_new.png"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <rect
+       style="fill:url(#linearGradient4596-6-6);fill-opacity:1;fill-rule:evenodd;stroke:none"
+       id="rect2987-5-7-1-8"
+       width="35.433071"
+       height="35.433071"
+       x="177.16534"
+       y="308.2677"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_new.png"
+       inkscape:export-xdpi="270.92999"
+       inkscape:export-ydpi="270.92999" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.69436485;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4627-2-8"
+       width="21.259838"
+       height="5.3149576"
+       x="184.25197"
+       y="311.811"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_new.png"
+       inkscape:export-xdpi="270.92999"
+       inkscape:export-ydpi="270.92999" />
+    <rect
+       style="fill:#787878;fill-opacity:1;stroke:none;stroke-width:1.30930543"
+       id="rect4629-6-2"
+       width="28.346441"
+       height="10.629884"
+       x="180.70866"
+       y="317.12598"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_new.png"
+       inkscape:export-xdpi="270.92999"
+       inkscape:export-ydpi="270.92999" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1.26773036;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4627-2-8-8"
+       width="21.259838"
+       height="17.716511"
+       x="184.25197"
+       y="322.44092"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_new.png"
+       inkscape:export-xdpi="270.92999"
+       inkscape:export-ydpi="270.92999" />
+    <rect
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.42257985"
+       id="rect4629-0-3"
+       width="17.716536"
+       height="1.771674"
+       x="186.02362"
+       y="325.98422"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_new.png"
+       inkscape:export-xdpi="270.92999"
+       inkscape:export-ydpi="270.92999" />
+    <rect
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.29880902"
+       id="rect4629-0-3-3"
+       width="8.858263"
+       height="1.771674"
+       x="186.02362"
+       y="331.29919"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_new.png"
+       inkscape:export-xdpi="270.92999"
+       inkscape:export-ydpi="270.92999" />
+    <rect
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.37796694"
+       id="rect4629-0-3-3-4"
+       width="14.173228"
+       height="1.771674"
+       x="186.02362"
+       y="336.61417"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_new.png"
+       inkscape:export-xdpi="270.92999"
+       inkscape:export-ydpi="270.92999" />
+    <rect
+       style="fill:url(#linearGradient4596-6-3);fill-opacity:1;fill-rule:evenodd;stroke:none"
+       id="rect2987-5-7-1-84"
+       width="35.433071"
+       height="35.433071"
+       x="248.03148"
+       y="308.2677"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_new.png"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1.60356688;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4627-2-4-3"
+       width="17.716518"
+       height="24.803144"
+       x="262.20474"
+       y="311.811"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_new.png"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1.60356688;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4627-2-4"
+       width="17.716518"
+       height="24.803144"
+       x="252.47993"
+       y="316.25696"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_new.png"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 258.66141,329.52755 h 5.31496"
+       id="path2040"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 261.36144,332.24279 v -5.39955"
+       id="path2042"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <rect
+       style="fill:url(#linearGradient3765-3);fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       id="rect2987-3"
+       width="35.433071"
+       height="35.433071"
+       x="318.89764"
+       y="42.519688"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/create_line.png"
+       inkscape:export-xdpi="270.92999"
+       inkscape:export-ydpi="270.92999" />
+    <path
+       style="fill:none;stroke:#3232ff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 325.98424,67.322837 h 21.25985"
+       id="path3757-40"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/create_line.png"
+       inkscape:export-xdpi="270.92999"
+       inkscape:export-ydpi="270.92999"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#3232ff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 322.44094,70.866144 7.08661,-7.086614"
+       id="path3757-40-9"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/create_line.png"
+       inkscape:export-xdpi="270.92999"
+       inkscape:export-ydpi="270.92999"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#3232ff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 343.70078,70.866144 7.08661,-7.086614"
+       id="path3757-40-9-2"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/create_line.png"
+       inkscape:export-xdpi="270.92999"
+       inkscape:export-ydpi="270.92999"
+       sodipodi:nodetypes="cc" />
+    <path
+       style="fill:none;stroke:#0000ff;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 325.98424,67.322837 V 51.377955"
+       id="path2101"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="270.92999"
+       inkscape:export-ydpi="270.92999" />
+    <path
+       style="fill:none;stroke:#0000ff;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 347.24409,67.322837 V 51.377955"
+       id="path2101-7"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="270.92999"
+       inkscape:export-ydpi="270.92999" />
+    <rect
+       style="fill:url(#linearGradient4596-6-3-9);fill-opacity:1;fill-rule:evenodd;stroke:none"
+       id="rect2987-5-7-1-84-0"
+       width="35.433071"
+       height="35.433071"
+       x="35.433071"
+       y="379.13385"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_new.png"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:1.60356688;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect4627-2-4-9"
+       width="28.346457"
+       height="21.25985"
+       x="38.976376"
+       y="386.22046"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_new.png"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <path
+       style="fill:none;stroke:#ff00ff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 46.906267,392.36349 h 5.31496"
+       id="path2040-3"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <path
+       style="fill:none;stroke:#ff00ff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 49.606297,395.07873 v -5.39955"
+       id="path2042-6"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <path
+       style="fill:none;stroke:#ff00ff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 56.692912,396.85039 h 5.31496"
+       id="path2040-3-3"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <path
+       style="fill:none;stroke:#ff00ff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 59.392942,399.56563 v -5.39955"
+       id="path2042-6-4"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <path
+       style="fill:none;stroke:#ff00ff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 44.291338,402.16535 h 5.31496"
+       id="path2040-3-3-0"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <path
+       style="fill:none;stroke:#ff00ff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 46.991368,404.88059 v -5.39955"
+       id="path2042-6-4-8"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <rect
+       style="fill:url(#linearGradient4596-6-3-9-9);fill-opacity:1;fill-rule:evenodd;stroke:none"
+       id="rect2987-5-7-1-84-0-5"
+       width="35.433071"
+       height="35.433071"
+       x="177.16536"
+       y="379.13385"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_new.png"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <path
+       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 193.11023,395.07873 v -5.31496 h 3.54331 l -1e-5,5.31496 h 5.31497 v 3.54331 h -5.31497 l 1e-5,5.31496 h -3.54331 v -5.31496 h -5.31496 v -3.54331 z"
+       id="path2253"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <rect
+       style="fill:url(#linearGradient4596-6-3-9-7);fill-opacity:1;fill-rule:evenodd;stroke:none"
+       id="rect2987-5-7-1-84-0-0"
+       width="35.433071"
+       height="35.433071"
+       x="106.29921"
+       y="379.21844"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_new.png"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <path
+       style="fill:none;stroke:#ff00ff;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 113.38582,386.22047 21.25985,21.25984"
+       id="path2040-3-32"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353"
+       sodipodi:nodetypes="cc" />
+    <rect
+       style="fill:url(#linearGradient4596-6-3-9-9-0);fill-opacity:1;fill-rule:evenodd;stroke:none"
+       id="rect2987-5-7-1-84-0-5-7"
+       width="35.433071"
+       height="35.433071"
+       x="248.03149"
+       y="379.13388"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_new.png"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <path
+       style="fill:#000000;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;fill-opacity:1"
+       d="m 258.66141,395.07873 h 14.17323 v 3.54331 h -14.17323 z"
+       id="path2327"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <rect
+       style="fill:url(#linearGradient4596-6-3-9-9-1);fill-opacity:1;fill-rule:evenodd;stroke:none"
+       id="rect2987-5-7-1-84-0-5-3"
+       width="35.433071"
+       height="35.433071"
+       x="318.89764"
+       y="379.13385"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_new.png"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 324.21259,409.25196 24.80315,-24.80315"
+       id="path2356"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="m 324.21259,384.44881 24.80315,24.80315"
+       id="path2358"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <rect
+       style="fill:url(#linearGradient4596-6-3-9-9-0-5);fill-opacity:1;fill-rule:evenodd;stroke:none"
+       id="rect2987-5-7-1-84-0-5-7-6"
+       width="35.433071"
+       height="35.433071"
+       x="35.433071"
+       y="450"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_new.png"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:5.66929134;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none"
+       d="M 38.976377,481.88976 67.322833,453.5433"
+       id="path1049"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <rect
+       style="fill:url(#linearGradient4596-6-3-9-9-0-5-4);fill-opacity:1;fill-rule:evenodd;stroke:none"
+       id="rect2987-5-7-1-84-0-5-7-6-5"
+       width="35.433071"
+       height="35.433071"
+       x="106.29921"
+       y="450"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_new.png"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:5.66929134;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:17.00787402,5.66929134;stroke-opacity:1;stroke-dashoffset:0"
+       d="M 109.84252,481.88976 138.18897,453.5433"
+       id="path1049-3"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <rect
+       style="fill:url(#linearGradient4596-6-3-9-9-0-5-4-4);fill-opacity:1;fill-rule:evenodd;stroke:none"
+       id="rect2987-5-7-1-84-0-5-7-6-5-9"
+       width="35.433071"
+       height="35.433071"
+       x="177.16534"
+       y="450"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_new.png"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:5.66929134;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:5.66929134,5.66929134;stroke-dashoffset:0;stroke-opacity:1"
+       d="M 180.70865,481.88977 209.0551,453.54331"
+       id="path1049-3-0"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <rect
+       style="fill:url(#linearGradient4596-6-3-9-9-0-5-4-4-0);fill-opacity:1;fill-rule:evenodd;stroke:none"
+       id="rect2987-5-7-1-84-0-5-7-6-5-9-0"
+       width="35.433071"
+       height="35.433071"
+       x="248.03149"
+       y="450"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_new.png"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:5.66929134;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:22.67716535,11.33858268,5.66929134,11.33858268;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 251.5748,481.88977 28.34645,-28.34646"
+       id="path1049-3-0-7"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <rect
+       style="fill:url(#linearGradient4596-6-3-9-9-0-5-4-4-0-1);fill-opacity:1;fill-rule:evenodd;stroke:none"
+       id="rect2987-5-7-1-84-0-5-7-6-5-9-0-3"
+       width="35.433071"
+       height="35.433071"
+       x="318.89764"
+       y="450"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_new.png"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:5.6692915;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:22.67716599,11.33858299,5.6692915,11.33858299;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 322.44094,481.88977 28.34645,-28.34646"
+       id="path1049-3-0-7-6"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <path
+       style="fill:#bebebe;fill-opacity:1;stroke:none;stroke-width:1.26523709px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 333.08305,465.68622 5.18652,-4.73554 5.1394,4.60276 -5.0451,5.00107 z"
+       id="path1039-2"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <path
+       style="fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="m 337.23507,463.22529 3.9715,-3.8632 3.93541,3.75488 -3.8632,4.07982 z"
+       id="path1039"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <rect
+       style="fill:url(#linearGradient4596-6-3-9-9-0-5-47);fill-opacity:1;fill-rule:evenodd;stroke:none"
+       id="rect2987-5-7-1-84-0-5-7-6-6"
+       width="35.433071"
+       height="35.433071"
+       x="35.433071"
+       y="520.86609"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_new.png"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.37795276;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 38.976377,552.7559 67.322833,524.40944"
+       id="path1049-0"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:1.25;font-family:Gadugi;-inkscape-font-specification:'Gadugi Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;"
+       x="45.644127"
+       y="552.37701"
+       id="text1114"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353"><tspan
+         sodipodi:role="line"
+         id="tspan1112"
+         x="45.644127"
+         y="552.37701">.10</tspan></text>
+    <rect
+       style="fill:url(#linearGradient4596-6-3-9-9-0-5-47-2);fill-opacity:1;fill-rule:evenodd;stroke:none"
+       id="rect2987-5-7-1-84-0-5-7-6-6-7"
+       width="35.433071"
+       height="35.433071"
+       x="106.29921"
+       y="520.86615"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_new.png"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.68031496;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 109.84252,552.75594 28.34645,-28.34646"
+       id="path1049-0-3"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:1.25;font-family:Gadugi;-inkscape-font-specification:'Gadugi Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       x="116.0183"
+       y="552.60431"
+       id="text1114-1"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353"><tspan
+         sodipodi:role="line"
+         id="tspan1112-0"
+         x="116.0183"
+         y="552.60431">.18</tspan></text>
+    <rect
+       style="fill:url(#linearGradient4596-6-3-9-9-0-5-47-2-2);fill-opacity:1;fill-rule:evenodd;stroke:none"
+       id="rect2987-5-7-1-84-0-5-7-6-6-7-5"
+       width="35.433071"
+       height="35.433071"
+       x="177.16534"
+       y="520.86615"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_new.png"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:0.94488189;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 180.70867,552.75594 28.34645,-28.34646"
+       id="path1049-0-3-9"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:1.25;font-family:Gadugi;-inkscape-font-specification:'Gadugi Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       x="187.39461"
+       y="552.6485"
+       id="text1114-1-2"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353"><tspan
+         sodipodi:role="line"
+         id="tspan1112-0-7"
+         x="187.39461"
+         y="552.6485">.25</tspan></text>
+    <rect
+       style="fill:url(#linearGradient4596-6-3-9-9-0-5-47-2-2-1);fill-opacity:1;fill-rule:evenodd;stroke:none"
+       id="rect2987-5-7-1-84-0-5-7-6-6-7-5-4"
+       width="35.433071"
+       height="35.433071"
+       x="248.03148"
+       y="520.86609"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_new.png"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1.88976378;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 251.5748,552.7559 28.34645,-28.34646"
+       id="path1049-0-3-9-2"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:1.25;font-family:Gadugi;-inkscape-font-specification:'Gadugi Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       x="258.51071"
+       y="552.46094"
+       id="text1114-1-2-3"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353"><tspan
+         sodipodi:role="line"
+         id="tspan1112-0-7-9"
+         x="258.51071"
+         y="552.46094">.50</tspan></text>
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot1215"
+       style="fill:black;fill-opacity:1;stroke:none;font-family:sans-serif;font-style:normal;font-weight:normal;font-size:21.33333333px;line-height:1.25;letter-spacing:0px;word-spacing:0px"><flowRegion
+         id="flowRegion1217"><rect
+           id="rect1219"
+           width="63.779526"
+           height="47.834644"
+           x="237.40157"
+           y="513.77954" /></flowRegion><flowPara
+         id="flowPara1221"></flowPara></flowRoot>    <rect
+       style="fill:url(#linearGradient4596-6-3-9-9-0-5-47-2-2-1-1);fill-opacity:1;fill-rule:evenodd;stroke:none"
+       id="rect2987-5-7-1-84-0-5-7-6-6-7-5-4-9"
+       width="35.433071"
+       height="35.433071"
+       x="318.89761"
+       y="520.86609"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_new.png"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:3.77952756;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 322.44094,552.7559 28.34645,-28.34646"
+       id="path1049-0-3-9-2-3"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:1.25;font-family:Gadugi;-inkscape-font-specification:'Gadugi Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       x="337.7952"
+       y="552.2475"
+       id="text1114-1-2-3-7"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353"><tspan
+         sodipodi:role="line"
+         id="tspan1112-0-7-9-8"
+         x="337.7952"
+         y="552.2475">1.</tspan></text>
+    <rect
+       style="fill:url(#linearGradient4596-6-3-9-9-0-5-47-2-2-1-1-4);fill-opacity:1;fill-rule:evenodd;stroke:none"
+       id="rect2987-5-7-1-84-0-5-7-6-6-7-5-4-9-3"
+       width="35.433071"
+       height="35.433071"
+       x="389.76376"
+       y="520.86615"
+       inkscape:export-filename="/home/t2l/Development/KADLUB/cvz/evo/cad_exe/resource/view_new.png"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:7.55905512;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 393.30708,552.75597 28.34645,-28.34646"
+       id="path1049-0-3-9-2-3-1"
+       inkscape:connector-curvature="0"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:16px;line-height:1.25;font-family:Gadugi;-inkscape-font-specification:'Gadugi Bold';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;"
+       x="409.06409"
+       y="552.15918"
+       id="text1114-1-2-3-7-5"
+       inkscape:export-xdpi="270.93353"
+       inkscape:export-ydpi="270.93353"><tspan
+         sodipodi:role="line"
+         id="tspan1112-0-7-9-8-8"
+         x="409.06409"
+         y="552.15918">2.</tspan></text>
+  </g>
+</svg>

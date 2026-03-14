@@ -1,0 +1,10 @@
+type:             symbol
+id:               circle2
+
+type:             sitem
+sitem:            circle
+point-num:        0.0 0.0
+radius:           1
+color:            magenta
+fill:             false
+width:            1

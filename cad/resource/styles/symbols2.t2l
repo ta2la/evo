@@ -1,0 +1,251 @@
+type:             symbol
+id:               button
+
+type:             sitem
+sitem:            area
+color:            magenta
+point-num:        0.0025 0.0025
+point-num:        -0.0025 0.0025
+point-num:        -0.0025 -0.0025
+point-num:        0.0025 -0.0025
+
+type:             symbol
+id:               circle
+
+type:             sitem
+sitem:            circle
+point-num:        0.0 0.0
+radius:           1
+color:            brown
+fill:             false
+width:            0.3    
+
+type:             symbol
+id:               target
+
+type:             sitem
+sitem:            circle
+point-num:        0.0 0.0
+radius:           1
+color:            black
+fill:             true
+
+type:             sitem
+sitem:            circle
+point-num:        0.0 0.0
+radius:           2
+color:            black
+fill:             false
+width:            0.1
+
+type:             symbol
+id:               cross
+
+type:             sitem
+sitem:            line
+color:            black
+width:            0.0003
+point-num:        0 -0.0015
+point-num:        0 0.0015
+
+type:             sitem
+sitem:            line
+color:            black
+width:            0.0003
+point-num:        -0.0015 0
+point-num:        0.0015 0
+
+type:             symbol
+id:               square
+
+type:             sitem
+sitem:            area
+color:            black
+point-num:        0.001 0.001
+point-num:        -0.001 0.001
+point-num:        -0.001 -0.001
+point-num:        0.001 -0.001
+
+type:             symbol
+id:               square1
+
+type:             sitem
+sitem:            area
+color:            black
+point-num:        0.0005 0.0005
+point-num:        -0.0005 0.0005
+point-num:        -0.0005 -0.0005
+point-num:        0.0005 -0.0005
+
+type:             symbol
+id:               square1k
+
+type:             sitem
+sitem:            area
+color:            black
+point-num:        0.0   0.001
+point-num:        -0.0  0.001
+point-num:        -0.0 -0.001
+point-num:        0.0  -0.001
+
+
+type:             symbol
+id:               todo
+
+type:             sitem
+sitem:            text
+text:             TODO
+point-num:        0.0 0.0
+height:           3
+color:            black   
+
+type:             symbol
+id:               agregation
+
+type:             sitem
+sitem:            circle
+point-num:        0.0 0.0
+radius:           2
+color:            blue
+fill:             true
+
+type:             symbol
+id:               inheritance
+
+type:             sitem
+sitem:            circle
+point-num:        0.0 0.0
+radius:           2
+color:            red
+fill:             true
+
+type:             symbol
+id:               parcela
+
+type:             sitem
+sitem:            circle
+point-num:        0.0 0.0
+radius:           0.15
+color:            black
+fill:             false
+width:            0.25
+
+type:             symbol
+id:               zahrada
+
+type:             sitem
+sitem:            circle
+point-num:        0.0 0.0
+radius:           0.5   
+color:            black
+fill:             false
+width:            0.25
+
+type:             sitem
+sitem:            line
+color:            black
+width:            0.00025
+point-num:        0 -0.0005
+point-num:        0.00125 -0.0005
+
+type:             symbol
+id:               height
+
+type:             sitem
+sitem:            line
+color:            black
+width:            0.00025
+point-num:        0 0
+point-num:        0 0.005
+point-num:        0.003 0.005
+
+type:             sitem
+sitem:            line
+color:            black
+width:            0.00025
+point-num:        0 0
+point-num:        0.0015 0.0015
+
+type:             sitem
+sitem:            line
+color:            black
+width:            0.00025
+point-num:        0 0
+point-num:        -0.0015 0.0015
+
+type:             symbol
+id:               height_plan
+
+type:             sitem
+sitem:            line
+color:            black
+width:            0.00025
+point-num:        0 0
+point-num:        0 0
+point-num:        0.0 0.003
+point-num:        0.0045 0.003
+point-num:        0.0045 0
+point-num:        0 0
+
+type:             symbol
+id:               unit
+
+type:             sitem
+sitem:            line
+color:            black
+width:            0.0001
+point-num:        0.0005 0.0005
+point-num:        -0.0005 0.0005
+point-num:        -0.0005 -0.0005
+point-num:        0.0005 -0.0005
+point-num:        0.0005 0.0005
+
+type:             symbol
+id:               height_right
+
+type:             sitem
+sitem:            line
+color:            black
+width:            0.00025
+point-num:        0 0
+point-num:        0.005 0
+point-num:        0.005 0.003
+
+type:             sitem
+sitem:            line
+color:            black
+width:            0.00025
+point-num:        0 0
+point-num:        0.0015 0.0015
+
+type:             sitem
+sitem:            line
+color:            black
+width:            0.00025
+point-num:        0 0
+point-num:        0.0015 -0.0015
+
+type:             symbol
+id:               height_left
+
+type:             sitem
+sitem:            line
+color:            black
+width:            0.00025
+point-num:        0 0
+point-num:        -0.005 0
+point-num:        -0.005 0.003
+
+type:             sitem
+sitem:            line
+color:            black
+width:            0.00025
+point-num:        0 0
+point-num:        -0.0015 0.0015
+
+type:             sitem
+sitem:            line
+color:            black
+width:            0.00025
+point-num:        0 0
+point-num:        -0.0015 -0.0015

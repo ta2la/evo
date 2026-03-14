@@ -1,0 +1,43 @@
+type:             symbol
+id:               null
+
+type:             symbol
+id:               arrow
+
+type:             sitem
+sitem:            area
+color:            red
+point-num:        -0.001 0.000
+point-num:        0.005 0.002
+point-num:        0.005 -0.002
+
+type:             symbol
+id:               arrow_blue
+
+type:             sitem
+sitem:            area
+color:            blue
+point-num:        -0.001 0.000
+point-num:        0.005 0.002
+point-num:        0.005 -0.002
+
+type:             symbol
+id:               road_dir1
+
+type:             sitem
+sitem:            area
+color:            black
+point-num:        -0.001 0.000
+point-num:        0.005 0.002
+point-num:        0.005 -0.002
+
+type:             symbol
+id:               road_dir1_follows
+
+type:             sitem
+sitem:            area
+color:            red
+point-num:        -0.001 0.000
+point-num:        0.005 0.002
+point-num:        0.005 -0.002
+

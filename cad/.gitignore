@@ -1,6 +1,9 @@
 *
 !*.cpp
 !*.h
+!*.qrc
 !cad.pro
 !.gitignore
+!/resource
+!/resource/**
 
