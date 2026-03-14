@@ -1,0 +1,6 @@
+*
+!*.cpp
+!*.h
+!cad_draw.pro
+!.gitignore
+
