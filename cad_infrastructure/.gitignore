@@ -1,5 +1,5 @@
 *
 !*.cpp
 !*.h
-!*.cad_infrastructure
-!*.gitignore
+!*.pro
+!.gitignore
