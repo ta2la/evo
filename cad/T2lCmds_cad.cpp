@@ -332,8 +332,8 @@ int Cmds_cad::cmd_xy(TcCmdContext* /*context*/, TcArgCol& args)
 //=============================================================================
 int Cmds_cad::cmd_cad_print(TcCmdContext* /*context*/, TcArgCol& /*args*/)
 {
-    assert(0);
-    //CmdQueue::queue().add( new Cmd_print(), false );
+    //assert(0);
+    CmdQueue::queue().add( new Cmd_print(), false );
     return 0;
 }
 

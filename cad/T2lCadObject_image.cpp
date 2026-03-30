@@ -44,6 +44,7 @@
 
 //qt
 #include <QPixmap>
+#include <QImage>
 #include <QFileInfo>
 
 //std
@@ -102,6 +103,7 @@ bool CadObject_image::isOfType(FilterCadObject::ECadObjectType type)
 //===================================================================
 CadObject_image::~CadObject_image(void)
 {
+    delete processedPixmap_;
     if (pixmapOwner_ == false) return;
     delete pixmap_;
 }
@@ -224,9 +226,14 @@ void CadObject_image::display(EntityList& list, RefCol* scene)
     Box2F imageBox = box(Vector2F(0, 0));
 
     EntityImage* eimage = new EntityImage(imageBox);
-    eimage->transparencySet(transparency_);
     eimage->layerSet(-1);
-    eimage->pixmapSet(pixmap_, false);
+    if (transparency_ < 1.0) {
+        eimage->pixmapSet(getProcessedPixmap_(), false);
+        eimage->transparencySet(1.0); // alpha already baked into pixels
+    } else {
+        eimage->pixmapSet(pixmap_, false);
+        eimage->transparencySet(1.0);
+    }
     list.add(eimage);
 
     bool notActive = false;
@@ -293,6 +300,31 @@ double CadObject_image::area()
 
     Point2FCol points = points_.pointCol();
     return points.bound().quantum();
+}
+
+//===================================================================
+QPixmap* CadObject_image::getProcessedPixmap_()
+{
+    if (processedPixmap_) return processedPixmap_;
+    if (pixmap_ == nullptr) return nullptr;
+
+    QImage img = pixmap_->toImage().convertToFormat(QImage::Format_ARGB32);
+
+    for (int y = 0; y < img.height(); y++) {
+        QRgb* line = (QRgb*)img.scanLine(y);
+        for (int x = 0; x < img.width(); x++) {
+            int gray = qGray(line[x]);
+            int a = 255 - gray;
+            if (colorizeUse_) {
+                line[x] = qRgba(colorize_.r(), colorize_.g(), colorize_.b(), a);
+            } else {
+                line[x] = qRgba(qRed(line[x]), qGreen(line[x]), qBlue(line[x]), a);
+            }
+        }
+    }
+
+    processedPixmap_ = new QPixmap(QPixmap::fromImage(img));
+    return processedPixmap_;
 }
 
 //=========================================================================

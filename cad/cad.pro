@@ -23,6 +23,7 @@ INCLUDEPATH += $$PWD \
                $$PWD/../../evo/storage_base/include \
                $$PWD/../../evo/storage \
                $$PWD/../../evo/cad \
+               $$PWD/../../evo/cad_cmds_manipulate \
                $$PWD/../../evo/cad_infrastructure \
                $$PWD/../../cad_professional/cad_professional_lib \
                $$PWD/../../evo/cad_attrs \

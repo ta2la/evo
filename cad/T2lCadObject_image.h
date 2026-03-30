@@ -19,6 +19,7 @@
 #include <T2lGObject.h>
 #include "T2lObjectDisplable.h"
 #include "T2lActiveFile.h"
+#include "T2lColor.h"
 
 class QPixmap;
 
@@ -41,7 +42,10 @@ public:
     Box2F box(Vector2F offsetArg = Vector2F(0, 0));
     virtual QString text() { return imageName(); }
     QPixmap* pixmap() { return pixmap_; }
-    void setTransparency(double value) { transparency_ = value; }
+    void setTransparency(double value) { transparency_ = value; invalidateProcessed_(); }
+    void setColorize(bool use, const Color& color = Color::BLACK) { colorizeUse_ = use; colorize_ = color; invalidateProcessed_(); }
+    bool colorizeUse() const { return colorizeUse_; }
+    Color colorize() const { return colorize_; }
 //===================================================================
 //<OVERRIDES>
     virtual bool isOfType(FilterCadObject::ECadObjectType type);
@@ -59,7 +63,12 @@ protected:
     QPixmap*    pixmap_       {nullptr};
     bool        pixmapOwner_  {0};
     double      transparency_ {1};
+    bool        colorizeUse_  {false};
+    Color       colorize_     {Color::BLACK};
+    QPixmap*    processedPixmap_ {nullptr};
 //<INTERNALS>
+    void invalidateProcessed_() { delete processedPixmap_; processedPixmap_ = nullptr; }
+    QPixmap* getProcessedPixmap_();
 };
 
 } // namespace T2l
