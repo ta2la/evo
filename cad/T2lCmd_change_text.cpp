@@ -14,6 +14,8 @@
 // limitations under the License.
 //=============================================================================
 #include "T2lCmd_change_text.h"
+#include <TcCmdTransl.h>
+#include <TcCmdEngine.h>
 #include <T2lScene.h>
 #include <T2lUpdateLock.h>
 #include <T2lRef.h>
@@ -124,6 +126,8 @@ void Cmd_change_text::enterPoint( const Point2F& pt, Display& view )
         selected.unselectAll();
         foundClean();
         previousDefined_ = false;
+
+        enterMove_( pt, pack );
     }
 
     pack->dynamicRefresh();
@@ -145,8 +149,12 @@ void Cmd_change_text::enterReset ( T2l::Display& view )
         if ( od ) {
             CadObject_text* text = dynamic_cast<CadObject_text*>(od);
             CAD_SETTINGS.textSet(text->text());
+            CAD_SETTINGS.linkFileSet(text->linkFile());
+            CAD_SETTINGS.linkLineSet(text->linkLine());
+            TcCmdEngine::engine().refreshReceivers();
         }
     }
+
 }
 
 //===================================================================
