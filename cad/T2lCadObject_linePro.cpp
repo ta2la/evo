@@ -34,8 +34,10 @@
 
 #include <QString>
 
+#ifndef __EMSCRIPTEN__
 #include <GL/gl.h>
 #include <GL/glu.h>
+#endif
 
 #include <iostream>
 #include <sstream>
@@ -120,12 +122,14 @@ void CadObject_linePro::display3d(DisplayBase* display)
     Point2F p0 = points().get(0);
     Point2F p1 = points().get(1);
 
+#ifndef __EMSCRIPTEN__
     GLfloat oldWidth = 1.0f;
-    glGetFloatv(GL_LINE_WIDTH, &oldWidth);  // uloží aktuální šířku
+    glGetFloatv(GL_LINE_WIDTH, &oldWidth);
     glLineWidth(2.0f);
     glColor3f(0.3f,0.3f,0.3f);
     DrawGl::drawLine( p0.x(), p0.y(), 0, p1.x(), p1.y(), 0);
     glLineWidth(oldWidth);
+#endif
 
 }
 

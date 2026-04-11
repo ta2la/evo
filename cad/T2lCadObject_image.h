@@ -49,6 +49,7 @@ public:
 //===================================================================
 //<OVERRIDES>
     virtual bool isOfType(FilterCadObject::ECadObjectType type);
+    bool isOfBoxType() override { return true; }
     virtual ObjectDisplable* clone();
     virtual void display(EntityList& list, RefCol* scene);
     virtual EIdentified identifiedByPoint(const Canvas& canvas, const Point2F& pt);

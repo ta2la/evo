@@ -40,6 +40,8 @@ public:
     //const char* category() const { return category_.c_str(); }
 //===================================================================
 //<OVERRIDES>
+    bool             isOfType       (FilterCadObject::ECadObjectType type) override { return type == FilterCadObject::ECO_AREA; }
+    bool             isOfBoxType    () override { return points().count() == 2; }
     ObjectDisplable* clone          () override;
     void             display        (EntityList& list, RefCol* scene) override;
     bool             loadFromStored (StoredItem* item, GFile* file) override;

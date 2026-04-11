@@ -73,6 +73,7 @@ public:
     virtual void settingsExport() {};
 
     virtual bool isOfType(FilterCadObject::ECadObjectType type) { return false; }
+    virtual bool isOfBoxType() { return false; }
 //===================================================================
 //<OVERRIDES>
     virtual bool loadFromStored(StoredItem* item, GFile* parent) = 0;

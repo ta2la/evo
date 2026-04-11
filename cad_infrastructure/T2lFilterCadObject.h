@@ -24,7 +24,7 @@ namespace T2l
 class FilterCadObject : public Filter {
 //=============================================================================
 public:
-    enum ECadObjectType { ECO_LINE, ECO_IMAGE, ECO_SYMBOL, ECO_TEXT, ECO_TEXTBOX, ECO_ZONE };
+    enum ECadObjectType { ECO_LINE, ECO_IMAGE, ECO_SYMBOL, ECO_TEXT, ECO_TEXTBOX, ECO_ZONE, ECO_AREA, ECO_DIMM, ECO_PAPPER };
 //<CONSTRUCTION>
     FilterCadObject(ECadObjectType type);
     virtual ~FilterCadObject() {}
