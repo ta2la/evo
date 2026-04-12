@@ -16,6 +16,7 @@ public:
     static void pickDir();
     static void pickDirAndList();
     static int  pickDirStatus();
+    static QString pickDirName();
     static void listDir();
     static int  fileCount();
     static QString  fileNameGet(int index);

@@ -75,6 +75,16 @@ EM_JS(int, pickDirStatus_, (), {
 });
 
 //=============================================================================
+EM_JS(const char*, pickDirName_, (), {
+    if (!window.dir || !window.dir.name) return 0;
+    var str = window.dir.name;
+    var lengthBytes = lengthBytesUTF8(str) + 1;
+    var p = _malloc(lengthBytes);
+    stringToUTF8(str, p, lengthBytes);
+    return p;
+});
+
+//=============================================================================
 EM_JS(void, listDir_, (), {
     console.log("listDir_");
 
@@ -336,6 +346,16 @@ EM_JS(bool, isChromiumBrowser_, (), {
     // Return true if Chrome or Edge (both Chromium-based)
     return ua.includes("Chrome/") || ua.includes("Edg/");
 });
+
+//=============================================================================
+QString EmBrowserFileAccess::pickDirName()
+{
+    const char* p = pickDirName_();
+    if (!p) return QString();
+    QString name = QString::fromUtf8(p);
+    free((void*)p);
+    return name;
+}
 
 //=============================================================================
 void EmBrowserFileAccess::downloadUrlToDir(const QString& url, const QString& fileName)

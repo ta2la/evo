@@ -59,9 +59,12 @@ int Cmds_em_file_access::em_em_pick_read_dir(TcCmdContext* /*context*/, TcArgCol
 }
 
 //=============================================================================
-int Cmds_em_file_access::em_download_example(TcCmdContext* /*context*/, TcArgCol& /*args*/)
+int Cmds_em_file_access::em_download_example(TcCmdContext* /*context*/, TcArgCol& args)
 {
-    EmBrowserFileAccess::downloadUrlToDir("https://t2ls.com/t2lcad/examples/test.t2d", "test.t2d");
+    QString fileName = "test.t2d";
+    if (args.count() > 1) fileName = args.at(1)->value();
+    QString url = "https://t2ls.com/t2lcad/examples/" + fileName;
+    EmBrowserFileAccess::downloadUrlToDir(url, fileName);
     return 0;
 }
 

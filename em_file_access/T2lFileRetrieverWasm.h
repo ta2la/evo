@@ -32,4 +32,7 @@ public:
         QString name = EmBrowserFileAccess::fileNameGet(index);
         return FileRetrieverItem(name);
     }
+    bool ready() const override {
+        return EmBrowserFileAccess::pickDirStatus() == 1;
+    }
 };
