@@ -1,0 +1,5 @@
+*
+!*.cpp
+!*.h
+!em_file_access.pro
+!.gitignore
