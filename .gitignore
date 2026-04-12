@@ -1,10 +1,5 @@
 *
 !/cad
-!/ws_server
-!/pulse_server
-!/queue_cmd
-!/route_draw
-!/route_model
 !/em_file_access
 !/cad_attrs
 !/cad_draw
