@@ -5,6 +5,8 @@
 #pragma once
 
 #include <QString>
+#include <QByteArray>
+#include <functional>
 
 //=============================================================================
 class  EmBrowserFileAccess {
@@ -26,6 +28,7 @@ public:
 
     static void startPickAndList();
     static void downloadUrlToDir(const QString& url, const QString& fileName);
+    static void requestBytes(const QString& fileName, std::function<void(QByteArray)> callback);
     static bool isChromiumBrowser();
 //=============================================================================
 //protected:

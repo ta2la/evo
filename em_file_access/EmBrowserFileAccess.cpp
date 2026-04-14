@@ -16,6 +16,8 @@
 #include <QTimer>
 #include <QDebug>
 #include <QFileInfo>
+#include <QMap>
+#include <functional>
 
 extern "C" {
 EMSCRIPTEN_KEEPALIVE
@@ -439,6 +441,70 @@ QString  EmBrowserFileAccess::fileNameGet(int index)
 //=============================================================================
 void EmBrowserFileAccess::startPickAndList() {
     pickDirEx_();
+}
+
+//=============================================================================
+static QMap<int, std::function<void(QByteArray)>> g_byteCallbacks;
+static int g_byteReqNextId = 1;
+
+EM_JS(void, requestBytes_, (int id, const char* filename), {
+    if (!window.dir) { console.error("No dir"); return; }
+    const name = UTF8ToString(filename);
+    window.byteReqQueue = window.byteReqQueue || [];
+    window.byteReqQueue.push({ id: id, name: name });
+    if (window.byteReqBusy) return;
+    function processNext() {
+        if (!window.byteReqQueue.length) { window.byteReqBusy = false; return; }
+        window.byteReqBusy = true;
+        const req = window.byteReqQueue.shift();
+        (async () => {
+            try {
+                const fh = await window.dir.getFileHandle(req.name);
+                const f  = await fh.getFile();
+                const ab = await f.arrayBuffer();
+                window.byteReqResult = new Uint8Array(ab);
+            } catch (e) {
+                console.error("requestBytes failed for", req.name, e);
+                window.byteReqResult = new Uint8Array(0);
+            }
+            _onBytesReady(req.id);
+            processNext();
+        })();
+    }
+    processNext();
+});
+
+EM_JS(int, getByteReqResultLen_, (), {
+    return window.byteReqResult ? window.byteReqResult.length : 0;
+});
+
+EM_JS(void, getByteReqResultCopy_, (int ptr, int len), {
+    if (!window.byteReqResult) return;
+    HEAPU8.set(window.byteReqResult.subarray(0, len), ptr);
+});
+
+extern "C" {
+EMSCRIPTEN_KEEPALIVE
+    void onBytesReady(int id)
+{
+    int len = getByteReqResultLen_();
+    QByteArray bytes(len, 0);
+    if (len > 0) getByteReqResultCopy_((int)(intptr_t)bytes.data(), len);
+
+    auto it = g_byteCallbacks.find(id);
+    if (it != g_byteCallbacks.end()) {
+        auto cb = it.value();
+        g_byteCallbacks.erase(it);
+        cb(bytes);
+    }
+}
+}
+
+void EmBrowserFileAccess::requestBytes(const QString& fileName, std::function<void(QByteArray)> callback)
+{
+    int id = g_byteReqNextId++;
+    g_byteCallbacks.insert(id, callback);
+    requestBytes_(id, fileName.toUtf8().constData());
 }
 
 //=============================================================================

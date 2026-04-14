@@ -37,6 +37,9 @@
 #include "T2lEntityArea.h"
 #include "T2lSfeatArea.h"
 #include "T2lCadSettings.h"
+#include "T2lAsyncFileLoader.h"
+#include "T2lDisplayCol.h"
+#include "T2lUpdateLock.h"
 
 //infrastructure
 #include "T2lBox2.h"
@@ -71,6 +74,18 @@ CadObject_image::CadObject_image(const char* fileName, const Point2FCol& positio
 
     if ( fi.exists() ) {
         pixmap_ = new QPixmap(fileQualified);
+    }
+    else if (AsyncFileLoader::available()) {
+        AsyncFileLoader::request(imageName_, [this](QByteArray bytes) {
+            if (bytes.isEmpty()) return;
+            QPixmap* pm = new QPixmap();
+            if (!pm->loadFromData(bytes)) { delete pm; return; }
+
+            UpdateLock l;
+            delete pixmap_;
+            pixmap_ = pm;
+            modifiedSet_();
+        });
     }
 
     if (parent != nullptr) parent->add(this);
@@ -211,8 +226,10 @@ Box2F CadObject_image::box(Vector2F offsetArg)
         return result;
     }
     else {
-        return Box2F( IntervalF(offset.x(),                   offset.x()+pixmap_->width()),
-                      IntervalF(offset.y()-pixmap_->height(), offset.y()) );
+        double w = pixmap_ ? pixmap_->width()  : 100;
+        double h = pixmap_ ? pixmap_->height() : 100;
+        return Box2F( IntervalF(offset.x(),     offset.x()+w),
+                      IntervalF(offset.y()-h,   offset.y()) );
     }
 }
 
@@ -225,16 +242,26 @@ void CadObject_image::display(EntityList& list, RefCol* scene)
 
     Box2F imageBox = box(Vector2F(0, 0));
 
-    EntityImage* eimage = new EntityImage(imageBox);
-    eimage->layerSet(-1);
-    if (transparency_ < 1.0) {
-        eimage->pixmapSet(getProcessedPixmap_(), false);
-        eimage->transparencySet(1.0); // alpha already baked into pixels
+    if (pixmap_ != nullptr) {
+        EntityImage* eimage = new EntityImage(imageBox);
+        eimage->layerSet(-1);
+        if (transparency_ < 1.0) {
+            eimage->pixmapSet(getProcessedPixmap_(), false);
+            eimage->transparencySet(1.0);
+        } else {
+            eimage->pixmapSet(pixmap_, false);
+            eimage->transparencySet(1.0);
+        }
+        list.add(eimage);
     } else {
-        eimage->pixmapSet(pixmap_, false);
-        eimage->transparencySet(1.0);
+        Style* ph = new Style("");
+        ph->sfeats().add(new SfeatArea(Color(200, 200, 200), 100));
+        EntityArea* placeholder = new EntityArea(*ph, true, nullptr);
+        for (int i = 0; i < 4; i++) placeholder->points().points().add(imageBox.getPoint(i));
+        list.add(placeholder);
+        EntityText* nameText = new EntityText(imageName_, imageBox.getPoint(0));
+        list.add(nameText);
     }
-    list.add(eimage);
 
     bool notActive = false;
     if ( parent() != ActiveFile::activeGet()->file() ) notActive = true;
