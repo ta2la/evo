@@ -165,7 +165,7 @@ QString Cmd_emOpenFile::dialogTml() const
             if (file == ActiveFile::activeGet()->file()) active = true;
 
             //FILE-ICON
-            QString ip = diri.path() + "/resource/icons/file.png";
+            QString ip = "qrc:/cad_icons/resource/icons/file.png";
 
             int icons = 0;
 
