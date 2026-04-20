@@ -216,7 +216,7 @@ QString Cmd_object_trim::dialogTml() const
     QString result;
 
     result += "TC;CB;icon: ";
-    result += dir.path() + "/resource/icons/offset_use.png;";
+    result += "qrc:/cad_icons/resource/icons/offset_use.png;";
 
     result += "cmd: cad_set_offset_use ";
     result += CAD_SETTINGS_PARAMS.offsetUse().valueNegated().c_str();

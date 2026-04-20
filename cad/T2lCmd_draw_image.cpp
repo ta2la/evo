@@ -344,7 +344,7 @@ QString Cmd_draw_image::dialogTml() const
         if (ifi.exists() == false) {
             QDir dir(QCoreApplication::applicationDirPath());
             dir.cdUp();
-            imageName = dir.path() + "/resource/icons/file.png";
+            imageName = "qrc:/cad_icons/resource/icons/file.png";
             ifi.setFile(imageName);
         }
         QString fileOpen = QString("cad_set_active_image \"") + fileName + "\" show";

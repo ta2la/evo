@@ -216,17 +216,17 @@ QString Cmd_object_mocopy_parallel::dialogTml() const
 
     result += "BUTTON:cad_set_offset_erase_original;icon:";
     if (CAD_SETTINGS.offset_erase_original()) {
-        result += dir.path() + "/resource/icons/offset_erase_original_on.png;;";
+        result += "qrc:/cad_icons/resource/icons/offset_erase_original_on.png;;";
     }
     else {
-        result += dir.path() + "/resource/icons/offset_erase_original_off.png;;";
+        result += "qrc:/cad_icons/resource/icons/offset_erase_original_off.png;;";
     }
 
     result += "NEWLINE:;;";
     result += "BUTTON:cad_set_offset_use ";
     result += CAD_SETTINGS_PARAMS.offsetUse().valueNegated().c_str();
     result += ";icon: ";
-    result += dir.path() + "/resource/icons/offset_use.png;;";
+    result += "qrc:/cad_icons/resource/icons/offset_use.png;;";
     if (CAD_SETTINGS_PARAMS.offsetUse().get()) {
         //result += "SPACE:;;";
         //result += "TEXT:offset:;;";

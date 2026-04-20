@@ -138,10 +138,10 @@ QString Cmd_object_set_symbology::dialogTml() const
 
     result += "TC;CB;icon: ";
     if (CAD_SETTINGS.attribute_line_pick()) {
-        result += dir.path() + "/resource/icons/attribute_line_pick_on.png;";
+        result += "qrc:/cad_icons/resource/icons/attribute_line_pick_on.png;";
     }
     else {
-        result += dir.path() + "/resource/icons/attribute_line_pick_off.png;";
+        result += "qrc:/cad_icons/resource/icons/attribute_line_pick_off.png;";
     }
     result += "cmd: cad_set_attribute_line_pick;;";
     result += "TC;CT;text: <space>;;";

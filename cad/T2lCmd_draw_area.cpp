@@ -184,10 +184,10 @@ QString Cmd_draw_area::dialogTml() const
 
     result += "TC;CB;icon: ";
     if (CAD_SETTINGS.draw_rectangle()) {
-        result += dir.path() + "/resource/icons/area_rectangle.png;";
+        result += "qrc:/cad_icons/resource/icons/area_rectangle.png;";
     }
     else {
-        result += dir.path() + "/resource/icons/area_polygon.png;";
+        result += "qrc:/cad_icons/resource/icons/area_polygon.png;";
     }
     result += "cmd: cad_set_draw_rectangle;;";
 

@@ -60,7 +60,7 @@ ActiveFile::~ActiveFile()
         UpdateLock l;
 
         instance_ = new ActiveFile();
-        QString seed = StoredFileNames::getExeUpDir() + "/resource/icons/implicit.t2l";
+        QString seed = "qrc:/cad_icons/resource/icons/implicit.t2l";
         GFile* file = new GFileObjects(seed);
         GFileCol::instance().add(file);
         instance_->file_ = file;

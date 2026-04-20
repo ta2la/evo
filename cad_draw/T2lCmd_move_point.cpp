@@ -333,10 +333,10 @@ QString Cmd_move_point::dialogTml() const
 
     result += "TC;CB;icon: ";
     if (CAD_SETTINGS.trimtoother_both()) {
-        result += dir.path() + "/resource/icons/trimtoother_both.png;";
+        result += "qrc:/cad_icons/resource/icons/trimtoother_both.png;";
     }
     else {
-        result += dir.path() + "/resource/icons/trimtoother_both_not.png;";
+        result += "qrc:/cad_icons/resource/icons/trimtoother_both_not.png;";
     }
     result += "cmd: cad_set_trimtoother_both;;";
 

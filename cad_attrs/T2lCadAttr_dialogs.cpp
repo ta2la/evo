@@ -113,7 +113,7 @@ string CadAttr_dialogs::editor_width_button_(string widthArg)
     QString width(widthArg.c_str());
 
     result += "TC;CB;icon: ";
-    result += StoredFileNames::getExeUpDir() + "/resource/icons/";
+    result += "qrc:/cad_icons/resource/icons/";
     result += "line_width_";
     result += QString(width).replace(".", "");
     result += ".png;";

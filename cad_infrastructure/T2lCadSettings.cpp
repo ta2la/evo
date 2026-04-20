@@ -101,6 +101,7 @@ CadSettings::CadSettings() :
     qprint_factor_(50),
     qprint_ppm_(8000),
     qprint_pix_to_pap_(8),
+    qprint_pixel_size_(1500),
     printFiles_(""),
     //object_transparency_(0.9),
     draw_rectangle_(true),
@@ -149,14 +150,14 @@ QString CadSettings::pixannCircleEditor()
     if (pixannCircle()) {
         result += "TC;CT;text: circle shape:;;";
         result += "TC;CB;icon: ";
-        result += StoredFileNames::getExeUpDir() + "/resource/icons/brush_circle.png;";
+        result += StoredFileNames::getExeUpDir() + "/resource/icons/brush_circle.png;"; //ICON_FROM_FILE
         result += "cmd: ann_set_pixanncircle off;;";
         //result.append(QString("<a href='tcview:://#ann_set_pixanncircle off'>drawing <b>circle</b> now</a>"));
     }
     else {
         result += "TC;CT;text: square shape:;;";
         result += "TC;CB;icon: ";
-        result += StoredFileNames::getExeUpDir() + "/resource/icons/brush_square.png;";
+        result += StoredFileNames::getExeUpDir() + "/resource/icons/brush_square.png;"; //ICON_FROM_FILE
         result += "cmd: ann_set_pixanncircle on;;";
         //result.append(QString("<a href='tcview:://#ann_set_pixanncircle on'>drawing <b>square</b> now</a>"));
     }
