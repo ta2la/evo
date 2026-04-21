@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="94" height="94" viewBox="0 0 94 94">
+  <!-- gray background -->
+  <rect x="0" y="0" width="94" height="94" fill="#969696"/>
+  <!-- rotated copy, lighter gray outline (on top) -->
+  <rect x="16" y="29" width="62" height="36" fill="none" stroke="#707070" stroke-width="9"
+        transform="rotate(-45 47 47)"/>
+  <!-- original rectangle, navy outline (bottom) -->
+  <rect x="16" y="50" width="62" height="36" fill="none" stroke="#395775" stroke-width="9"/>
+</svg>
