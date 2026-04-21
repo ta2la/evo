@@ -159,6 +159,7 @@ public:
         REGISTER_CMD( "cad_set_qprint_factor", cad_set_qprint_factor,      "cad" );
         REGISTER_CMD( "cad_set_qprint_ppm",    cad_set_qprint_ppm,      "cad" );
         REGISTER_CMD( "cad_set_qprint_pix_to_pap",    cad_set_qprint_pix_to_pap,      "cad" );
+        REGISTER_CMD( "cad_set_qprint_pixel_size",    cad_set_qprint_pixel_size,      "cad" );
         REGISTER_CMD( "cad_set_object_transparency",    cad_set_object_transparency,      "cad" );
         REGISTER_CMD( "cad_set_print_files",   cad_set_print_files,      "cad" );
 
@@ -268,6 +269,7 @@ private:
     CMD_DOUBLE(qprint_factor)
     CMD_DOUBLE(qprint_ppm)
     CMD_DOUBLE(qprint_pix_to_pap)
+    CMD_DOUBLE(qprint_pixel_size)
     //CMD_DOUBLE(object_transparency);
     CMD_FCE(cad_set_object_transparency);
 };

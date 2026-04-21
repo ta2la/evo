@@ -168,6 +168,7 @@ public:
     TATTR_SIMPLE(double, qprint_factor)
     TATTR_SIMPLE(double, qprint_ppm)
     TATTR_SIMPLE(double, qprint_pix_to_pap)
+    TATTR_SIMPLE(double, qprint_pixel_size)
     TATTR_OBJECT(QString, printFiles)
 
     //TATTR_SIMPLE(double, object_transparency)
