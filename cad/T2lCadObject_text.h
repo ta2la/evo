@@ -91,6 +91,7 @@ protected:
     friend class Cmd_change_text;
     friend class Cmd_textbox_change_text;
     friend class Cmd_follow_link;
+    friend class Cmd_selected_2svg;
 };
 
 } // namespace T2l

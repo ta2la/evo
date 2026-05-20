@@ -27,10 +27,12 @@ namespace T2l
 
 class StoredItem;//
 class Canvas; //TODO remove
+class Cmd_selected_2svg;
 
 //===================================================================
 class CadObject_area : public ObjectDisplable {
 //===================================================================
+    friend class Cmd_selected_2svg;
 public:
 //<CONSTRUCTION>
     CadObject_area( const Point2Col<double>& points, const Color& color, const Color& colorLine,
